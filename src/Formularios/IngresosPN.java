@@ -5,20 +5,129 @@
  */
 package Formularios;
 
+import BD.BDFIBRA;
+import BD.Componente;
+import Class.PN;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.naming.spi.DirStateFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
  * @author jluis
  */
 public class IngresosPN extends javax.swing.JInternalFrame {
+    int Enviacodigo;
 
     /**
      * Creates new form Ingresos
      */
     public IngresosPN() {
         initComponents();
-       
+        habilitar(true);
+        bGuardar.setEnabled(false);
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select descripcion||' '||medida from COMPONENTES order by descripcion");
+            while (rs.next()){
+                ComboBox1.addItem((String) rs.getObject(1));
+                ComboBox2.addItem((String) rs.getObject(1));
+                ComboBox3.addItem((String) rs.getObject(1));
+                ComboBox4.addItem((String) rs.getObject(1));
+                ComboBox5.addItem((String) rs.getObject(1));
+            }
+     
+        } catch (Exception e) {
+        }
     }
+     public void habilitar(boolean b){
+     ComboBox1.setEnabled(b);
+     ComboBox2.setEnabled(!b);
+     ComboBox3.setEnabled(!b);
+     ComboBox4.setEnabled(!b);
+     ComboBox5.setEnabled(!b);
+     cantidad2.setEnabled(!b);
+     cantidad3.setEnabled(!b);
+     cantidad4.setEnabled(!b);
+     cantidad5.setEnabled(!b);
+     }
 
+   /* public IngresosPN(JComboBox<String> ComboBox1, JComboBox<String> ComboBox2, JComboBox<String> ComboBox3, JComboBox<String> ComboBox4, JComboBox<String> ComboBox5, JButton bGuardar, JTextField cantidad1, JTextField cantidad2, JTextField cantidad3, JTextField cantidad4, JTextField cantidad5, JLabel jLabel1, JLabel jLabel2, JLabel jLabel3, JLabel jLabel4, JPanel jPanel1, JPanel jPanel2, JPanel jPanel3, JScrollPane jScrollPane1, JTextArea nota, JTextField pn, JLabel test2) {
+        this.ComboBox1 = ComboBox1;
+        this.ComboBox2 = ComboBox2;
+        this.ComboBox3 = ComboBox3;
+        this.ComboBox4 = ComboBox4;
+        this.ComboBox5 = ComboBox5;
+        this.bGuardar = bGuardar;
+        this.cantidad1 = cantidad1;
+        this.cantidad2 = cantidad2;
+        this.cantidad3 = cantidad3;
+        this.cantidad4 = cantidad4;
+        this.cantidad5 = cantidad5;
+        this.jLabel1 = jLabel1;
+        this.jLabel2 = jLabel2;
+        this.jLabel3 = jLabel3;
+        this.jLabel4 = jLabel4;
+        this.jPanel1 = jPanel1;
+        this.jPanel2 = jPanel2;
+        this.jPanel3 = jPanel3;
+        this.jScrollPane1 = jScrollPane1;
+        this.nota = nota;
+        this.pn = pn;
+        this.test2 = test2;
+    }*/
+     
+    public void limpiar(){
+     
+        ComboBox1.setSelectedItem("Seleccionar...");
+        ComboBox2.setSelectedItem("Seleccionar...");
+        ComboBox3.setSelectedItem("Seleccionar...");
+        ComboBox4.setSelectedItem("Seleccionar...");
+        ComboBox5.setSelectedItem("Seleccionar...");
+        cantidad1.setText("");
+        cantidad2.setText("");
+        cantidad3.setText("");
+        cantidad4.setText("");
+        cantidad5.setText("");
+        pn.setText("");
+        nota.setText("");
+    } 
+    
+    public void existePN(){
+       
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(PN) from PN where PN='" + pn.getText().toUpperCase()+"'");
+            rs.next();
+            int pn1 = rs.getInt("count(PN)");
+            if (pn1 == 1) {
+                JOptionPane.showMessageDialog(null, "EL P/N YA EXISTE...");
+                return;
+            } else {
+                
+                bGuardar.requestFocus();
+                bGuardar.setEnabled(true);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+        
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,10 +141,10 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         test2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        pn = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        nota = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         ComboBox1 = new javax.swing.JComboBox<>();
         ComboBox2 = new javax.swing.JComboBox<>();
@@ -49,9 +158,11 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         cantidad3 = new javax.swing.JTextField();
         cantidad4 = new javax.swing.JTextField();
         cantidad5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bGuardar = new javax.swing.JButton();
+        Cancel = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("CREAR P/N");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -63,12 +174,32 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("P/N");
 
+        pn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pn.setFocusTraversalPolicyProvider(true);
+        pn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnActionPerformed(evt);
+            }
+        });
+        pn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pnKeyTyped(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Nota");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        nota.setColumns(20);
+        nota.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        nota.setRows(5);
+        nota.setFocusTraversalPolicyProvider(true);
+        nota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(nota);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -80,7 +211,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(pn))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -89,7 +220,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -99,14 +230,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Componentes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
+        ComboBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
-        ComboBox1.setNextFocusableComponent(jTextField1);
+        ComboBox1.setNextFocusableComponent(pn);
         ComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBox1ActionPerformed(evt);
             }
         });
 
+        ComboBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +247,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             }
         });
 
+        ComboBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +255,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             }
         });
 
+        ComboBox4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +263,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             }
         });
 
+        ComboBox5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         ComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         ComboBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +276,79 @@ public class IngresosPN extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("cantidad");
+
+        cantidad1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantidad1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cantidad1FocusLost(evt);
+            }
+        });
+        cantidad1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cantidad1MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cantidad1MouseExited(evt);
+            }
+        });
+        cantidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidad1ActionPerformed(evt);
+            }
+        });
+        cantidad1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidad1KeyTyped(evt);
+            }
+        });
+
+        cantidad2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantidad2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidad2ActionPerformed(evt);
+            }
+        });
+        cantidad2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidad2KeyTyped(evt);
+            }
+        });
+
+        cantidad3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantidad3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidad3ActionPerformed(evt);
+            }
+        });
+        cantidad3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidad3KeyTyped(evt);
+            }
+        });
+
+        cantidad4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantidad4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidad4ActionPerformed(evt);
+            }
+        });
+        cantidad4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidad4KeyTyped(evt);
+            }
+        });
+
+        cantidad5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cantidad5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantidad5ActionPerformed(evt);
+            }
+        });
+        cantidad5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cantidad5KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -195,29 +404,44 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save2.png"))); // NOI18N
-        jButton1.setText(" GUARDAR");
+        bGuardar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save2.png"))); // NOI18N
+        bGuardar.setText(" GUARDAR");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
+
+        Cancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancelar.png"))); // NOI18N
+        Cancel.setText("Cancelar");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton1))
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(bGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Cancel))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(test2)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(301, 301, 301)
+                        .addComponent(test2)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,11 +449,13 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(test2)
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                            .addComponent(Cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
@@ -248,25 +474,159 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox1ActionPerformed
-      cantidad1.requestFocus();
-    }//GEN-LAST:event_ComboBox1ActionPerformed
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        
+        if(pn.getText().compareTo("")!=0 && !ComboBox1.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
+                
+            try {
+                 PN p = new PN();
+                 p.setPN(pn.getText().toUpperCase());
+                 p.setNota(nota.getText());
+                 p.setCantidad1(Integer.parseInt(cantidad1.getText()));
+                 if(cantidad2.getText()!=""){p.setCantidad2(Integer.parseInt(cantidad2.getText()));}else{p.setCantidad2(0);}
+                 if(cantidad3.getText()!=""){p.setCantidad3(Integer.parseInt(cantidad3.getText()));}else{p.setCantidad3(0);}
+                 if(cantidad4.getText()!=""){p.setCantidad4(Integer.parseInt(cantidad4.getText()));}else{p.setCantidad4(0);}
+                 if(cantidad5.getText()!=""){p.setCantidad5(Integer.parseInt(cantidad5.getText()));}else{p.setCantidad5(0);}
+                 p.setCompo1(ComboBox1.getSelectedItem().toString());
+                 p.setCompo2(ComboBox2.getSelectedItem().toString());
+                 p.setCompo3(ComboBox3.getSelectedItem().toString());
+                 p.setCompo4(ComboBox4.getSelectedItem().toString());
+                 p.setCompo5(ComboBox5.getSelectedItem().toString());
+                 Componente.guardarPN(p);
+                 JOptionPane.showMessageDialog(null,"P/N Agregado..."); 
+                 limpiar();
+                 habilitar(true);
+            } catch (Exception e) { JOptionPane.showMessageDialog(null,"ERROR"+e);  
+            }
+            
+        }else{JOptionPane.showMessageDialog(null, "Llene Todos los Campos");}
+    }//GEN-LAST:event_bGuardarActionPerformed
 
-    private void ComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox2ActionPerformed
-       cantidad2.requestFocus();
-    }//GEN-LAST:event_ComboBox2ActionPerformed
+    private void cantidad5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad5ActionPerformed
+        pn.requestFocus();
+    }//GEN-LAST:event_cantidad5ActionPerformed
 
-    private void ComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox3ActionPerformed
-     cantidad3.requestFocus();
-    }//GEN-LAST:event_ComboBox3ActionPerformed
+    private void cantidad4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad4ActionPerformed
+        if(!ComboBox4.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && cantidad4.getText().compareTo("")!=0) {
+            ComboBox5.setEnabled(true);
+            cantidad5.setEnabled(true);
+            pn.requestFocus();
+        }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
+            cantidad5.requestFocus();}
+    }//GEN-LAST:event_cantidad4ActionPerformed
+
+    private void cantidad3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad3ActionPerformed
+        if(!ComboBox3.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && cantidad3.getText().compareTo("")!=0) {
+            ComboBox4.setEnabled(true);
+            cantidad4.setEnabled(true);
+            pn.requestFocus();
+        }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
+            cantidad3.requestFocus();}
+    }//GEN-LAST:event_cantidad3ActionPerformed
+
+    private void cantidad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad2ActionPerformed
+        if(!ComboBox2.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && cantidad2.getText().compareTo("")!=0) {
+            ComboBox3.setEnabled(true);
+            cantidad3.setEnabled(true);
+            pn.requestFocus();
+        }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
+            cantidad2.requestFocus();}
+    }//GEN-LAST:event_cantidad2ActionPerformed
+
+    private void cantidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad1ActionPerformed
+        if(!ComboBox1.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && cantidad1.getText().compareTo("")!=0) {
+            ComboBox2.setEnabled(true);
+            cantidad2.setEnabled(true);
+            pn.requestFocus();
+        }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
+            cantidad1.requestFocus();}
+    }//GEN-LAST:event_cantidad1ActionPerformed
+
+    private void cantidad1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cantidad1MouseExited
+
+    }//GEN-LAST:event_cantidad1MouseExited
+
+    private void cantidad1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cantidad1FocusLost
+
+    }//GEN-LAST:event_cantidad1FocusLost
+
+    private void ComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox5ActionPerformed
+        cantidad5.requestFocus();
+    }//GEN-LAST:event_ComboBox5ActionPerformed
 
     private void ComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox4ActionPerformed
         cantidad4.requestFocus();
     }//GEN-LAST:event_ComboBox4ActionPerformed
 
-    private void ComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox5ActionPerformed
-       cantidad5.requestFocus();
-    }//GEN-LAST:event_ComboBox5ActionPerformed
+    private void ComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox3ActionPerformed
+        cantidad3.requestFocus();
+    }//GEN-LAST:event_ComboBox3ActionPerformed
+
+    private void ComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox2ActionPerformed
+        cantidad2.requestFocus();
+    }//GEN-LAST:event_ComboBox2ActionPerformed
+
+    private void ComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox1ActionPerformed
+        cantidad1.requestFocus();
+    }//GEN-LAST:event_ComboBox1ActionPerformed
+
+    private void pnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnActionPerformed
+        existePN();
+        
+    }//GEN-LAST:event_pnActionPerformed
+
+    private void cantidad1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cantidad1MouseClicked
+      
+    }//GEN-LAST:event_cantidad1MouseClicked
+
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+       limpiar();
+        habilitar(true);
+       
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void cantidad1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad1KeyTyped
+       char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cantidad1KeyTyped
+
+    private void cantidad2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad2KeyTyped
+       char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cantidad2KeyTyped
+
+    private void cantidad3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad3KeyTyped
+       char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cantidad3KeyTyped
+
+    private void cantidad4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad4KeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cantidad4KeyTyped
+
+    private void cantidad5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad5KeyTyped
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_cantidad5KeyTyped
+
+    private void pnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnKeyTyped
+       
+    }//GEN-LAST:event_pnKeyTyped
+
+    private void notaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notaMouseClicked
+
+    }//GEN-LAST:event_notaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -305,17 +665,18 @@ public class IngresosPN extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancel;
     private javax.swing.JComboBox<String> ComboBox1;
     private javax.swing.JComboBox<String> ComboBox2;
     private javax.swing.JComboBox<String> ComboBox3;
     private javax.swing.JComboBox<String> ComboBox4;
     private javax.swing.JComboBox<String> ComboBox5;
+    private javax.swing.JButton bGuardar;
     private javax.swing.JTextField cantidad1;
     private javax.swing.JTextField cantidad2;
     private javax.swing.JTextField cantidad3;
     private javax.swing.JTextField cantidad4;
     private javax.swing.JTextField cantidad5;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -324,8 +685,8 @@ public class IngresosPN extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea nota;
+    private javax.swing.JTextField pn;
     private javax.swing.JLabel test2;
     // End of variables declaration//GEN-END:variables
 }

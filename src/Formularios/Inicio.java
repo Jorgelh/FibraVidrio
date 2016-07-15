@@ -137,6 +137,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu4.setLabel("  P/N");
         jMenu4.setPreferredSize(new java.awt.Dimension(50, 25));
 
+        jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem4.setText("Nuevo P/N ");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +150,9 @@ public class Inicio extends javax.swing.JFrame {
         jMenu4.add(jMenuItem14);
 
         jMenu8.setText("Componentes");
+        jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
 
+        jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem13.setText("Nuevo");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,7 +300,13 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuBar1HierarchyChanged
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        
+        IngresoTrabajos compo = new IngresoTrabajos();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

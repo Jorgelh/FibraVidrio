@@ -196,8 +196,8 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
              try {
             PN p = new PN();
             p.setIdcompo(Integer.parseInt(no.getText()));
-            p.setDescripcion(descripcion.getText());
-            p.setMedida(medidas.getText());
+            p.setDescripcion(descripcion.getText().toUpperCase());
+            p.setMedida(medidas.getText().toUpperCase());
             Componente.guardarComponentes(p);
             JOptionPane.showMessageDialog(null, "Guargado...");
             limpiar();
