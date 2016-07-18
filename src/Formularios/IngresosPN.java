@@ -577,9 +577,9 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(37, 37, 37)
                         .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)
                         .addComponent(Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -628,7 +628,6 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                 
             try {
                  PN p = new PN();
-               
                  p.setPN(pn.getText().toUpperCase());
                  p.setNota(nota.getText());
                  p.setCompo1(ComboBox1.getSelectedItem().toString());
@@ -642,17 +641,13 @@ public class IngresosPN extends javax.swing.JInternalFrame {
                  p.setCompo5(ComboBox5.getSelectedItem().toString());
                  if(cantidad5.getText().compareTo("")!=0){p.setCantidad5(Integer.parseInt(cantidad5.getText()));}else{p.setCantidad5(0);}
                  p.setCompo6(ComboBox6.getSelectedItem().toString());
-                 if(cantidad6.getText().compareTo("")!=0){p.setCantidad2(Integer.parseInt(cantidad2.getText()));}else{p.setCantidad2(0);}
+                 if(cantidad6.getText().compareTo("")!=0){p.setCantidad2(Integer.parseInt(cantidad6.getText()));}else{p.setCantidad6(0);}
                  p.setCompo7(ComboBox7.getSelectedItem().toString());
-                 if(cantidad7.getText().compareTo("")!=0){p.setCantidad3(Integer.parseInt(cantidad3.getText()));}else{p.setCantidad3(0);}
+                 if(cantidad7.getText().compareTo("")!=0){p.setCantidad3(Integer.parseInt(cantidad7.getText()));}else{p.setCantidad7(0);}
                  p.setCompo8(ComboBox8.getSelectedItem().toString());
-                 if(cantidad8.getText().compareTo("")!=0){p.setCantidad4(Integer.parseInt(cantidad4.getText()));}else{p.setCantidad4(0);}
+                 if(cantidad8.getText().compareTo("")!=0){p.setCantidad4(Integer.parseInt(cantidad8.getText()));}else{p.setCantidad8(0);}
                  p.setCompo9(ComboBox9.getSelectedItem().toString());
-                 if(cantidad9.getText().compareTo("")!=0){p.setCantidad5(Integer.parseInt(cantidad5.getText()));}else{p.setCantidad5(0);}
-                
-                
-                
-                
+                 if(cantidad9.getText().compareTo("")!=0){p.setCantidad5(Integer.parseInt(cantidad9.getText()));}else{p.setCantidad9(0);}
                  Componente.guardarPN(p);
                  JOptionPane.showMessageDialog(null,"P/N Agregado..."); 
                  limpiar();
