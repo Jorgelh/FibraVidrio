@@ -34,16 +34,15 @@ public class Componente {
        Connection cn = BDFIBRA.getConnection();
        PreparedStatement ps = null;
        if(p.getCompo2()!="Seleccionar.."){
-       ps = cn.prepareStatement("insert into PN values("+p.getPN()+","
+       ps = cn.prepareStatement("insert into PN values(pn1.nextval,'"+p.getPN()+"',"
                +p.getCompo1()+","+p.getCantidad1()+","
                +p.getNota()+";");
                ps.executeUpdate();
                cn.close();
                ps.close();
        }else if(p.getCompo3()!="Seleccionar"){
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
-                       + p.getCompo1() + "," + p.getCantidad1() + ","
-                       + p.getNota() + "");
+               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","+p.getCompo1()+ ","+p.getCantidad1()+","+p.getNota()+";"
+                       + "insert into PN values"+p.getPN()+","+p.getCompo2());
                ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
                    + p.getCompo2() + "," + p.getCantidad2() + ","
                    + p.getNota() + ";");
