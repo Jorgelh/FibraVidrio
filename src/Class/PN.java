@@ -21,6 +21,16 @@ public class PN {
     public String compo8;
     public String compo9;
     public String compo10;
+    public int comp1;
+    public int comp2;
+    public int comp3;
+    public int comp4;
+    public int comp5;
+    public int comp6;
+    public int comp7;
+    public int comp8;
+    public int comp9;
+    public int comp10;
     public int cantidad1 = 0;
     public int cantidad2 = 0;
     public int cantidad3 = 0;
@@ -34,6 +44,86 @@ public class PN {
     public String nota;
     public String PN;
 
+    public int getComp1() {
+        return comp1;
+    }
+
+    public void setComp1(int comp1) {
+        this.comp1 = comp1;
+    }
+
+    public int getComp2() {
+        return comp2;
+    }
+
+    public void setComp2(int comp2) {
+        this.comp2 = comp2;
+    }
+
+    public int getComp3() {
+        return comp3;
+    }
+
+    public void setComp3(int comp3) {
+        this.comp3 = comp3;
+    }
+
+    public int getComp4() {
+        return comp4;
+    }
+
+    public void setComp4(int comp4) {
+        this.comp4 = comp4;
+    }
+
+    public int getComp5() {
+        return comp5;
+    }
+
+    public void setComp5(int comp5) {
+        this.comp5 = comp5;
+    }
+
+    public int getComp6() {
+        return comp6;
+    }
+
+    public void setComp6(int comp6) {
+        this.comp6 = comp6;
+    }
+
+    public int getComp7() {
+        return comp7;
+    }
+
+    public void setComp7(int comp7) {
+        this.comp7 = comp7;
+    }
+
+    public int getComp8() {
+        return comp8;
+    }
+
+    public void setComp8(int comp8) {
+        this.comp8 = comp8;
+    }
+
+    public int getComp9() {
+        return comp9;
+    }
+
+    public void setComp9(int comp9) {
+        this.comp9 = comp9;
+    }
+
+    public int getComp10() {
+        return comp10;
+    }
+
+    public void setComp10(int comp10) {
+        this.comp10 = comp10;
+    }
+    
     public String getCompo6() {
         return compo6;
     }

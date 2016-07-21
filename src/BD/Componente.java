@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,48 +32,107 @@ public class Componente {
         ps.close();
     }
     
-    public static void guardarPN (PN p) throws SQLException{
-       Connection cn = BDFIBRA.getConnection();
-       PreparedStatement ps = null;
-       if(p.getCompo2()!="Seleccionar.."){
-       ps = cn.prepareStatement("insert into PN values(pn1.nextval,'"+p.getPN()+"',"
-               +p.getCompo1()+","+p.getCantidad1()+","
-               +p.getNota()+";");
-               ps.executeUpdate();
-               cn.close();
-               ps.close();
-       }else if(p.getCompo3()!="Seleccionar"){
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","+p.getCompo1()+ ","+p.getCantidad1()+","+p.getNota()+";"
-                       + "insert into PN values"+p.getPN()+","+p.getCompo2());
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
-                   + p.getCompo2() + "," + p.getCantidad2() + ","
-                   + p.getNota() + ";");
-               ps.executeUpdate();
+    public static void guardarPN(PN p) throws SQLException {
+
+        try {
+            Connection cn = BDFIBRA.getConnection();
+            Statement ps = cn.createStatement();
+            if (p.getCompo2() == "Seleccionar...") {
+               
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
                 cn.close();
-               ps.close();
-       }else if (p.getCompo4()!="Seleccionar"){
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
-                       + p.getCompo1() + "," + p.getCantidad1() + ","
-                       + p.getNota() + ";");
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
-                   + p.getCompo2() + "," + p.getCantidad2() + ","
-                   + p.getNota() + ";");
-               ps = cn.prepareStatement("insert into PN values(" + p.getPN() + ","
-                   + p.getCompo3() + "," + p.getCantidad3() + ","
-                   + p.getNota() + ";");
-               ps.executeUpdate();
-               cn.close();
-               ps.close();
-       
-       
-       }
-      
+                ps.close();
+
+            } else if (p.getCompo3() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+
+            } else if (p.getCompo4() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo5() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo6() == "Seleccionar") {
+
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo7() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp6() + "," + p.getCantidad6() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo8() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp6() + "," + p.getCantidad6() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp7() + "," + p.getCantidad7() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo9() == "Seleccionar...") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp6() + "," + p.getCantidad6() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp7() + "," + p.getCantidad7() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp8() + "," + p.getCantidad8() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo10() == "Seleccionar") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp6() + "," + p.getCantidad6() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp7() + "," + p.getCantidad7() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp8() + "," + p.getCantidad8() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp9() + "," + p.getCantidad9() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            } else if (p.getCompo10() != "Seleccionar") {
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp1() + "," + p.getCantidad1() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp2() + "," + p.getCantidad2() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp3() + "," + p.getCantidad3() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp4() + "," + p.getCantidad4() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp5() + "," + p.getCantidad5() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp6() + "," + p.getCantidad6() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp7() + "," + p.getCantidad7() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp8() + "," + p.getCantidad8() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp9() + "," + p.getCantidad9() + ",'" + p.getNota() + "')");
+                ps.executeUpdate("insert into PN values(pn1.nextval,'" + p.getPN() + "'," + p.getComp10() + "," + p.getCantidad10() + ",'" + p.getNota() + "')");
+                cn.close();
+                ps.close();
+            }
+        } catch (Exception e) {
+        }
     }
     
     public static PN buscarCompo (String p1) throws SQLException{
-    
         return buscarDescarga(p1, null);
-        
     }
     
     public static PN buscarDescarga(String p1, PN c) throws SQLException{
@@ -84,7 +145,6 @@ public class Componente {
              if (c == null){
              c = new PN(){
              };
-        
         }
         c.setPN(rs.getString("pn"));
         c.setCompo1(rs.getString("componente1"));

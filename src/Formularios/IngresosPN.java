@@ -10,6 +10,7 @@ import BD.Componente;
 import Class.PN;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.naming.spi.DirStateFactory;
 import javax.swing.JButton;
@@ -27,7 +28,16 @@ import javax.swing.JTextField;
  */
 public class IngresosPN extends javax.swing.JInternalFrame {
     int Enviacodigo;
-
+    int comb1;
+    int comb2;
+    int comb3;
+    int comb4;
+    int comb5;
+    int comb6;
+    int comb7;
+    int comb8;
+    int comb9;
+    int comb10;
     /**
      * Creates new form Ingresos
      */
@@ -35,6 +45,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         initComponents();
         habilitar(true);
         bGuardar.setEnabled(false);
+        pn.requestFocus();
         try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -55,6 +66,147 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+    public void idcompo1() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox1.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb1 = rs.getInt("idcompo");       
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo2() {
+
+        try {
+            
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox2.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb2 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo3() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox3.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb3 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo4() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox4.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb4 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo5() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox5.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb5 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo6() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox6.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb6 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo7() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox7.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb7 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo8() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida='"+ComboBox8.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb8 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo9() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida='"+ComboBox9.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb9 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
+    public void idcompo10() {
+
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes where descripcion||' '||medida ='"+ComboBox10.getSelectedItem()+"'");
+            while (rs.next()) {
+            comb10 = rs.getInt("idcompo");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+    
      public void habilitar(boolean b){
      ComboBox1.setEnabled(!b);
      ComboBox2.setEnabled(!b);
@@ -111,7 +263,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         try {
             Connection con = BDFIBRA.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select COUNT(PN) from PN where PN='" + pn.getText().toUpperCase()+"'");
+            ResultSet rs = stmt.executeQuery("select COUNT(PN) from PN where PN='"+ pn.getText().toUpperCase()+"'");
             rs.next();
             int pn1 = rs.getInt("count(PN)");
             if (pn1 == 1) {
@@ -189,7 +341,7 @@ public class IngresosPN extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("P/N");
 
-        pn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        pn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pn.setFocusTraversalPolicyProvider(true);
         pn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -625,37 +777,66 @@ public class IngresosPN extends javax.swing.JInternalFrame {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         
         if(pn.getText().compareTo("")!=0 && !ComboBox1.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
-                
+        idcompo2();idcompo3();idcompo4();idcompo5();    
+        idcompo6();idcompo7();idcompo8();idcompo9();idcompo10();    
+        idcompo1();
+            
             try {
                  PN p = new PN();
                  p.setPN(pn.getText().toUpperCase());
                  p.setNota(nota.getText());
+                 
                  p.setCompo1(ComboBox1.getSelectedItem().toString());
+                 p.setComp1(comb1);
                  p.setCantidad1(Integer.parseInt(cantidad1.getText()));
+                 
                  p.setCompo2(ComboBox2.getSelectedItem().toString());
+                 p.setComp2(comb2);
                  if(cantidad2.getText().compareTo("")!=0){p.setCantidad2(Integer.parseInt(cantidad2.getText()));}else{p.setCantidad2(0);}
+                                               
                  p.setCompo3(ComboBox3.getSelectedItem().toString());
+                 p.setComp3(comb3);
                  if(cantidad3.getText().compareTo("")!=0){p.setCantidad3(Integer.parseInt(cantidad3.getText()));}else{p.setCantidad3(0);}
+                 
                  p.setCompo4(ComboBox4.getSelectedItem().toString());
+                 p.setComp4(comb4);
                  if(cantidad4.getText().compareTo("")!=0){p.setCantidad4(Integer.parseInt(cantidad4.getText()));}else{p.setCantidad4(0);}
+                 
                  p.setCompo5(ComboBox5.getSelectedItem().toString());
+                 p.setComp5(comb5);
                  if(cantidad5.getText().compareTo("")!=0){p.setCantidad5(Integer.parseInt(cantidad5.getText()));}else{p.setCantidad5(0);}
+                 
                  p.setCompo6(ComboBox6.getSelectedItem().toString());
-                 if(cantidad6.getText().compareTo("")!=0){p.setCantidad2(Integer.parseInt(cantidad6.getText()));}else{p.setCantidad6(0);}
+                 p.setComp6(comb6);
+                 if(cantidad6.getText().compareTo("")!=0){p.setCantidad6(Integer.parseInt(cantidad6.getText()));}else{p.setCantidad6(0);}
+                 
                  p.setCompo7(ComboBox7.getSelectedItem().toString());
-                 if(cantidad7.getText().compareTo("")!=0){p.setCantidad3(Integer.parseInt(cantidad7.getText()));}else{p.setCantidad7(0);}
+                 p.setComp7(comb7);
+                 if(cantidad7.getText().compareTo("")!=0){p.setCantidad7(Integer.parseInt(cantidad7.getText()));}else{p.setCantidad7(0);}
+                 
                  p.setCompo8(ComboBox8.getSelectedItem().toString());
-                 if(cantidad8.getText().compareTo("")!=0){p.setCantidad4(Integer.parseInt(cantidad8.getText()));}else{p.setCantidad8(0);}
+                 p.setComp8(comb8);
+                 if(cantidad8.getText().compareTo("")!=0){p.setCantidad8(Integer.parseInt(cantidad8.getText()));}else{p.setCantidad8(0);}
+                 
                  p.setCompo9(ComboBox9.getSelectedItem().toString());
-                 if(cantidad9.getText().compareTo("")!=0){p.setCantidad5(Integer.parseInt(cantidad9.getText()));}else{p.setCantidad9(0);}
+                 p.setComp9(comb9);
+                 if(cantidad9.getText().compareTo("")!=0){p.setCantidad9(Integer.parseInt(cantidad9.getText()));}else{p.setCantidad9(0);}
+
+                 p.setCompo10(ComboBox10.getSelectedItem().toString());
+                 p.setComp10(comb10);
+                 if(cantidad10.getText().compareTo("")!=0){p.setCantidad10(Integer.parseInt(cantidad10.getText()));}else{p.setCantidad10(0);}
+                 
                  Componente.guardarPN(p);
                  JOptionPane.showMessageDialog(null,"P/N Agregado..."); 
                  limpiar();
                  habilitar(true);
-            } catch (Exception e) { JOptionPane.showMessageDialog(null,"ERROR"+e);  
+            } catch (SQLException e) { JOptionPane.showMessageDialog(null,"ERROR desde guardar"+e);
+                        
             }
             
         }else{JOptionPane.showMessageDialog(null, "Llene Todos los Campos");}
+        
+        
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void cantidad5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidad5ActionPerformed
@@ -734,6 +915,8 @@ public class IngresosPN extends javax.swing.JInternalFrame {
     private void pnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnActionPerformed
         existePN();
         
+        
+        
     }//GEN-LAST:event_pnActionPerformed
 
     private void cantidad1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cantidad1MouseClicked
@@ -799,12 +982,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             ComboBox7.setEnabled(true);
             cantidad7.setEnabled(true);
             ComboBox7.requestFocus();
+            idcompo7();
         }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
             cantidad6.requestFocus();}
     }//GEN-LAST:event_cantidad6ActionPerformed
 
     private void cantidad6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad6KeyTyped
-        // TODO add your handling code here:
+      char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_cantidad6KeyTyped
 
     private void ComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox7ActionPerformed
@@ -816,12 +1003,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             ComboBox8.setEnabled(true);
             cantidad8.setEnabled(true);
             ComboBox8.requestFocus();
+            idcompo8();
         }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
             cantidad7.requestFocus();}
     }//GEN-LAST:event_cantidad7ActionPerformed
 
     private void cantidad7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad7KeyTyped
-        // TODO add your handling code here:
+       char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_cantidad7KeyTyped
 
     private void ComboBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox8ActionPerformed
@@ -833,12 +1024,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             ComboBox9.setEnabled(true);
             cantidad9.setEnabled(true);
             ComboBox9.requestFocus();
+            idcompo9();
         }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
             cantidad8.requestFocus();}
     }//GEN-LAST:event_cantidad8ActionPerformed
 
     private void cantidad8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad8KeyTyped
-        // TODO add your handling code here:
+         char c = evt.getKeyChar();
+            if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+               evt.consume();
+            }
     }//GEN-LAST:event_cantidad8KeyTyped
 
     private void ComboBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox9ActionPerformed
@@ -850,12 +1045,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             ComboBox10.setEnabled(true);
             cantidad10.setEnabled(true);
             ComboBox10.requestFocus();
+            idcompo10();
         }else{JOptionPane.showMessageDialog(null, "Llene todos los Datos");
             cantidad9.requestFocus();}
     }//GEN-LAST:event_cantidad9ActionPerformed
 
     private void cantidad9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad9KeyTyped
-        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_cantidad9KeyTyped
 
     private void ComboBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox10ActionPerformed
@@ -870,7 +1069,10 @@ public class IngresosPN extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cantidad10ActionPerformed
 
     private void cantidad10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantidad10KeyTyped
-        // TODO add your handling code here:
+      char c = evt.getKeyChar();
+        if ((c < '0' || c > '9') && (c < '0' || c > '9')) {
+            evt.consume();
+        }
     }//GEN-LAST:event_cantidad10KeyTyped
 
     /**
