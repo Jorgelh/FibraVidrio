@@ -76,7 +76,7 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
         descripcion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         medidas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        Bguardar = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -96,8 +96,20 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Descripcion");
 
+        descripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcionActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Medidas");
+
+        medidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medidasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,12 +147,12 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save2.png"))); // NOI18N
-        jButton1.setText(" Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Bguardar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Bguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save2.png"))); // NOI18N
+        Bguardar.setText(" Guardar");
+        Bguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BguardarActionPerformed(evt);
             }
         });
 
@@ -159,7 +171,7 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(58, 58, 58))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(Bguardar)
                         .addGap(158, 158, 158))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,7 +182,7 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Bguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -188,7 +200,7 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BguardarActionPerformed
       
         if(no.getText().compareTo("") !=0 && descripcion.getText().compareTo("") !=0 && medidas.getText().compareTo("")!=0)
         {
@@ -209,7 +221,15 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
         }else{JOptionPane.showMessageDialog(null, "Llenar todos los campos...");}
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BguardarActionPerformed
+
+    private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
+        medidas.requestFocus();
+    }//GEN-LAST:event_descripcionActionPerformed
+
+    private void medidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medidasActionPerformed
+       Bguardar.requestFocus();
+    }//GEN-LAST:event_medidasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,8 +267,8 @@ public class IngresoComponentes extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Bguardar;
     private javax.swing.JTextField descripcion;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
