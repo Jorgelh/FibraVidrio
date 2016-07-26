@@ -47,7 +47,35 @@ public class CTrabajos {
     public int idpn10;
     public int cantidad10;
     public Date fechaexp;
+    public String f1;
+    public String f2;
+    public String nota;
 
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+    
+    
+    public String getF1() {
+        return f1;
+    }
+
+    public void setF1(String f1) {
+        this.f1 = f1;
+    }
+
+    public String getF2() {
+        return f2;
+    }
+
+    public void setF2(String f2) {
+        this.f2 = f2;
+    }
+            
     public Date getFechaexp() {
         return fechaexp;
     }

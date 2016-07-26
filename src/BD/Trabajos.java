@@ -55,8 +55,11 @@ public class Trabajos {
         try {
             Connection cn = BDFIBRA.getConnection();
             Statement ps = cn.createStatement();
-            ps.executeUpdate("insert into ingreso_trabajo values(" + p.getIdTrabajo() + ",'" + p.getJob() + "','" + p.getRev() + "','" + new java.sql.Date(p.getFecha().getTime()) + "',1," + p.getCantidadportrabajo() + ""
-                    + ",'" + p.getPn() + "','" + new java.sql.Date(p.getFechaexp().getTime()) + "')");
+            ps.executeUpdate("insert into ingreso_trabajo values(" + p.getIdTrabajo() + ",'" + p.getJob() + "','" + p.getRev() + "','"+p.getF1()+"',1,"+p.getCantidadportrabajo()+""
+                    + ",'"+p.getPn()+"','"+p.getF2()+"','"+p.getNota()+"')");
+            
+            //+new java.sql.Date(p.getFechaexp().getTime())+
+            //+new java.sql.Date(p.getFecha().getTime())+
             if (p.getIdpn2() == 0) {
                 ps.executeUpdate("insert into TRABAJO_PARTES values (job.nextval," + p.getIdTrabajo() + "," + p.getIdpn1() + "," + p.getCantidad1() + ")");
             } else if (p.getCantidad3() == 0) {
@@ -130,4 +133,38 @@ public class Trabajos {
         }
     }
 
+    public static ArrayList<CTrabajos> ListarJob(String c) {
+
+        return consultaJOB("select no_trabajo,job from ingreso_trabajo where pn = '" + c + "'");
+    }
+
+    private static ArrayList<CTrabajos> consultaJOB(String sql) {
+        ArrayList<CTrabajos> list = new ArrayList<CTrabajos>();
+        Connection cn = BDFIBRA.getConnection();
+
+        try {
+            CTrabajos t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                t = new CTrabajos();
+                t.setNoTabajo(rs.getString("no_trabajo"));
+                t.setJob(rs.getString("job"));
+                list.add(t);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR " + e);
+        }
+        return list;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

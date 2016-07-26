@@ -42,21 +42,19 @@ public class Inicio extends javax.swing.JFrame {
         Panel1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         Pendientes = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -112,6 +110,67 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        jMenu4.setForeground(new java.awt.Color(0, 102, 255));
+        jMenu4.setActionCommand(" P/N");
+        jMenu4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu4.setLabel("  P/N");
+        jMenu4.setPreferredSize(new java.awt.Dimension(50, 25));
+
+        jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem4.setText("Nuevo P/N ");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
+
+        jMenu8.setText("Componentes");
+        jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+
+        jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem13.setText("Nuevo");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem13);
+
+        jMenu4.add(jMenu8);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu3.setForeground(new java.awt.Color(0, 102, 255));
+        jMenu3.setText("TRABAJOS");
+        jMenu3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu3.setPreferredSize(new java.awt.Dimension(87, 19));
+
+        jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem2.setText("Nuevo");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem9.setText("Entregar");
+        jMenu3.add(jMenuItem9);
+
+        Pendientes.setText("Pendientes");
+        Pendientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PendientesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(Pendientes);
+
+        jMenuItem7.setText("Terminados");
+        jMenu3.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu3);
+
         jMenu1.setBorder(null);
         jMenu1.setForeground(new java.awt.Color(0, 102, 255));
         jMenu1.setText("  DRAWINGS");
@@ -130,67 +189,6 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
         jMenu1.getAccessibleContext().setAccessibleName("Drawings");
-
-        jMenu4.setForeground(new java.awt.Color(0, 102, 255));
-        jMenu4.setActionCommand(" P/N");
-        jMenu4.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenu4.setLabel("  P/N");
-        jMenu4.setPreferredSize(new java.awt.Dimension(50, 25));
-
-        jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
-        jMenuItem4.setText("Nuevo P/N ");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem4);
-
-        jMenuItem14.setText("Editar P/N");
-        jMenu4.add(jMenuItem14);
-
-        jMenu8.setText("Componentes");
-        jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-
-        jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenuItem13.setText("Nuevo");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
-            }
-        });
-        jMenu8.add(jMenuItem13);
-
-        jMenuItem8.setText("Editar");
-        jMenu8.add(jMenuItem8);
-
-        jMenu4.add(jMenu8);
-
-        jMenuBar1.add(jMenu4);
-
-        jMenu3.setForeground(new java.awt.Color(0, 102, 255));
-        jMenu3.setText("TRABAJOS");
-        jMenu3.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenu3.setPreferredSize(new java.awt.Dimension(87, 19));
-
-        jMenuItem2.setText("Nuevo");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem9.setText("Entregar");
-        jMenu3.add(jMenuItem9);
-
-        Pendientes.setText("Pendientes");
-        jMenu3.add(Pendientes);
-
-        jMenuItem7.setText("Terminados");
-        jMenu3.add(jMenuItem7);
-
-        jMenuBar1.add(jMenu3);
 
         jMenu5.setForeground(new java.awt.Color(0, 102, 255));
         jMenu5.setText("  FOTOS");
@@ -279,7 +277,6 @@ public class Inicio extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
         jMenuBar1.getAccessibleContext().setAccessibleName("");
-        jMenuBar1.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,6 +329,16 @@ public class Inicio extends javax.swing.JFrame {
         ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         ingre.show();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void PendientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendientesActionPerformed
+        
+         TrabajosPendientes ingre  = new TrabajosPendientes();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_PendientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,7 +396,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
@@ -402,7 +408,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

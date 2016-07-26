@@ -6,18 +6,16 @@
 package Formularios;
 
 import BD.BDFIBRA;
-import BD.Componente;
 import BD.Trabajos;
 import Class.CTrabajos;
-import Class.PN;
-import java.awt.Event;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import static java.util.Collections.list;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -47,14 +45,15 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     int idcompo10;
     int cantidad10;
     int n=0;
+    DefaultTableModel temp;
 
     /**
      * Creates new form IngresoTrabajos
      */
     public IngresoTrabajos() {
         initComponents();
-        Bagregar.setEnabled(false);
         txtpn.requestFocus();
+        txtTrabajo.setEditable(false);
     }
 
     public void existePN() {
@@ -68,9 +67,13 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             if (coun > 0) {
                 TablaComponentes();
                 obtenerID();
+                txtpn.setEditable(false);
+                txtTrabajo.setEditable(true);
+                txtTrabajo.requestFocus();
                 
             } else {
                 JOptionPane.showMessageDialog(null, "El P/N no existe");
+                txtpn.requestFocus();
             }
 
         } catch (Exception e) {
@@ -88,8 +91,42 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             rs.next();
             int coun = rs.getInt("JOB");
             if (coun == 0) {
-                txtcantidad.requestFocus();
-                Bagregar.setEnabled(true);
+                if(txtTrabajo.getText().compareTo("")!=0 && txtcantidad.getText().compareTo("")!=0 && txtpn.getText().compareTo("")!=0
+            && txtrevision.getText().compareTo("")!=0 && fechaingre.getDate()!=null && fechaexp.getDate()!=null)
+        {
+            try {
+            CTrabajos t = new CTrabajos();
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
+            Date fec1 = fechaingre.getDate();
+            Date fec2 = fechaexp.getDate();
+            String fe1 = formato.format(fec1);
+            String fe2 = formato.format(fec2);
+             t.setJob(txtTrabajo.getText().toUpperCase());
+             t.setCantidadportrabajo(Integer.parseInt(txtcantidad.getText()));
+             t.setPn(txtpn.getText().toUpperCase());
+             t.setRev(txtrevision.getText().toUpperCase());
+             t.setF1(fe1);
+             t.setF2(fe2);
+             t.setNoTabajo(txtnota.getText().toUpperCase());
+             t.setIdTrabajo(n+1);
+             t.setNota(txtnota.getText());
+             t.setCantidad1(cantidad1*(Integer.parseInt(txtcantidad.getText())));t.setIdpn1(idcompo1);
+             t.setCantidad2(cantidad2*(Integer.parseInt(txtcantidad.getText())));t.setIdpn2(idcompo2);
+             t.setCantidad3(cantidad3*(Integer.parseInt(txtcantidad.getText())));t.setIdpn3(idcompo3);
+             t.setCantidad4(cantidad4*(Integer.parseInt(txtcantidad.getText())));t.setIdpn4(idcompo4);
+             t.setCantidad5(cantidad5*(Integer.parseInt(txtcantidad.getText())));t.setIdpn5(idcompo5);
+             t.setCantidad6(cantidad6*(Integer.parseInt(txtcantidad.getText())));t.setIdpn6(idcompo6);
+             t.setCantidad7(cantidad7*(Integer.parseInt(txtcantidad.getText())));t.setIdpn7(idcompo7);
+             t.setCantidad8(cantidad8*(Integer.parseInt(txtcantidad.getText())));t.setIdpn8(idcompo8);
+             t.setCantidad9(cantidad9*(Integer.parseInt(txtcantidad.getText())));t.setIdpn9(idcompo9);
+             t.setCantidad10(cantidad10*(Integer.parseInt(txtcantidad.getText())));t.setIdpn(idcompo10);
+             Trabajos.GuardarTrabajo(t);
+             JOptionPane.showMessageDialog(null, "Trabajo Ingresado");
+             Limpiar();
+             } catch (Exception e) {
+                 System.out.println("ERROR  "+e);
+            }        
+        }else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos");}
              
             } else {
                 JOptionPane.showMessageDialog(null, "El No. JOB ya existe");
@@ -115,8 +152,33 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
              rs.close();
         } catch (Exception e) {
         }
-          //no.setText(String.valueOf(n+1));
-      //  
+    }
+    
+    public void Limpiar()
+    {
+       txtTrabajo.setText("");
+       txtcantidad.setText("");
+       txtnota.setText("");
+       txtpn.setText("");
+       txtrevision.setText("");
+       fechaingre.setDate(null);
+       fechaexp.setDate(null);
+       txtpn.setEditable(true);
+       txtpn.requestFocus();
+       //Bagregar.setEnabled(false);
+       
+        try {
+            temp = (DefaultTableModel) TablaPartes.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+               
+    
     }
        
     /**
@@ -288,7 +350,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addGap(4, 4, 4)
                 .addComponent(fechaingre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +358,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtrevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         bTrabajos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -350,17 +412,17 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(35, 35, 35)
                         .addComponent(Bagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,51 +448,17 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     private void txtpnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpnActionPerformed
        
         existePN();
-        txtTrabajo.requestFocus();
+        
+        
         
     }//GEN-LAST:event_txtpnActionPerformed
 
     private void txtTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTrabajoActionPerformed
-        existeJob();
-        
+       txtcantidad.requestFocus();
     }//GEN-LAST:event_txtTrabajoActionPerformed
 
     private void BagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarActionPerformed
-
-        if(txtTrabajo.getText().compareTo("")!=0 && txtcantidad.getText().compareTo("")!=0 && txtpn.getText().compareTo("")!=0
-            && txtrevision.getText().compareTo("")!=0 && fechaingre.getDate()!=null && fechaexp.getDate()!=null)
-        {
-            try {
-            CTrabajos t = new CTrabajos();
-             t.setJob(txtTrabajo.getText().toUpperCase());
-             t.setCantidadportrabajo(Integer.parseInt(txtcantidad.getText()));
-             t.setPn(txtpn.getText().toUpperCase());
-             t.setRev(txtrevision.getText().toUpperCase());
-             t.setFecha(fechaingre.getDate());
-             t.setFechaexp(fechaexp.getDate());
-             t.setNoTabajo(txtnota.getText().toUpperCase());
-             t.setIdTrabajo(n+1);
-             t.setCantidad1(cantidad1*(Integer.parseInt(txtcantidad.getText())));t.setIdpn1(idcompo1);
-             t.setCantidad2(cantidad2*(Integer.parseInt(txtcantidad.getText())));t.setIdpn2(idcompo2);
-             t.setCantidad3(cantidad3*(Integer.parseInt(txtcantidad.getText())));t.setIdpn3(idcompo3);
-             t.setCantidad4(cantidad4*(Integer.parseInt(txtcantidad.getText())));t.setIdpn4(idcompo4);
-             t.setCantidad5(cantidad5*(Integer.parseInt(txtcantidad.getText())));t.setIdpn5(idcompo5);
-             t.setCantidad6(cantidad6*(Integer.parseInt(txtcantidad.getText())));t.setIdpn6(idcompo6);
-             t.setCantidad7(cantidad7*(Integer.parseInt(txtcantidad.getText())));t.setIdpn7(idcompo7);
-             t.setCantidad8(cantidad8*(Integer.parseInt(txtcantidad.getText())));t.setIdpn8(idcompo8);
-             t.setCantidad9(cantidad9*(Integer.parseInt(txtcantidad.getText())));t.setIdpn9(idcompo9);
-             t.setCantidad10(cantidad10*(Integer.parseInt(txtcantidad.getText())));t.setIdpn(idcompo10);
-             Trabajos.GuardarTrabajo(t);
-             JOptionPane.showMessageDialog(null, "Trabajo Ingresado");
-             } catch (Exception e) {
-                 System.out.println("ERROR  "+e);
-            }        
-        
-        }else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos");}
-        
-        
-        
-        
+    existeJob();
     }//GEN-LAST:event_BagregarActionPerformed
 
     private void bTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTrabajosActionPerformed
@@ -446,7 +474,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtrevisionActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        
+        Limpiar();
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void TablaComponentes() {

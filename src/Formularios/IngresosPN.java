@@ -266,15 +266,16 @@ public class IngresosPN extends javax.swing.JInternalFrame {
             ResultSet rs = stmt.executeQuery("select COUNT(PN) from PN where PN='"+ pn.getText().toUpperCase()+"'");
             rs.next();
             int pn1 = rs.getInt("count(PN)");
-            if (pn1 == 1) {
-                JOptionPane.showMessageDialog(null, "EL P/N YA EXISTE...");
-                return;
-            } else {
-                
+            if (pn1 == 0) {
                 bGuardar.requestFocus();
                 bGuardar.setEnabled(true);
                 ComboBox1.setEnabled(true);
                 cantidad1.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "EL P/N YA EXISTE...");
+                pn.requestFocus();
+                return;
+                
             }
 
         } catch (Exception e) {
