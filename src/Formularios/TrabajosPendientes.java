@@ -5,9 +5,15 @@
  */
 package Formularios;
 
+import BD.BDFIBRA;
 import BD.Trabajos;
 import Class.CTrabajos;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
@@ -15,14 +21,49 @@ import javax.swing.table.TableColumn;
  * @author jluis
  */
 public class TrabajosPendientes extends javax.swing.JInternalFrame {
+      DefaultTableModel temp;
 
     /**
      * Creates new form TrabajosPendientes
      */
     public TrabajosPendientes() {
         initComponents();
+        txtPN.requestFocus();
     }
+    
+     public void limpiartablajob() {
 
+        try {
+            temp = (DefaultTableModel) job.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+     
+      public void limpiartablabalance() {
+
+        try {
+            temp = (DefaultTableModel) balance.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+     
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,23 +79,24 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        PN = new javax.swing.JTextField();
+        REV = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        balance = new javax.swing.JTable();
         txtPN = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        fechaVen = new javax.swing.JTextField();
+        fechaIn = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Nota = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         job = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,17 +112,24 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTable2);
 
         setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Trabajos por P/N");
+        setToolTipText("");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("P/N");
+        jLabel2.setText("Trabajo");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Revision");
+
+        PN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PN.setForeground(new java.awt.Color(0, 102, 255));
+
+        REV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        REV.setForeground(new java.awt.Color(0, 102, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,8 +140,8 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                    .addComponent(PN)
+                    .addComponent(REV, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,15 +150,15 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(REV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        balance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -117,7 +166,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 "Descripcion", "Cantidad Total", "Cantidad Entregada", "Cantidad Restante"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(balance);
 
         txtPN.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtPN.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +186,12 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Vencimiento");
 
+        fechaVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaVen.setForeground(new java.awt.Color(0, 102, 255));
+
+        fechaIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        fechaIn.setForeground(new java.awt.Color(0, 102, 255));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -144,13 +199,13 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4)
+                    .addComponent(fechaVen)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(0, 146, Short.MAX_VALUE))
-                    .addComponent(jTextField5))
+                    .addComponent(fechaIn))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -159,11 +214,11 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fechaVen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -172,9 +227,9 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Notas");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        Nota.setColumns(20);
+        Nota.setRows(5);
+        jScrollPane2.setViewportView(Nota);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -207,7 +262,21 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 "No.", "Job"
             }
         ));
+        job.setFocusable(false);
+        job.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jobMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(job);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton1.setText("NUEVA CONSULTA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,13 +285,6 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
@@ -233,22 +295,36 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(23, 23, 23)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(11, 11, 11))))
+                        .addGap(11, 11, 11))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(44, 44, 44))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,8 +350,61 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPNActionPerformed
-       TablaJob();
+      
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(PN) from INGRESO_TRABAJO where ESTADO = 1 AND PN='"+txtPN.getText().toUpperCase() + "'");
+            rs.next();
+            int coun = rs.getInt("count(PN)");
+            if (coun > 0) {
+               
+                TablaJob();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "El P/N NO CONTIENE TRABAJOS PENDIENTES");
+                txtPN.setText("");
+                txtPN.requestFocus();
+                
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_txtPNActionPerformed
+
+    private void jobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobMouseClicked
+      
+        try {
+            CTrabajos c = Trabajos.BuscarTrabajo(Integer.parseInt(String.valueOf(job.getModel().getValueAt(job.getSelectedRow(), 0))));
+            PN.setText(c.getPn());
+            REV.setText(c.getRev());
+            fechaIn.setText(c.getF1());
+            fechaVen.setText(c.getF2());
+            Nota.setText(c.getNota());
+            TablaPendiente();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jobMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        txtPN.setText("");
+        PN.setText("");
+        REV.setText("");
+        fechaIn.setText("");
+        fechaVen.setText("");
+        Nota.setText("");
+        limpiartablabalance();
+        limpiartablajob();
+        txtPN.requestFocus();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
      private void TablaJob() {
 
@@ -304,6 +433,37 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         });
         TableColumn columna1 = job.getColumn("No.");
          columna1.setPreferredWidth(5);
+    }
+    
+    private void TablaPendiente() {
+
+        ArrayList<CTrabajos> result = Trabajos.ListarPendiente(PN.getText());
+        cargarTablaPendiente(result);
+    }
+    
+    private void cargarTablaPendiente(ArrayList<CTrabajos> list1) {
+
+        Object[][] dato = new Object[list1.size()][4];
+        int f = 0;
+        for (CTrabajos a : list1) {
+            dato[f][0] = a.getDescripcion();
+            dato[f][1] = a.getCantidad1();
+            dato[f][2] = a.getCantidad3();
+            dato[f][3] = a.getCantidad2();
+            f++;
+        }
+        balance.setModel(new javax.swing.table.DefaultTableModel(
+                dato,
+                new String[]{
+                "Descripcion.","Cantidad Total","Cantidad Entregada","Cantidad Pendiente"
+                }) {
+            @Override
+            public boolean isCellEditable(int row, int colum) {
+                return false;
+            }
+        });
+       /* TableColumn columna1 = job.getColumn("No.");
+         columna1.setPreferredWidth(5);*/
     }
     /**
      * @param args the command line arguments
@@ -340,6 +500,13 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Nota;
+    private javax.swing.JTextField PN;
+    private javax.swing.JTextField REV;
+    private javax.swing.JTable balance;
+    private javax.swing.JTextField fechaIn;
+    private javax.swing.JTextField fechaVen;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -354,13 +521,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTable job;
     private javax.swing.JTextField txtPN;
     // End of variables declaration//GEN-END:variables

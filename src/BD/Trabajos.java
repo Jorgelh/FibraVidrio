@@ -135,23 +135,22 @@ public class Trabajos {
 
     public static ArrayList<CTrabajos> ListarJob(String c) {
 
-        return consultaJOB("select no_trabajo,job from ingreso_trabajo where pn = '" + c + "'");
+        return consultaJOB("select no_trabajo,job from ingreso_trabajo where ESTADO = 1 AND pn = '"+ c +"'");
     }
 
     private static ArrayList<CTrabajos> consultaJOB(String sql) {
         ArrayList<CTrabajos> list = new ArrayList<CTrabajos>();
         Connection cn = BDFIBRA.getConnection();
-
         try {
             CTrabajos t;
             Statement stmt = cn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
+            while (rs.next()){
                 t = new CTrabajos();
                 t.setNoTabajo(rs.getString("no_trabajo"));
                 t.setJob(rs.getString("job"));
                 list.add(t);
-            }
+                }
             cn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR " + e);
@@ -159,12 +158,59 @@ public class Trabajos {
         return list;
     }
     
+    public static CTrabajos BuscarTrabajo (int id)  throws SQLException{
+        return BuscarTrabajo(id,null);
+    }
+        
+    public static CTrabajos BuscarTrabajo(int id,CTrabajos t) throws SQLException{
+        
+        Connection cn = BDFIBRA.getConnection();
+        PreparedStatement ps =null;
+        ps = cn.prepareStatement("select no_trabajo,job,rev,fecha,fechaven,nota from INGRESO_TRABAJO where NO_TRABAJO ="+id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+             if (t == null){
+             t = new CTrabajos(){};
+        }
+             t.setIdTrabajo(rs.getInt("no_trabajo"));
+             t.setPn(rs.getString("job"));
+             t.setRev(rs.getString("rev"));
+             t.setF1(rs.getString("fecha"));
+             t.setF2(rs.getString("fechaven"));
+             t.setNota(rs.getString("Nota"));
+    }
+      cn.close();
+      ps.close();
+      return t;
+              
+    }
     
-    
-    
-    
-    
-    
+    public static ArrayList<CTrabajos> ListarPendiente(String c) {
+
+        return ListarPendientes("select componentes.descripcion||' '||componentes.medida as \"descripcion\",trabajo_partes.cantidad as \"cantidadin\",BITACORAPARTES.CANTIDAD,BITACORAPARTES.CANTIDAD-trabajo_partes.cantidad as \"cantientre\" from ingreso_trabajo inner join TRABAJO_PARTES on ingreso_trabajo.NO_TRABAJO = TRABAJO_PARTES.NO_TRABAJO join componentes on componentes.IDCOMPO = TRABAJO_PARTES.IDCOMPO join BITACORAPARTES on TRABAJO_PARTES.IDTRABAJOPARTES = BITACORAPARTES.IDTRABAJOPARTES where ingreso_trabajo.JOB ='"+c+"'");
+    }
+
+    private static ArrayList<CTrabajos> ListarPendientes(String sql) {
+        ArrayList<CTrabajos> list = new ArrayList<CTrabajos>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            CTrabajos t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                t = new CTrabajos();
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setCantidad1(rs.getInt("cantidad"));
+                t.setCantidad2(rs.getInt("cantidadin"));
+                t.setCantidad3(rs.getInt("cantientre"));
+                list.add(t);
+                }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR TABLA CANTIDADES " + e);
+        }
+        return list;
+    }
     
     
 }

@@ -117,6 +117,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu4.setPreferredSize(new java.awt.Dimension(50, 25));
 
         jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem4.setText("Nuevo P/N ");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +130,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
 
         jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem13.setText("Nuevo");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +149,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu3.setPreferredSize(new java.awt.Dimension(87, 19));
 
         jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem2.setText("Nuevo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,9 +158,18 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem9.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
         jMenuItem9.setText("Entregar");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
+        Pendientes.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        Pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
         Pendientes.setText("Pendientes");
         Pendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,6 +351,16 @@ public class Inicio extends javax.swing.JFrame {
         ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         ingre.show();
     }//GEN-LAST:event_PendientesActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        EntregasTrabajo ingre  = new EntregasTrabajo();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
