@@ -19,8 +19,9 @@ public class BDFIBRA {
     public static Connection getConnection() {
         Connection cn = null;
         try {
-           Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:xe";
+            Class.forName("oracle.jdbc.OracleDriver");
+            //String url = "jdbc:oracle:thin:@localhost:1521:xe";
+            String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
             String user = "fibra";
             String password = "campana1234";
             cn= DriverManager.getConnection(url, user, password);

@@ -54,9 +54,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
@@ -119,6 +118,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem4.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem4.setText("Nuevo P/N ");
+        jMenuItem4.setPreferredSize(new java.awt.Dimension(133, 35));
+        jMenuItem4.setRequestFocusEnabled(false);
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -128,10 +129,12 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu8.setText("Componentes");
         jMenu8.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenu8.setPreferredSize(new java.awt.Dimension(157, 33));
 
         jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem13.setText("Nuevo");
+        jMenuItem13.setPreferredSize(new java.awt.Dimension(89, 35));
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -151,6 +154,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem2.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem2.setText("Nuevo");
+        jMenuItem2.setPreferredSize(new java.awt.Dimension(93, 35));
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -161,6 +165,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem9.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
         jMenuItem9.setText("Entregar");
+        jMenuItem9.setPreferredSize(new java.awt.Dimension(113, 35));
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -171,6 +176,7 @@ public class Inicio extends javax.swing.JFrame {
         Pendientes.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         Pendientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
         Pendientes.setText("Pendientes");
+        Pendientes.setPreferredSize(new java.awt.Dimension(133, 35));
         Pendientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PendientesActionPerformed(evt);
@@ -178,7 +184,15 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu3.add(Pendientes);
 
+        jMenuItem7.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
         jMenuItem7.setText("Terminados");
+        jMenuItem7.setPreferredSize(new java.awt.Dimension(133, 35));
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
@@ -190,14 +204,27 @@ public class Inicio extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu1.setPreferredSize(new java.awt.Dimension(105, 25));
 
+        jMenuItem1.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
         jMenuItem1.setText("Buscar ");
+        jMenuItem1.setPreferredSize(new java.awt.Dimension(101, 35));
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem5.setText("Agregar");
+        jMenuItem5.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
+        jMenuItem5.setText("Nuevo");
+        jMenuItem5.setPreferredSize(new java.awt.Dimension(101, 35));
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
-
-        jMenuItem6.setText("Reubicar ");
-        jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
         jMenu1.getAccessibleContext().setAccessibleName("Drawings");
@@ -208,10 +235,18 @@ public class Inicio extends javax.swing.JFrame {
         jMenu5.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu5.setPreferredSize(new java.awt.Dimension(75, 25));
+        jMenu5.setPreferredSize(new java.awt.Dimension(75, 35));
 
-        jMenu7.setText("Fotos");
-        jMenu5.add(jMenu7);
+        jMenuItem6.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/camera-icon.png"))); // NOI18N
+        jMenuItem6.setText("Fotos");
+        jMenuItem6.setPreferredSize(new java.awt.Dimension(89, 35));
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem6);
 
         jMenuBar1.add(jMenu5);
 
@@ -276,8 +311,10 @@ public class Inicio extends javax.swing.JFrame {
         jMenu6.setLabel("  SALIR");
         jMenu6.setPreferredSize(new java.awt.Dimension(65, 25));
 
+        jMenuItem3.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancelar.png"))); // NOI18N
         jMenuItem3.setText("Salir");
+        jMenuItem3.setPreferredSize(new java.awt.Dimension(79, 35));
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -362,6 +399,42 @@ public class Inicio extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+       HistorialEntregas ingre  = new HistorialEntregas();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        Drawings ingre  = new Drawings();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        BuscarDrawings ingre  = new BuscarDrawings();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        Fotos ingre  = new Fotos();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -398,7 +471,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane Panel1;
+    public javax.swing.JDesktopPane Panel1;
     private javax.swing.JMenuItem Pendientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -410,7 +483,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

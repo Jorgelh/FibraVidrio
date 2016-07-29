@@ -56,7 +56,7 @@ public class Entregas {
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select componentes.descripcion,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join\n" +
+        ps = cn.prepareStatement("select componentes.descripcion,trabajo_partes.cantidad,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join\n" +
         "componentes on TRABAJO_PARTES.IDCOMPO = componentes.IDCOMPO where TRABAJO_PARTES.IDTRABAJOPARTES ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
@@ -67,6 +67,7 @@ public class Entregas {
              t.setNo_trabajo(rs.getInt("no_trabajo"));
              t.setIdcompo(rs.getInt("idcompo"));
              t.setDescripcion(rs.getString("Descripcion"));
+             t.setCantidad(rs.getInt("cantidad"));
              
     }
       cn.close();
@@ -92,4 +93,69 @@ public class Entregas {
         cn.close();
         ps.close();
     }
+    
+    
+    
+    
+    public static ArrayList<CEntregas> ListarHistorialEntregas(String l, String i){
+
+        return ListarHistorial("select Ingreso_trabajo.pn,entregas.fecha,entregas.cantidad,entregas.po,componentes.descripcion,ingreso_trabajo.job,empleado.nombre from entregas inner join componentes on\n" +
+"entregas.IDCOMPO = componentes.idcompo join ingreso_trabajo on entregas.NO_TRABAJO = ingreso_trabajo.NO_TRABAJO\n" +
+"join empleado on entregas.codigo = empleado.codigo where upper(ingreso_trabajo.PN) like upper('"+l+"%') and upper(ingreso_trabajo.job) like upper('"+i+"%')");
+    }
+
+    private static ArrayList<CEntregas> ListarHistorial(String sql) {
+        ArrayList<CEntregas> list = new ArrayList<CEntregas>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            CEntregas t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                t = new CEntregas();
+                t.setPN(rs.getString("PN"));
+                t.setDescripcion(rs.getString("descripcion"));
+                t.setFecha(rs.getString("fecha"));
+                t.setCantidad(rs.getInt("Cantidad"));
+                t.setPO(rs.getString("PO"));
+                t.setJOB(rs.getString("job"));
+                t.setEmpleado(rs.getString("nombre"));
+                list.add(t);
+                }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR TABLA CANTIDADES " + e);
+        }
+        return list;
+    }
+    
+    public static ArrayList<CEntregas> BuscarDrawings(String l){
+
+        return Drawings("select pnn,gabeta,folder,nota,rev from Drawings where upper(PNN) like upper('"+l+"%')");
+    }
+
+    private static ArrayList<CEntregas> Drawings(String sql) {
+        ArrayList<CEntregas> list = new ArrayList<CEntregas>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            CEntregas t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                t = new CEntregas();
+                t.setPN(rs.getString("pnn"));
+                t.setGabeta(rs.getString("gabeta"));
+                t.setFolder(rs.getString("folder"));
+                t.setNota(rs.getString("nota"));
+                t.setRev(rs.getString("rev"));
+                list.add(t);
+                }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR TABLA Drawings " + e);
+        }
+        return list;
+    }
+    
+    
 }

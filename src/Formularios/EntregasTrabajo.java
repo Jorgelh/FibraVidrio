@@ -26,6 +26,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
      int no_trabajo;
      int no_trabajo2;
      int idcompo;
+     int cantidadpen;
      DefaultTableModel temp;
 
     /**
@@ -568,6 +569,8 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
             po.requestFocus();
             no_trabajo2 = c.getNo_trabajo();
             idcompo = c.getIdcompo();
+            cantidadpen = c.getCantidad();
+            System.out.println("cantidad = "+cantidadpen);
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"ERROr"+e);
         }
@@ -578,6 +581,8 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
         if(no1.getText().compareTo("")!=0 && po.getText().compareTo("")!=0 && cantidad.getText().compareTo("")!=0 
            && fechaEntrega.getDate() != null && entregadoa.getText().compareTo("")!=0 && no_trabajo2 != 0 && idcompo != 0){
         
+            if(cantidadpen > Integer.parseInt(cantidad.getText()))
+                 {
             try {
                 CEntregas c = new CEntregas();
                 c.setIdtrabajopartes(Integer.parseInt(no1.getText()));
@@ -596,6 +601,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
                 
                 JOptionPane.showMessageDialog(null, "ERROR AGREGAR ENTREGA"+e);
             }
+                 }else{JOptionPane.showMessageDialog(null, "LA CANTIDAD DE ENTREGA NO PUEDE SER MAYOR A LA CANTIDAD PENDIENTE");}
         }else{JOptionPane.showMessageDialog(null, "LLENE TODOS LOS CAMPOS..");}
     }//GEN-LAST:event_BagregarActionPerformed
 
@@ -612,7 +618,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadActionPerformed
-       cantidad.requestFocus();
+       entregadoa.requestFocus();
     }//GEN-LAST:event_cantidadActionPerformed
 
 

@@ -24,7 +24,62 @@ public class CEntregas {
     public String Nota;
     public String medida;
     public Date fechaentre;
+    public String PN;
+    public String JOB;
+    public String empleado;
+    public String gabeta;
+    public String folder;
+    public String rev;
 
+    public String getRev() {
+        return rev;
+    }
+
+    public void setRev(String rev) {
+        this.rev = rev;
+    }
+    
+    
+
+    public String getGabeta() {
+        return gabeta;
+    }
+
+    public void setGabeta(String gabeta) {
+        this.gabeta = gabeta;
+    }
+
+    public String getFolder() {
+        return folder;
+    }
+
+    public void setFolder(String folder) {
+        this.folder = folder;
+    }
+    
+    
+    public String getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(String empleado) {
+        this.empleado = empleado;
+    }
+    public String getJOB() {
+        return JOB;
+    }
+    public void setJOB(String JOB) {
+        this.JOB = JOB;
+    }
+    public String getPN() {
+        return PN;
+    }
+
+    public void setPN(String PN) {
+        this.PN = PN;
+    }
+     
+    
     public Date getFechaentre() {
         return fechaentre;
     }

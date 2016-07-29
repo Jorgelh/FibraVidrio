@@ -92,7 +92,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             int coun = rs.getInt("JOB");
             if (coun == 0) {
                 if(txtTrabajo.getText().compareTo("")!=0 && txtcantidad.getText().compareTo("")!=0 && txtpn.getText().compareTo("")!=0
-            && txtrevision.getText().compareTo("")==0 && fechaingre.getDate()!=null && fechaexp.getDate()==null)
+            && txtrevision.getText().compareTo("")!=0 && fechaingre.getDate()!=null && fechaexp.getDate()!=null)
         {
             try {
             CTrabajos t = new CTrabajos();
