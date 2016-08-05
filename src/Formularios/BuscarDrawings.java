@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -48,7 +49,6 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Drawings = new javax.swing.JTable();
         BCarpeta = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -70,7 +70,7 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "P/N", "GAVETA", "FOLDER", "NOTAS"
+
             }
         ));
         Drawings.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -89,13 +89,6 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,8 +101,6 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(141, 141, 141)
                         .addComponent(BCarpeta))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(15, Short.MAX_VALUE)
@@ -123,10 +114,9 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtPN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BCarpeta)
-                    .addComponent(jButton1))
+                    .addComponent(BCarpeta))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -149,34 +139,26 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPNKeyReleased
 
     private void BCarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCarpetaActionPerformed
-        DefaultTableModel tm = (DefaultTableModel)Drawings.getModel();
-        String P = String.valueOf(tm.getValueAt(Drawings.getSelectedRow(),0));
-            try {
-                if(P.equals("")){
+        DefaultTableModel tm = (DefaultTableModel) Drawings.getModel();
+        String P = String.valueOf(tm.getValueAt(Drawings.getSelectedRow(), 0));
+        try {
+            if (P.equals("")) {
                 JOptionPane.showMessageDialog(null, "SELECCIONE UN P/N DE LA LISTA");
-                }else{
+            } else {
                 Desktop.getDesktop().open(new File("\\\\192.168.0.2\\Compartida Produccion\\DRAWINGS\\TRANSFORMERS\\DRAWINGS\\" + P));
-                }    
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "EL P/N "+P+" NO TIENE CARPETA");
-                }
-            
-            
-            
-       
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "EL P/N " + P + " NO TIENE CARPETA");
+        }
+
+
     }//GEN-LAST:event_BCarpetaActionPerformed
 
     private void DrawingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DrawingsMouseClicked
         BCarpeta.setEnabled(true);
     }//GEN-LAST:event_DrawingsMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-       
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-     private void BuscarDrawins() {
+    private void BuscarDrawins() {
         ArrayList<CEntregas> result = Entregas.BuscarDrawings(txtPN.getText());
         cargarTabla(result);
     }
@@ -196,22 +178,27 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
         Drawings.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                "P/N","REV","GAVETA","FOLDER","NOTA"
+                    "P/N", "REV", "GAVETA", "FOLDER", "NOTA"
                 }) {
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;
             }
         });
-    
+
+        TableColumn columna1 = Drawings.getColumn("REV");
+        columna1.setPreferredWidth(0);
+        TableColumn columna2 = Drawings.getColumn("GAVETA");
+        columna2.setPreferredWidth(0);
+        TableColumn columna3 = Drawings.getColumn("FOLDER");
+        columna3.setPreferredWidth(0);
+        TableColumn columna4 = Drawings.getColumn("P/N");
+         columna4.setPreferredWidth(0);
+         TableColumn columna5 = Drawings.getColumn("NOTA");
+         columna5.setPreferredWidth(500);
+
     }
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +237,6 @@ public class BuscarDrawings extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCarpeta;
     private javax.swing.JTable Drawings;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -62,6 +62,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu12 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -272,6 +273,14 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu2.add(jMenu12);
 
+        jMenuItem8.setText("Tipo de Material");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
         jMenu11.setForeground(new java.awt.Color(0, 102, 255));
@@ -435,6 +444,15 @@ public class Inicio extends javax.swing.JFrame {
         ingre.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+      Descripcion ingre  = new Descripcion();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -502,6 +520,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

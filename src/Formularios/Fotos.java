@@ -58,7 +58,6 @@ public class Fotos extends javax.swing.JInternalFrame {
 
         imagenes.clear();
         index = 0;
-
         String album = ("\\\\192.168.0.2\\FOTOS DE PIEZAS\\"+txtPN.getText());
         File albumCarpeta = new File(album);
         folder = albumCarpeta.getName();
@@ -75,11 +74,11 @@ public class Fotos extends javax.swing.JInternalFrame {
                 }
                 jLabel1.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\FOTOS DE PIEZAS\\" + folder + "\\" + (String) imagenes.elementAt(0)).getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
             } else {
-                jLabel1.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\FOTOS DE PIEZAS\\imagen.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
+                jLabel1.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Master Document\\No_Image_Available.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
                 return;
             }
         } else {
-            jLabel1.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\FOTOS DE PIEZAS\\imagen.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
+            jLabel1.setIcon(new ImageIcon(((new ImageIcon("\\\\192.168.0.2\\Compartida Produccion\\Master Document\\No_Image_Available.jpg").getImage()).getScaledInstance(500, 400, java.awt.Image.SCALE_SMOOTH))));
 
         }
     }
@@ -281,15 +280,23 @@ public class Fotos extends javax.swing.JInternalFrame {
         fotoAtras();
     }//GEN-LAST:event_atrasKeyPressed
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+/*
         try {
             Desktop.getDesktop().open(new File("\\\\192.168.0.2\\Compartida Produccion\\DRAWINGS\\TRANSFORMERS\\DRAWINGS\\" + txtPN.getText()));
+            
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "La Carpeta de P/N "+txtPN.getText()+" No Existe");
             if (ex != null) {
                 Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
             } else {
                 System.out.println("Forms");
-            }
+            
+        }*/
+        try {
+            Desktop.getDesktop().open(new File("\\\\192.168.0.2\\Compartida Produccion\\DRAWINGS\\TRANSFORMERS\\DRAWINGS\\" + txtPN.getText()));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La Carpeta de P/N "+txtPN.getText()+" no existe");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
