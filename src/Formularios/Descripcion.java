@@ -40,6 +40,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFeditar.setEnabled(false);
         BFguardar.setEnabled(false);
         BFNuevo.requestFocus();
+        txtFDescripcion.setEditable(false);
         actualizarBusquedafam();
        // this.setLocationRelativeTo(null);
        
@@ -97,7 +98,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
 
         setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
-        setTitle("INGRESO DE FAMILIAS");
+        setTitle("INGRESOS");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -206,24 +207,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
 
         jtFMedida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "No.", "Descripcion"
@@ -254,8 +238,8 @@ public class Descripcion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,7 +268,9 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFeditar.setEnabled(false);
         obtenerUltimoIdfam();
         accion = "Guardar";
+        txtFDescripcion.setEditable(true);
         txtFDescripcion.requestFocus();
+        
     }//GEN-LAST:event_BFNuevoActionPerformed
 
     private void BFguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFguardarActionPerformed
@@ -293,6 +279,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
 
             if (txtId.getText().compareTo("")!=0 && txtFDescripcion.getText().compareTo("")!=0){
                 try {
+                    txtFDescripcion.setEditable(true);
                     DescripcionC m = new DescripcionC();
                     m.setDescripcion(txtFDescripcion.getText().toUpperCase());
                     m.setId(Integer.parseInt(txtId.getText()));
@@ -307,6 +294,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
                 BFguardar.setEnabled(false);
                 BFNuevo.requestFocus();
                 BFNuevo.setEnabled(true);
+                txtFDescripcion.setEditable(false);
               
 
             }else {
@@ -341,6 +329,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFguardar.setEnabled(true);
         BFeditar.setEnabled(false);
         BFcancelar.setEnabled(true);
+        txtFDescripcion.setEditable(true);
     }//GEN-LAST:event_BFeditarActionPerformed
 
     private void BFcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFcancelarActionPerformed
@@ -349,6 +338,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFNuevo.setEnabled(true);
         BFguardar.setEnabled(false);
         BFeditar.setEnabled(false);
+        txtFDescripcion.setEditable(false);
        
     }//GEN-LAST:event_BFcancelarActionPerformed
 

@@ -166,7 +166,7 @@ public class Trabajos {
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select no_trabajo,job,rev,fecha,fechaven,nota from INGRESO_TRABAJO where NO_TRABAJO ="+id);
+        ps = cn.prepareStatement("select no_trabajo,job,rev,fecha,fechaven,nota from ingreso_trabajo where no_trabajo ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (t == null){
@@ -211,6 +211,4 @@ public class Trabajos {
         }
         return list;
     }
-    
-    
 }

@@ -56,20 +56,20 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu11 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu13 = new javax.swing.JMenu();
-        jMenuItem23 = new javax.swing.JMenuItem();
-        jMenuItem28 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -251,6 +251,72 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu11.setForeground(new java.awt.Color(0, 102, 255));
+        jMenu11.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu11.setLabel("  BODEGA MATERIALES");
+        jMenu11.setPreferredSize(new java.awt.Dimension(190, 25));
+
+        jMenuItem8.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
+        jMenuItem8.setText("Tipo de Material");
+        jMenuItem8.setPreferredSize(new java.awt.Dimension(173, 35));
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem8);
+
+        jMenuItem11.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
+        jMenuItem11.setText("Ingresos");
+        jMenuItem11.setPreferredSize(new java.awt.Dimension(197, 35));
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem11);
+
+        jMenuItem12.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
+        jMenuItem12.setText("Descargas");
+        jMenuItem12.setPreferredSize(new java.awt.Dimension(197, 35));
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem12);
+
+        jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
+        jMenu13.setText("Consultas");
+        jMenu13.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenu13.setPreferredSize(new java.awt.Dimension(203, 35));
+
+        jMenuItem10.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
+        jMenuItem10.setText("Existencias Bodega");
+        jMenuItem10.setPreferredSize(new java.awt.Dimension(197, 35));
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem10);
+
+        jMenuItem28.setText("Descargas");
+        jMenu13.add(jMenuItem28);
+
+        jMenuItem14.setText("Ingresos");
+        jMenu13.add(jMenuItem14);
+
+        jMenu11.add(jMenu13);
+
+        jMenuBar1.add(jMenu11);
+
         jMenu2.setForeground(new java.awt.Color(0, 102, 255));
         jMenu2.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu2.setLabel("  BODEGA PRODUCTOS");
@@ -273,44 +339,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu2.add(jMenu12);
 
-        jMenuItem8.setText("Tipo de Material");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem8);
-
         jMenuBar1.add(jMenu2);
-
-        jMenu11.setForeground(new java.awt.Color(0, 102, 255));
-        jMenu11.setFocusTraversalPolicyProvider(true);
-        jMenu11.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
-        jMenu11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jMenu11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jMenu11.setLabel("  BODEGA MATERIALES");
-        jMenu11.setPreferredSize(new java.awt.Dimension(190, 25));
-
-        jMenuItem10.setText("Existencias Bodega");
-        jMenu11.add(jMenuItem10);
-
-        jMenuItem11.setText("Ingresos");
-        jMenu11.add(jMenuItem11);
-
-        jMenuItem12.setText("Descargas");
-        jMenu11.add(jMenuItem12);
-
-        jMenu13.setText("Consultas");
-
-        jMenuItem23.setText("Ingresos");
-        jMenu13.add(jMenuItem23);
-
-        jMenuItem28.setText("Descargas");
-        jMenu13.add(jMenuItem28);
-
-        jMenu11.add(jMenu13);
-
-        jMenuBar1.add(jMenu11);
 
         jMenu6.setForeground(new java.awt.Color(255, 0, 0));
         jMenu6.setFocusPainted(true);
@@ -453,6 +482,33 @@ public class Inicio extends javax.swing.JFrame {
         ingre.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        IngreMateriales ingre  = new IngreMateriales();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+       Existencias ingre  = new Existencias();
+       Panel1.add(ingre);
+       Dimension desktopSize = Panel1.getSize();
+       Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        Descargas1 ingre  = new Descargas1();
+        Panel1.add(ingre);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -508,8 +564,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;

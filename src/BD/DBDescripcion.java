@@ -22,7 +22,7 @@ public abstract class DBDescripcion {
     public static void insertarDesc (DescripcionC d) throws SQLException{
     Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-    ps= cnn.prepareStatement("insert into descripcion (iddesc,nombre) Values(?,?)");
+    ps= cnn.prepareStatement("insert into descripcion (iddesc,nombre,cantidad) Values(?,?,0)");
     ps.setInt(1, d.getId());
     ps.setString(2, d.getDescripcion());
     ps.executeUpdate();
