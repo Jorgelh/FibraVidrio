@@ -8,6 +8,8 @@ package BD;
 import Class.CTrabajos;
 import Class.IngresoMaterial;
 import Formularios.IngreMateriales;
+import Formularios.ingresoTmaterial;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,4 +70,11 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
     }
 
     
+    
+    
+    
+    
+
 }
+
+

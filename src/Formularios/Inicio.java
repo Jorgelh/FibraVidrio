@@ -29,6 +29,9 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +73,12 @@ public class Inicio extends javax.swing.JFrame {
         jMenu12 = new javax.swing.JMenu();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
+        jMenuItem31 = new javax.swing.JMenuItem();
+        jMenuItem32 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -341,6 +350,37 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu7.setForeground(new java.awt.Color(0, 102, 255));
+        jMenu7.setText("  BODEGA HERRAMIENTAS");
+        jMenu7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenu7.setMinimumSize(new java.awt.Dimension(29, 25));
+        jMenu7.setPreferredSize(new java.awt.Dimension(225, 25));
+
+        jMenuItem29.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
+        jMenuItem29.setText("Ingreso");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem29);
+
+        jMenuItem30.setText("Descargas");
+        jMenu7.add(jMenuItem30);
+
+        jMenu14.setText("Consultas");
+
+        jMenuItem31.setText("Ingresos");
+        jMenu14.add(jMenuItem31);
+
+        jMenuItem32.setText("Descargas");
+        jMenu14.add(jMenuItem32);
+
+        jMenu7.add(jMenu14);
+
+        jMenuBar1.add(jMenu7);
+
         jMenu6.setForeground(new java.awt.Color(255, 0, 0));
         jMenu6.setFocusPainted(true);
         jMenu6.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
@@ -509,6 +549,15 @@ public class Inicio extends javax.swing.JFrame {
         ingre.show();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        ingresoHerramientas ingre  = new ingresoHerramientas();
+        Panel1.add(ingre);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -545,18 +594,20 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JDesktopPane Panel1;
+    public static javax.swing.JDesktopPane Panel1;
     private javax.swing.JMenuItem Pendientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -571,7 +622,11 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem30;
+    private javax.swing.JMenuItem jMenuItem31;
+    private javax.swing.JMenuItem jMenuItem32;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

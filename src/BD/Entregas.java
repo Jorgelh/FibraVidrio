@@ -131,7 +131,7 @@ public class Entregas {
     
     public static ArrayList<CEntregas> BuscarDrawings(String l){
 
-        return Drawings("select pnn,gabeta,folder,nota,rev from Drawings where upper(PNN) like upper('"+l+"%')");
+        return Drawings("select pn,gabeta,folder,nota,rev from Drawings where upper(PN) like upper('"+l+"%')");
     }
 
     private static ArrayList<CEntregas> Drawings(String sql) {
@@ -143,7 +143,7 @@ public class Entregas {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 t = new CEntregas();
-                t.setPN(rs.getString("pnn"));
+                t.setPN(rs.getString("pn"));
                 t.setGabeta(rs.getString("gabeta"));
                 t.setFolder(rs.getString("folder"));
                 t.setNota(rs.getString("nota"));

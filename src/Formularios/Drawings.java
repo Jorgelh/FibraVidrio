@@ -27,7 +27,7 @@ public class Drawings extends javax.swing.JInternalFrame {
     public Drawings() {
         initComponents();
         obtenerID();
-        PNN.requestFocus();
+        PN.requestFocus();
         
     }
     
@@ -41,27 +41,27 @@ public class Drawings extends javax.swing.JInternalFrame {
         try {
              Connection cn = BDFIBRA.getConnection();
              Statement ps = cn.createStatement();
-             ResultSet rs = ps.executeQuery("select max(PN) from Drawings");
+             ResultSet rs = ps.executeQuery("select max(PNN) from Drawings");
              rs.next();
-             n = (rs.getInt("max(PN)"));
+             n = (rs.getInt("max(PNN)"));
              ps.close();
              rs.close();
         } catch (Exception e) {
         }
-          PN.setText(String.valueOf(n+1));
+          PNN.setText(String.valueOf(n+1));
       //  
     }
     public void guardarDrawins() throws SQLException  {
         Connection cn = BDFIBRA.getConnection();
         Statement ps = cn.createStatement();
-        ps.executeUpdate("insert into DRAWINGS values("+PN.getText()+",'"+gabeta.getText()+"','"+folder.getText()+"','"+notas.getText()+"','"+PNN.getText()+"','"+revicion.getText()+"')");
+        ps.executeUpdate("insert into DRAWINGS values("+PNN.getText()+",'"+PN.getText()+"','"+gabeta.getText()+"','"+folder.getText()+"','"+notas.getText()+"','"+revicion.getText()+"')");
         cn.close();
         ps.close();
     }
     
     public void limpiar(){
      
-        PNN.setText("");
+        PN.setText("");
         gabeta.setText("");
         folder.setText("");
         notas.setText("");
@@ -83,7 +83,7 @@ public class Drawings extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        PNN = new javax.swing.JTextField();
+        PN = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         folder = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -95,7 +95,7 @@ public class Drawings extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         revicion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        PN = new javax.swing.JTextField();
+        PNN = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,10 +107,10 @@ public class Drawings extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("P/N");
 
-        PNN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        PNN.addActionListener(new java.awt.event.ActionListener() {
+        PN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PNNActionPerformed(evt);
+                PNActionPerformed(evt);
             }
         });
 
@@ -178,7 +178,7 @@ public class Drawings extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(folder, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gabeta, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PNN, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                            .addComponent(PN, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -201,7 +201,7 @@ public class Drawings extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(PNN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
@@ -214,7 +214,7 @@ public class Drawings extends javax.swing.JInternalFrame {
                     .addComponent(BGuardar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(revicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -222,10 +222,10 @@ public class Drawings extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Eras Bold ITC", 0, 24)); // NOI18N
         jLabel5.setText("Ingreso Drawings");
 
-        PN.setEditable(false);
-        PN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        PN.setForeground(new java.awt.Color(204, 0, 0));
-        PN.setFocusable(false);
+        PNN.setEditable(false);
+        PNN.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PNN.setForeground(new java.awt.Color(204, 0, 0));
+        PNN.setFocusable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,18 +237,17 @@ public class Drawings extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(38, 38, 38)
-                        .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PNN, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel5))
-                    .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PNN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -271,32 +270,32 @@ public class Drawings extends javax.swing.JInternalFrame {
     private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
 
         
-        if(PNN.getText().compareTo("")!=0 && folder.getText().compareTo("")!=0 && gabeta.getText().compareTo("")!=0){
+        if(PN.getText().compareTo("")!=0 && folder.getText().compareTo("")!=0 && gabeta.getText().compareTo("")!=0){
         
          try {
              Connection cn = BDFIBRA.getConnection();
              Statement ps = cn.createStatement();
-             ResultSet rs = ps.executeQuery("select count(PNN) from Drawings where PNN ="+PNN.getText());
+             ResultSet rs = ps.executeQuery("select count(PN) from Drawings where PN ="+PN.getText());
              rs.next();
-             f = (rs.getInt("count(PNN)"));
+             f = (rs.getInt("count(PN)"));
              if(f==0){
                  guardarDrawins();
                  JOptionPane.showMessageDialog(null, "Drawing Guardado Exitosamente");
                  limpiar();
-             }else{JOptionPane.showMessageDialog(null, "EL P/N "+PNN.getText()+" Ya Existe"); PNN.requestFocus();}
+             }else{JOptionPane.showMessageDialog(null, "EL P/N "+PN.getText()+" Ya Existe"); PN.requestFocus();}
              ps.close();
              rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR"+e);
         }
-          PN.setText(String.valueOf(n+1));
+          PNN.setText(String.valueOf(n+1));
         }else{JOptionPane.showMessageDialog(null, "Llene todos los datos...");}
              
     }//GEN-LAST:event_BGuardarActionPerformed
 
-    private void PNNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PNNActionPerformed
+    private void PNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PNActionPerformed
        folder.requestFocus();
-    }//GEN-LAST:event_PNNActionPerformed
+    }//GEN-LAST:event_PNActionPerformed
 
     private void folderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folderActionPerformed
         gabeta.requestFocus();
