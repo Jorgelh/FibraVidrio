@@ -28,7 +28,7 @@ import javax.swing.table.TableColumn;
  *
  * @author jluis
  */
-public class CargaHerramientas extends javax.swing.JInternalFrame {
+public class DescargaHerramientas extends javax.swing.JInternalFrame {
 
 int idingreherra;
 int no_marca;
@@ -38,29 +38,16 @@ int d;
     /**
      * Creates new form IngreMateriales
      */
-    public CargaHerramientas() {
+    public DescargaHerramientas() {
         initComponents();
         buscarHerramients();
         
         medida.requestFocus();
-        llenarCombo4();
         llenarCombo3();
         obtenerIDcombo();
     }
     
-     public static void llenarCombo4(){
-        
-        try {
-            Connection con = BDFIBRA.getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select decri_marca from m_marca order by decri_marca");
-            while (rs.next()){
-                marca.addItem((String) rs.getObject(1));
-            }
-        } catch (Exception e) {
-        }
-       marca.setSelectedItem("Sin Marca...");
-    }
+     
     
      public static void llenarCombo3(){
         
@@ -75,21 +62,6 @@ int d;
         }
     }
      
-     
-    public void obtenerID(){
-        
-        try {
-            Connection con = BDFIBRA.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT NO_MARCA FROM M_MARCA WHERE DECRI_MARCA='"+marca.getSelectedItem()+"'");
-            while (rs.next()) {
-            no_marca = rs.getInt("NO_MARCA");     
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
-        } 
-    
-    }
      
     
    public void obtenerIDcombo(){
@@ -113,9 +85,9 @@ int d;
      try {
              Connection cn = BDFIBRA.getConnection();
              Statement ps = cn.createStatement();
-             ResultSet rs = ps.executeQuery("select max(ID_INGRESOHERRA) from M_INGRESOHERRAMIENTA");
+             ResultSet rs = ps.executeQuery("select max(NO_DESCARGA) from M_DESCARGAS");
              rs.next();
-             n = (rs.getInt("max(ID_INGRESOHERRA)"));
+             n = (rs.getInt("max(NO_DESCARGA)"));
              ps.close();
              rs.close();
         } catch (Exception e) {
@@ -132,7 +104,6 @@ int d;
         descripcion.setText("");
         nota.setText("");
         no.setText("");
-        marca.setSelectedItem("Sin Marca...");
         no_marca = 0;
        // PO.setText("");
         idingreherra = 0;
@@ -173,9 +144,6 @@ int d;
         cantidad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         fechain = new com.toedter.calendar.JDateChooser();
-        jLabel11 = new javax.swing.JLabel();
-        marca = new javax.swing.JComboBox<>();
-        BTdescripcion1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Herramientas = new javax.swing.JTable();
         Guardar = new javax.swing.JButton();
@@ -293,7 +261,7 @@ int d;
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("CARGAR HERRAMIENTAS");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Ingreso", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Eras Bold ITC", 0, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de Descarga", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Eras Bold ITC", 0, 14))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Cantidad");
@@ -306,84 +274,39 @@ int d;
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha Ingreso");
+        jLabel4.setText("Fecha Descarga");
 
         fechain.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel11.setText("Marca");
-
-        marca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        marca.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                marcaItemStateChanged(evt);
-            }
-        });
-        marca.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                marcaFocusLost(evt);
-            }
-        });
-        marca.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                marcaMouseClicked(evt);
-            }
-        });
-        marca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                marcaActionPerformed(evt);
-            }
-        });
-
-        BTdescripcion1.setText("+");
-        BTdescripcion1.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        BTdescripcion1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTdescripcion1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechain, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(fechain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(13, 13, 13))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BTdescripcion1))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel11))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel4)
+                .addGap(0, 171, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel11)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTdescripcion1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(72, 72, 72))
         );
 
         Herramientas.setModel(new javax.swing.table.DefaultTableModel(
@@ -484,7 +407,7 @@ int d;
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Cancelar)
                             .addComponent(Guardar))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -513,11 +436,11 @@ int d;
                                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 70, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
 
@@ -550,7 +473,7 @@ int d;
             
         
             obtenerultimoid();
-            obtenerID();
+            if(Integer.parseInt(cantidadBodga.getText()) > Integer.parseInt(cantidad.getText())){
             if(cantidad.getText().compareTo("")!=0 && no.getText().compareTo("")!=0 && fechain.getDate()!=null){
                 
         try {
@@ -559,10 +482,8 @@ int d;
             m.setNo(Integer.parseInt(no.getText()));
             m.setCantidad(Integer.parseInt(cantidad.getText()));
             m.setFechain(fechain.getDate());
-            m.setNomarca(no_marca);
-           // m.setPo(PO.getText());
-            EditComponentesHerramienta.IngresoHerra(m);
-            JOptionPane.showMessageDialog(null, "Ingreso Agregado...");
+            EditComponentesHerramienta.DescargaHerra(m);
+            JOptionPane.showMessageDialog(null, "Descarga Realizada...");
             limpiar();
             buscarHerramients();
         } catch (Exception e) {
@@ -570,6 +491,7 @@ int d;
         }
             }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
 
+            }else{JOptionPane.showMessageDialog(null, "No posea la cantidad a descargar...");}
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noActionPerformed
@@ -598,33 +520,6 @@ int d;
             System.out.println(e);
         }
     }//GEN-LAST:event_HerramientasMouseClicked
-
-    private void marcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_marcaItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaItemStateChanged
-
-    private void marcaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_marcaFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaFocusLost
-
-    private void marcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_marcaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaMouseClicked
-
-    private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaActionPerformed
-
-    private void BTdescripcion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdescripcion1ActionPerformed
-
-        IngresoMarca1 compo = new IngresoMarca1();
-        Panel1.add(compo);
-        Dimension desktopSize = Panel1.getSize();
-        Dimension FrameSize = compo.getSize();
-        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
-        compo.show();
-
-    }//GEN-LAST:event_BTdescripcion1ActionPerformed
 
     private void combodescriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combodescriItemStateChanged
        buscarHerramients();
@@ -704,27 +599,28 @@ int d;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DescargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DescargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DescargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DescargaHerramientas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CargaHerramientas().setVisible(true);
+                new DescargaHerramientas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTdescripcion1;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
     private javax.swing.JTable Herramientas;
@@ -736,7 +632,6 @@ int d;
     private com.toedter.calendar.JDateChooser fechain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -750,7 +645,6 @@ int d;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JComboBox<String> marca;
     private javax.swing.JTextField medida;
     private javax.swing.JTextField no;
     private javax.swing.JTextArea nota;

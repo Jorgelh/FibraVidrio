@@ -380,6 +380,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem15.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
         jMenuItem15.setText("Descarga Herramientas");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem15);
 
         jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
@@ -583,6 +588,18 @@ public class Inicio extends javax.swing.JFrame {
         ingre.show();
         
     }//GEN-LAST:event_jMenuItem30ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+       
+        DescargaHerramientas ingre  = new DescargaHerramientas();
+        Panel1.add(ingre);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     /**
      * @param args the command line arguments
