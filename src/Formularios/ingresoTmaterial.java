@@ -6,7 +6,7 @@
 package Formularios;
 
 import BD.BDFIBRA;
-import static Formularios.ingresoHerramientas.material;
+//import static Formularios.ingresoHerramientas.material;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -43,9 +43,7 @@ int n;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR "+e);
         }
-           
             no.setText(String.valueOf(n+1));
-    
     }
 
     /**

@@ -582,7 +582,7 @@ int n=0;
 
     private void BTmaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTmaterialActionPerformed
 
-        IngresoTmaterial1 compo = new IngresoTmaterial1();
+        ingresoTmaterial compo = new ingresoTmaterial();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
