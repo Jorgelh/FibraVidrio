@@ -76,6 +76,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem29 = new javax.swing.JMenuItem();
         jMenuItem30 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jMenuItem31 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
@@ -358,7 +359,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuItem29.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
-        jMenuItem29.setText("Ingreso");
+        jMenuItem29.setText("Nueva Herramienta");
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem29ActionPerformed(evt);
@@ -366,10 +367,24 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem29);
 
-        jMenuItem30.setText("Descargas");
+        jMenuItem30.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
+        jMenuItem30.setText("Ingreso de Herramienta");
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem30);
 
+        jMenuItem15.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
+        jMenuItem15.setText("Descarga Herramientas");
+        jMenu7.add(jMenuItem15);
+
+        jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
         jMenu14.setText("Consultas");
+        jMenu14.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
 
         jMenuItem31.setText("Ingresos");
         jMenu14.add(jMenuItem31);
@@ -558,6 +573,17 @@ public class Inicio extends javax.swing.JFrame {
         ingre.show();
     }//GEN-LAST:event_jMenuItem29ActionPerformed
 
+    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
+     
+        CargaHerramientas ingre  = new CargaHerramientas();
+        Panel1.add(ingre);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = ingre.getSize();
+        ingre.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        ingre.show();
+        
+    }//GEN-LAST:event_jMenuItem30ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -616,6 +642,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;

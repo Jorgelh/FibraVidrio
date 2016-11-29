@@ -43,7 +43,7 @@ int n=0;
         llenarCombo1();
         llenarCombo2();
         llenarCombo3();
-        llenarCombo4();
+      //  llenarCombo4();
         
         
 
@@ -84,21 +84,22 @@ int n=0;
             }
         } catch (Exception e) {
         }
-    }  
-     public static void llenarCombo4(){
-        
-        try {
-            Connection con = BDFIBRA.getConnection();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select decri_marca from m_marca order by decri_marca");
-            while (rs.next()){
-                marca.addItem((String) rs.getObject(1));
-            }
-        } catch (Exception e) {
-        }
-       marca.setSelectedItem("Sin Marca...");
     }
-      
+
+//     public static void llenarCombo4(){
+//        
+//        try {
+//            Connection con = BDFIBRA.getConnection();
+//            Statement st = con.createStatement();
+//            ResultSet rs = st.executeQuery("select decri_marca from m_marca order by decri_marca");
+//            while (rs.next()){
+//                marca.addItem((String) rs.getObject(1));
+//            }
+//        } catch (Exception e) {
+//        }
+//       marca.setSelectedItem("Sin Marca...");
+//    }
+//      
     
     
     
@@ -137,16 +138,16 @@ int n=0;
             JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
         }
       
-       try {
-            Connection con = BDFIBRA.getConnection();
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT NO_MARCA FROM M_MARCA WHERE DECRI_MARCA='"+marca.getSelectedItem()+"'");
-            while (rs.next()) {
-            no_marca = rs.getInt("NO_MARCA");     
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
-        }
+//       try {
+//            Connection con = BDFIBRA.getConnection();
+//            Statement stmt = con.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT NO_MARCA FROM M_MARCA WHERE DECRI_MARCA='"+marca.getSelectedItem()+"'");
+//            while (rs.next()) {
+//            no_marca = rs.getInt("NO_MARCA");     
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+//        }
       
       
       
@@ -175,11 +176,11 @@ int n=0;
         material.setSelectedItem("Seleccionar...");
         medida.setSelectedItem("Seleccionar...");
         descripcion.setSelectedItem("Seleccionar...");
-        marca.setSelectedItem("Sin Marca...");
+        //marca.setSelectedItem("Sin Marca...");
         fechaIngreso.setDate(null);
-        marca.setSelectedItem("");
+        //marca.setSelectedItem("");
         filos.setSelectedItem("");
-        cantidad.setText("");
+      //  cantidad.setText("");
         po.setText("");
         codigopedido.setText("");
         nota.setText("");
@@ -205,7 +206,6 @@ int n=0;
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         material = new javax.swing.JComboBox<>();
         BTmaterial = new javax.swing.JButton();
@@ -213,19 +213,15 @@ int n=0;
         jLabel10 = new javax.swing.JLabel();
         BTmedida = new javax.swing.JButton();
         filos = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        cantidad = new javax.swing.JTextField();
         descripcion = new javax.swing.JComboBox<>();
         BTdescripcion = new javax.swing.JButton();
-        marca = new javax.swing.JComboBox<>();
-        BTdescripcion1 = new javax.swing.JButton();
+        fechaIngreso = new com.toedter.calendar.JDateChooser();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nota = new javax.swing.JTextArea();
-        fechaIngreso = new com.toedter.calendar.JDateChooser();
-        jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         po = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -249,9 +245,6 @@ int n=0;
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Descripcion");
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Marca");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Filos");
@@ -313,16 +306,6 @@ int n=0;
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("Cantidad");
-
-        cantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cantidadActionPerformed(evt);
-            }
-        });
-
         descripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descripcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         descripcion.addItemListener(new java.awt.event.ItemListener() {
@@ -354,35 +337,8 @@ int n=0;
             }
         });
 
-        marca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        marca.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                marcaItemStateChanged(evt);
-            }
-        });
-        marca.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                marcaFocusLost(evt);
-            }
-        });
-        marca.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                marcaMouseClicked(evt);
-            }
-        });
-        marca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                marcaActionPerformed(evt);
-            }
-        });
-
-        BTdescripcion1.setText("+");
-        BTdescripcion1.setMargin(new java.awt.Insets(2, 2, 2, 2));
-        BTdescripcion1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTdescripcion1ActionPerformed(evt);
-            }
-        });
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Fecha Ingreso");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -400,26 +356,21 @@ int n=0;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTmedida))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(filos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel8))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cantidad)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTdescripcion))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BTdescripcion1)))
+                    .addComponent(fechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(filos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -444,20 +395,14 @@ int n=0;
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTdescripcion))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(9, 9, 9)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTdescripcion1))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(filos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(fechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -469,9 +414,6 @@ int n=0;
         nota.setColumns(20);
         nota.setRows(5);
         jScrollPane1.setViewportView(nota);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha Ingreso");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("P.O");
@@ -500,35 +442,29 @@ int n=0;
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(fechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9)
-                                .addComponent(po, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addComponent(codigopedido, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
-                            .addComponent(jLabel4)))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel12)
+                    .addComponent(codigopedido, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(po, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(po, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(codigopedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -582,13 +518,13 @@ int n=0;
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -599,9 +535,7 @@ int n=0;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -616,17 +550,13 @@ int n=0;
 
 
     }//GEN-LAST:event_CancelarActionPerformed
-    private void cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantidadActionPerformed
-        po.requestFocus();
-    }//GEN-LAST:event_cantidadActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
             
         
             obtenerultimoid();
             obtenerID();
-            if(fechaIngreso.getDate() != null && !material.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !medida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !descripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")
-                    && cantidad.getText().compareTo("")!=0 ){
+            if(fechaIngreso.getDate() != null && !material.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !medida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !descripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
         try {
             componentes m = new componentes();
             m.setNo(n+1);
@@ -635,7 +565,7 @@ int n=0;
             m.setDescri(no_descrip);
             m.setFecha(fechaIngreso.getDate());
             m.setMarca(no_marca);
-            m.setCantidad(Integer.parseInt(cantidad.getText()));
+           // m.setCantidad(Integer.parseInt(cantidad.getText()));
             m.setFilos((String)filos.getSelectedItem());
             m.setComentantario(nota.getText());
             m.setPo(po.getText());
@@ -652,7 +582,7 @@ int n=0;
 
     private void BTmaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTmaterialActionPerformed
 
-        ingresoTmaterial compo = new ingresoTmaterial();
+        IngresoTmaterial1 compo = new IngresoTmaterial1();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -667,7 +597,7 @@ int n=0;
 
     private void BTmedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTmedidaActionPerformed
 
-        ingresoMedida compo = new ingresoMedida();
+        IngresoMedida1 compo = new IngresoMedida1();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -689,13 +619,9 @@ int n=0;
             Guardar.requestFocus();
     }//GEN-LAST:event_codigopedidoActionPerformed
 
-    private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descripcionActionPerformed
-
     private void BTdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdescripcionActionPerformed
         
-        ingresoDescripcion compo = new ingresoDescripcion();
+        IngresoDescripcion1 compo = new IngresoDescripcion1();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -723,52 +649,25 @@ int n=0;
 
     }//GEN-LAST:event_medidaMouseClicked
 
+    private void filosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filosItemStateChanged
+    //  marca.requestFocus();
+    }//GEN-LAST:event_filosItemStateChanged
+
+    private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcionActionPerformed
+
     private void descripcionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_descripcionMouseClicked
-        
+
     }//GEN-LAST:event_descripcionMouseClicked
 
     private void descripcionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descripcionFocusLost
-                 
-  
-        
+
     }//GEN-LAST:event_descripcionFocusLost
 
     private void descripcionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_descripcionItemStateChanged
-      marca.requestFocus();
+     //   marca.requestFocus();
     }//GEN-LAST:event_descripcionItemStateChanged
-
-    private void filosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filosItemStateChanged
-      marca.requestFocus();
-    }//GEN-LAST:event_filosItemStateChanged
-
-    private void marcaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_marcaItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaItemStateChanged
-
-    private void marcaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_marcaFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaFocusLost
-
-    private void marcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_marcaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaMouseClicked
-
-    private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_marcaActionPerformed
-
-    private void BTdescripcion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdescripcion1ActionPerformed
-             
-        ingresoMarca compo = new ingresoMarca();
-        Panel1.add(compo);
-        Dimension desktopSize = Panel1.getSize();
-        Dimension FrameSize = compo.getSize();
-        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
-        compo.show();
-
-
-
-    }//GEN-LAST:event_BTdescripcion1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -808,12 +707,10 @@ int n=0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTdescripcion;
-    private javax.swing.JButton BTdescripcion1;
     private javax.swing.JButton BTmaterial;
     private javax.swing.JButton BTmedida;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JTextField cantidad;
     private javax.swing.JTextField codigopedido;
     public static javax.swing.JComboBox<String> descripcion;
     private com.toedter.calendar.JDateChooser fechaIngreso;
@@ -824,16 +721,13 @@ int n=0;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JComboBox<String> marca;
     public static javax.swing.JComboBox<String> material;
     public static javax.swing.JComboBox<String> medida;
     private javax.swing.JTextArea nota;

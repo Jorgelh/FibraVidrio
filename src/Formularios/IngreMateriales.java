@@ -44,7 +44,7 @@ int n=0;
       try {
             Connection con = BDFIBRA.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select no from Descripcion where nombre='"+material.getSelectedItem()+"'");
+            ResultSet rs = stmt.executeQuery("select iddesc from Descripcion where nombre='"+material.getSelectedItem()+"'");
             while (rs.next()) {
             idingre = rs.getInt("iddesc");     
             }

@@ -6,7 +6,6 @@
 package Formularios;
 
 import BD.BDFIBRA;
-import static Formularios.ingresoHerramientas.marca;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -177,9 +176,6 @@ int n;
         cn.close();
         ps.close();
         JOptionPane.showMessageDialog(null, "Agregado...");
-        ingresoHerramientas.marca.removeAllItems();
-        ingresoHerramientas.marca.setSelectedItem("Sin Marca...");;
-        ingresoHerramientas.llenarCombo4();
         this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR"+e);
