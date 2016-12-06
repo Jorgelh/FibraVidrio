@@ -29,8 +29,9 @@ public class DescripcionC {
         this.Descripcion = Descripcion;
     }
     
-    private int id;
-    private String Descripcion;
+    public int id;
+    public String Descripcion;
+    
     
     
 }

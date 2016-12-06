@@ -38,7 +38,7 @@ public class EditComponentesHerramienta {
          return consultarSQL("select no_tipo as \"numero\", m_tipo as \"descri\" from m_material order by no_tipo");   
     }
     
-private static ArrayList<DescripcionC> consultarSQL(String sql) {
+public static ArrayList<DescripcionC> consultarSQL(String sql) {
         ArrayList<DescripcionC> list = new ArrayList<DescripcionC>();
         Connection cn = BDFIBRA.getConnection();
         try {
@@ -130,6 +130,7 @@ private static ArrayList<DescripcionC> consultarSQL(String sql) {
         ps.close();
         return p;
     }
+  
   public static void insertarMarca(DescripcionC d) throws SQLException{
     Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
