@@ -5,15 +5,10 @@
  */
 package Formularios;
 
-import BD.BDFIBRA;
-import BD.DBDescripcion;
 import BD.EditComponentesHerramienta;
 import Class.DescripcionC;
 import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,7 +32,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
         }
         initComponents();
-        obtenerUltimoIdfam();
+       // obtenerUltimoIdfam();
         BFeditar.setEnabled(false);
         BFguardar.setEnabled(false);
         BFNuevo.requestFocus();
@@ -47,7 +42,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
        
     }
     
-    public void obtenerUltimoIdfam() {
+    /*public void obtenerUltimoIdfam() {
         try {
             Connection con = BDFIBRA.getConnection();
             Statement stmt = con.createStatement();
@@ -63,7 +58,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
             System.out.print(error);
         }
     }
-    
+    */
     public void limpiarCajaTextofam() {
         txtId.setText("");
         txtFDescripcion.setText("");
@@ -85,6 +80,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         BFNuevo = new javax.swing.JButton();
         BFguardar = new javax.swing.JButton();
@@ -100,6 +96,8 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(153, 204, 255));
         setClosable(true);
         setTitle("INGRESOS");
+
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -222,25 +220,36 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jtFMedida);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -267,7 +276,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
         BFcancelar.setEnabled(true);
         BFNuevo.setEnabled(false);
         BFeditar.setEnabled(false);
-        obtenerUltimoIdfam();
+       // obtenerUltimoIdfam();
         accion = "Guardar";
         txtFDescripcion.setEditable(true);
         txtFDescripcion.requestFocus();
@@ -290,7 +299,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
                     System.out.println("Error BD:"+e.getMessage());
                 }
                 limpiarCajaTextofam();
-                obtenerUltimoIdfam();
+             //   obtenerUltimoIdfam();
                 actualizarBusquedafam();
                 BFguardar.setEnabled(false);
                 BFNuevo.requestFocus();
@@ -310,7 +319,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
                 EditComponentesHerramienta.actualizarMaterial(p);
                 JOptionPane.showMessageDialog(null, " [ Datos Actualizados ]");
                 limpiarCajaTextofam();
-                obtenerUltimoIdfam();
+             //   obtenerUltimoIdfam();
                 BFguardar.setEnabled(false);
                 BFNuevo.setEnabled(true);
                 
@@ -335,7 +344,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
 
     private void BFcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFcancelarActionPerformed
         limpiarCajaTextofam();
-        obtenerUltimoIdfam();
+     //   obtenerUltimoIdfam();
         BFNuevo.setEnabled(true);
         BFguardar.setEnabled(false);
         BFeditar.setEnabled(false);
@@ -348,7 +357,7 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
    
     }//GEN-LAST:event_txtFDescripcionActionPerformed
 
-     private void actualizarBusquedafam() {
+     public void actualizarBusquedafam() {
         ArrayList<DescripcionC> result = EditComponentesHerramienta.ListarMaterial();
         recargarTablefam(result);
     }
@@ -481,15 +490,16 @@ public class IngresoTmaterial1 extends javax.swing.JInternalFrame {
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BFNuevo;
-    private javax.swing.JButton BFcancelar;
-    private javax.swing.JButton BFeditar;
-    private javax.swing.JButton BFguardar;
+    public static javax.swing.JButton BFNuevo;
+    public static javax.swing.JButton BFcancelar;
+    public static javax.swing.JButton BFeditar;
+    public static javax.swing.JButton BFguardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel2;
+    public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtFMedida;
+    public static javax.swing.JTable jtFMedida;
     private javax.swing.JTextField txtFDescripcion;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables

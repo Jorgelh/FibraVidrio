@@ -269,7 +269,6 @@ public class IngresoMarca1 extends javax.swing.JInternalFrame {
             DescripcionC m = EditComponentesHerramienta.buscarMarca(Integer.parseInt(String.valueOf(jtFMedida.getModel().getValueAt(jtFMedida.getSelectedRow(),0))));
             txtId.setText(String.valueOf(m.getId()));
             txtFDescripcion.setText(m.getDescripcion());
-
         } catch (Exception e) {
             System.out.println("Erro de Seleccion:"+e);
         }
