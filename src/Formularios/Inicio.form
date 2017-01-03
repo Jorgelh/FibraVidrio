@@ -425,6 +425,7 @@
               <Color blue="ff" green="66" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  BODEGA HERRAMIENTAS"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Eras Bold ITC" size="14" style="0"/>
             </Property>

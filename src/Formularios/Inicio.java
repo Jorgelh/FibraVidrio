@@ -353,6 +353,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu7.setForeground(new java.awt.Color(0, 102, 255));
         jMenu7.setText("  BODEGA HERRAMIENTAS");
+        jMenu7.setEnabled(false);
         jMenu7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu7.setMinimumSize(new java.awt.Dimension(29, 25));
         jMenu7.setPreferredSize(new java.awt.Dimension(225, 25));
@@ -534,7 +535,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-      Descripcion ingre  = new Descripcion();
+      Descri ingre  = new Descri();
        Panel1.add(ingre);
        Dimension desktopSize = Panel1.getSize();
        Dimension FrameSize = ingre.getSize();
