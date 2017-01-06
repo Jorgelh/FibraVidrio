@@ -6,46 +6,57 @@
 package Formularios;
 
 import BD.BDFIBRA;
+import BD.Componente;
 import BD.DBDescripcion;
 import Class.DescripcionC;
+import Class.PN;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.xml.transform.Result;
-
 /**
  *
  * @author jluis
  */
-public class Descri extends javax.swing.JInternalFrame {
+public class EditarPNComponentes extends javax.swing.JInternalFrame {
 
     String accion = "";
-    
+    DefaultTableModel temp;
+    int idcomponente;
+
     /**
      * Creates new form Descri
      */
-    public Descri() {
+    public EditarPNComponentes(){
         initComponents();
-        obtenerUltimoID();
         BEditar.setEnabled(false);
         BGuardar.setEnabled(false);
         BNuevo.requestFocus();
-        txtDescripcion.setEditable(false);
-        actualizarBusquedafam();
+        CombDescripcion.setEnabled(false);
+        txtCantidad.setEditable(false);
         
-              
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select descripcion||' '||medida from COMPONENTES order by descripcion");
+            while (rs.next()){
+            CombDescripcion.addItem((String) rs.getObject(1));
+            }
+     
+        } catch (Exception e){
+        }
     }
 
-    public void obtenerUltimoID(){
+  /*  public void obtenerUltimoID(){
     
         try {
             Connection c = BDFIBRA.getConnection();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select max(iddesc) from Descripcion");
+            ResultSet rs = stmt.executeQuery("select max(IDCOMPO) from COMPONENTES");
             while (rs.next()){
                int lastID = rs.getInt(1);
                txtNo.setText(String.valueOf(lastID + 1));
@@ -56,18 +67,54 @@ public class Descri extends javax.swing.JInternalFrame {
         } catch (SQLException error) {
             System.out.println(error);
         }
+    }*/
+    
+    
+    public  void obteneridcompo() {
+      
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select idcompo from COMPONENTES where DESCRIPCION||' '||MEDIDA = '" + CombDescripcion.getSelectedItem()+"'");
+            rs.next();
+            idcomponente = rs.getInt("idcompo");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+        
+    }
+
+   
+    
+   public void cleartablacomponentes() {
+
+        try {
+            temp = (DefaultTableModel) Tabla.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
     }
     
+    
+    
+    
     public void limpiarCajaTexto(){
-       txtDescripcion.setText("");
+      // CombDescripcion.setText("");
        txtNo.setText("");
+       txtCantidad.setText("");
     }
     
     public void activartexto(boolean b){
         
         txtNo.setEditable(!b);
-        txtDescripcion.setEditable(b);
-    
+        CombDescripcion.setEnabled(b);
+        txtCantidad.setEditable(b);
     
     }
     /**
@@ -86,11 +133,16 @@ public class Descri extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNo = new javax.swing.JTextField();
-        txtDescripcion = new javax.swing.JTextField();
         BNuevo = new javax.swing.JButton();
         BGuardar = new javax.swing.JButton();
         BEditar = new javax.swing.JButton();
         BCancelar = new javax.swing.JButton();
+        txtCantidad = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        CombDescripcion = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        PN = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -102,7 +154,7 @@ public class Descri extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "No.", "Descripcion"
+                "No.", "Descripcion", "Cantidad"
             }
         ));
         Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,13 +172,6 @@ public class Descri extends javax.swing.JInternalFrame {
 
         txtNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNo.setEnabled(false);
-
-        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
-            }
-        });
 
         BNuevo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         BNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
@@ -164,30 +209,47 @@ public class Descri extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Cantidad");
+
+        CombDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CombDescripcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CombDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 41, Short.MAX_VALUE)
                         .addComponent(BNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(42, 42, 42)
                         .addComponent(BGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(55, 55, 55)
                         .addComponent(BEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BCancelar)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addComponent(BCancelar)
+                        .addGap(58, 58, 58))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,46 +261,95 @@ public class Descri extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(CombDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("P/N");
+
+        PN.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        PN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PNActionPerformed(evt);
+            }
+        });
+        PN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                PNKeyReleased(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
+        jButton1.setText("Nueva Consulta de  P/N");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 568, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(306, 306, 306))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -251,10 +362,10 @@ public class Descri extends javax.swing.JInternalFrame {
         BCancelar.setEnabled(true);
         BNuevo.setEnabled(false);
         BEditar.setEnabled(false);
-        obtenerUltimoID();
         accion = "Guardar";
-        txtDescripcion.setEditable(true);
-        txtDescripcion.requestFocus();
+        CombDescripcion.setEnabled(true);
+        txtCantidad.setEditable(true);
+        CombDescripcion.requestFocus();
         
     }//GEN-LAST:event_BNuevoActionPerformed
 
@@ -262,24 +373,29 @@ public class Descri extends javax.swing.JInternalFrame {
       
         if(accion.equalsIgnoreCase("Guardar")){
             
-            if(txtNo.getText().compareTo("")!=0 && txtDescripcion.getText().compareTo("")!=0){
+            if(txtCantidad.getText().compareTo("")!=0 && !CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
                 try {
-                    txtDescripcion.setEditable(true);
+                    CombDescripcion.setEnabled(true);
+                    txtCantidad.setEditable(true);
+                    obteneridcompo();
                     DescripcionC m = new DescripcionC();
-                    m.setDescripcion(txtDescripcion.getText().toUpperCase());
-                    m.setId(Integer.parseInt(txtNo.getText()));
-                    DBDescripcion.insertarDesc(m);
-                    JOptionPane.showMessageDialog(null, "Registro Guardado");
-                } catch (Exception e) {
+                    m.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                    m.setPN(PN.getText());
+                    m.setIdcompo(idcomponente);
+                    Componente.guardarPNmas(m);
+                    JOptionPane.showMessageDialog(null,"Registro Guardado");
+                } catch (Exception e){
                     System.out.println(e);
                 }
                 limpiarCajaTexto();
-                obtenerUltimoID();
-                actualizarBusquedafam();
+                BusquedaComponentes();
                 BGuardar.setEnabled(false);
                 BNuevo.requestFocus();
                 BNuevo.setEnabled(true);
-                txtDescripcion.setEditable(false);
+                CombDescripcion.setSelectedItem("Seleccionar...");
+                txtNo.setText("");
+                CombDescripcion.setEnabled(false);
+                txtCantidad.setEditable(false);
             }else {
                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             }
@@ -287,21 +403,25 @@ public class Descri extends javax.swing.JInternalFrame {
         if(accion.equalsIgnoreCase("Actualizar")){
             DescripcionC p;
             try {
-                p = DBDescripcion.buscarDesc(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
-                DBDescripcion.actualizarFamilia(p);
+                obteneridcompo();
+                p = DBDescripcion.buscarEditCompo(Integer.parseInt(txtNo.getText()));
+                p.setIdcompo(idcomponente);
+                p.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                DBDescripcion.actualizarPNComponente(p);
                 JOptionPane.showMessageDialog(null, "Datos Actualizados");
                 limpiarCajaTexto();
-                obtenerUltimoID();
+                BusquedaComponentes();
                 BGuardar.setEnabled(false);
                 BNuevo.setEnabled(true);
-                actualizarBusquedafam();
+                CombDescripcion.setEnabled(false);
+                txtCantidad.setEditable(false);
+                BNuevo.requestFocus();
+                CombDescripcion.setSelectedItem("Seleccionar...");
+                txtNo.setText("");
+
             } catch (Exception e) {
                  JOptionPane.showMessageDialog(null, "Error BD: " + e.getMessage());
             }
-        
-        
-        
         }
         
         
@@ -317,7 +437,8 @@ public class Descri extends javax.swing.JInternalFrame {
         BGuardar.setEnabled(true);
         BEditar.setEnabled(false);
         BCancelar.setEnabled(true);
-        txtDescripcion.setEditable(true);
+        CombDescripcion.setEnabled(true);
+        txtCantidad.setEditable(true);
         
         
     }//GEN-LAST:event_BEditarActionPerformed
@@ -325,55 +446,97 @@ public class Descri extends javax.swing.JInternalFrame {
     private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed
         
         limpiarCajaTexto();
-        obtenerUltimoID();
         BNuevo.setEnabled(true);
         BGuardar.setEnabled(false);
         BEditar.setEnabled(false);
-        txtDescripcion.setEditable(false);
-        
+        CombDescripcion.setEnabled(false);
+        txtCantidad.setEditable(false);
+        CombDescripcion.setSelectedItem("Seleccionar...");
+        txtNo.setText("");
+        Tabla.requestFocus();
         
     }//GEN-LAST:event_BCancelarActionPerformed
-
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        BGuardar.requestFocus();
-    }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
         
         BEditar.setEnabled(true);
         BGuardar.setEnabled(false);
-        
         try {
-            DescripcionC m = DBDescripcion.buscarDesc(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(), 0))));
+            DescripcionC m = DBDescripcion.buscarEditCompo(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(),0))));
             txtNo.setText(String.valueOf(m.getId()));
-            txtDescripcion.setText(m.getDescripcion());
+            CombDescripcion.setSelectedItem(m.getDescripcion());
+            txtCantidad.setText(String.valueOf(m.getCantidad()));
         } catch (Exception e) {
             System.out.println("Error de Seleccion--"+e);
         }
     }//GEN-LAST:event_TablaMouseClicked
 
-    private void actualizarBusquedafam() {
-        ArrayList<DescripcionC> result = DBDescripcion.ListarDescrip();
-        recargarTablefam(result);
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        BGuardar.requestFocus();
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void PNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PNKeyReleased
+    }//GEN-LAST:event_PNKeyReleased
+
+    private void PNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PNActionPerformed
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select COUNT(PN) from PN where PN='"+PN.getText().toUpperCase()+"'");
+            rs.next();
+            int pn1 = rs.getInt("count(PN)");
+            if (pn1 > 0) {
+                 BusquedaComponentes();
+                 PN.setEditable(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "EL P/N NO EXISTE...");
+                PN.requestFocus();
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+        }
+    }//GEN-LAST:event_PNActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        limpiarCajaTexto();
+        BNuevo.setEnabled(true);
+        BGuardar.setEnabled(false);
+        BEditar.setEnabled(false);
+        CombDescripcion.setEnabled(false);
+        txtCantidad.setEditable(false);
+        CombDescripcion.setSelectedItem("Seleccionar...");
+        txtNo.setText("");
+        PN.setText("");
+        cleartablacomponentes();
+        PN.setEditable(true);
+        PN.requestFocus();
+                
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BusquedaComponentes(){
+        ArrayList<DescripcionC> result = DBDescripcion.ListarComponentes(PN.getText());
+        recargarTable(result);
     }
-    
-    public void recargarTablefam(ArrayList<DescripcionC> list) {
-        Object[][] datos = new Object[list.size()][2];
+    public void recargarTable(ArrayList<DescripcionC> list) {
+        Object[][] datos = new Object[list.size()][3];
         int i = 0;
         for (DescripcionC f : list)
         {
             datos[i][0] = f.getId();
             datos[i][1] = f.getDescripcion();
+            datos[i][2] = f.getCantidad();
             i++;
         }
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
                 datos,
                 new String[]{
-                    "No.","Descripcion"
+                    "No.","Descripcion","Cantidad"
                 }) {
                      @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+            return false;
             }
         });
         
@@ -381,6 +544,8 @@ public class Descri extends javax.swing.JInternalFrame {
         columna1.setPreferredWidth(0);
         TableColumn columna2 = Tabla.getColumn("Descripcion");
         columna2.setPreferredWidth(200);
+        TableColumn columna3 = Tabla.getColumn("Cantidad");
+        columna3.setPreferredWidth(200);
     }
     /**
      * @param args the command line arguments
@@ -399,35 +564,39 @@ public class Descri extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPNComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPNComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPNComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarPNComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Descri().setVisible(true);
+                new EditarPNComponentes().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCancelar;
     private javax.swing.JButton BEditar;
     private javax.swing.JButton BGuardar;
     private javax.swing.JButton BNuevo;
+    private javax.swing.JComboBox<String> CombDescripcion;
+    private javax.swing.JTextField PN;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtNo;
     // End of variables declaration//GEN-END:variables
 }

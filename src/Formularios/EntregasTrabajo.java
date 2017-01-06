@@ -581,7 +581,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
         if(no1.getText().compareTo("")!=0 && po.getText().compareTo("")!=0 && cantidad.getText().compareTo("")!=0 
            && fechaEntrega.getDate() != null && entregadoa.getText().compareTo("")!=0 && no_trabajo2 != 0 && idcompo != 0){
         
-            if(cantidadpen > Integer.parseInt(cantidad.getText()))
+            if(cantidadpen >= Integer.parseInt(cantidad.getText()))
                  {
             try {
                 CEntregas c = new CEntregas();

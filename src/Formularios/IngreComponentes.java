@@ -6,38 +6,39 @@
 package Formularios;
 
 import BD.BDFIBRA;
+import BD.Componente;
 import BD.DBDescripcion;
 import Class.DescripcionC;
+import Class.PN;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.xml.transform.Result;
-
 /**
  *
  * @author jluis
  */
-public class Descri extends javax.swing.JInternalFrame {
+public class IngreComponentes extends javax.swing.JInternalFrame {
 
     String accion = "";
-    
+    DefaultTableModel temp;
+
     /**
      * Creates new form Descri
      */
-    public Descri() {
+    public IngreComponentes() {
         initComponents();
         obtenerUltimoID();
         BEditar.setEnabled(false);
         BGuardar.setEnabled(false);
         BNuevo.requestFocus();
         txtDescripcion.setEditable(false);
+        txtMedida.setEditable(false);
         actualizarBusquedafam();
-        
-              
     }
 
     public void obtenerUltimoID(){
@@ -45,7 +46,7 @@ public class Descri extends javax.swing.JInternalFrame {
         try {
             Connection c = BDFIBRA.getConnection();
             Statement stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("select max(iddesc) from Descripcion");
+            ResultSet rs = stmt.executeQuery("select max(IDCOMPO) from COMPONENTES");
             while (rs.next()){
                int lastID = rs.getInt(1);
                txtNo.setText(String.valueOf(lastID + 1));
@@ -58,16 +59,35 @@ public class Descri extends javax.swing.JInternalFrame {
         }
     }
     
+    public void cleartablacomponentes() {
+
+        try {
+            temp = (DefaultTableModel) pnTabla.getModel();
+            int a = temp.getRowCount();
+            for (int i = 0; i < a; i++) {
+                temp.removeRow(i);
+                i--;
+            }
+        } catch (Exception e) {
+
+        }
+
+    }
+    
+    
+    
+    
     public void limpiarCajaTexto(){
        txtDescripcion.setText("");
        txtNo.setText("");
+       txtMedida.setText("");
     }
     
     public void activartexto(boolean b){
         
         txtNo.setEditable(!b);
         txtDescripcion.setEditable(b);
-    
+        txtMedida.setEditable(b);
     
     }
     /**
@@ -91,6 +111,14 @@ public class Descri extends javax.swing.JInternalFrame {
         BGuardar = new javax.swing.JButton();
         BEditar = new javax.swing.JButton();
         BCancelar = new javax.swing.JButton();
+        txtMedida = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pnTabla = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        BDescrip = new javax.swing.JTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -164,29 +192,41 @@ public class Descri extends javax.swing.JInternalFrame {
             }
         });
 
+        txtMedida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMedida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMedidaActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Medida");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(BNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BCancelar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(BNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BCancelar)))
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -200,41 +240,104 @@ public class Descri extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        pnTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "P/N"
+            }
+        ));
+        jScrollPane2.setViewportView(pnTabla);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("P/N EN QUE SE UTILIZA");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(156, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(141, 141, 141))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("Descripcion");
+
+        BDescrip.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BDescrip.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BDescripKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(BDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,6 +357,7 @@ public class Descri extends javax.swing.JInternalFrame {
         obtenerUltimoID();
         accion = "Guardar";
         txtDescripcion.setEditable(true);
+        txtMedida.setEditable(true);
         txtDescripcion.requestFocus();
         
     }//GEN-LAST:event_BNuevoActionPerformed
@@ -262,13 +366,15 @@ public class Descri extends javax.swing.JInternalFrame {
       
         if(accion.equalsIgnoreCase("Guardar")){
             
-            if(txtNo.getText().compareTo("")!=0 && txtDescripcion.getText().compareTo("")!=0){
+            if(txtNo.getText().compareTo("")!=0 && txtDescripcion.getText().compareTo("")!=0 && txtMedida.getText().compareTo("")!=0){
                 try {
                     txtDescripcion.setEditable(true);
-                    DescripcionC m = new DescripcionC();
+                    txtMedida.setEditable(true);
+                    PN m = new PN();
                     m.setDescripcion(txtDescripcion.getText().toUpperCase());
-                    m.setId(Integer.parseInt(txtNo.getText()));
-                    DBDescripcion.insertarDesc(m);
+                    m.setMedida(txtMedida.getText().toUpperCase());
+                    m.setIdcompo(Integer.parseInt(txtNo.getText()));
+                    Componente.guardarComponentes(m);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
                 } catch (Exception e) {
                     System.out.println(e);
@@ -280,6 +386,7 @@ public class Descri extends javax.swing.JInternalFrame {
                 BNuevo.requestFocus();
                 BNuevo.setEnabled(true);
                 txtDescripcion.setEditable(false);
+                txtMedida.setEditable(false);
             }else {
                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             }
@@ -287,9 +394,10 @@ public class Descri extends javax.swing.JInternalFrame {
         if(accion.equalsIgnoreCase("Actualizar")){
             DescripcionC p;
             try {
-                p = DBDescripcion.buscarDesc(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
-                DBDescripcion.actualizarFamilia(p);
+                p = DBDescripcion.buscarDescCompo(Integer.parseInt(txtNo.getText()));
+                p.setDescripcion(txtDescripcion.getText().toUpperCase());
+                p.setMedida(txtMedida.getText().toUpperCase());
+                DBDescripcion.actualizarComponente(p);
                 JOptionPane.showMessageDialog(null, "Datos Actualizados");
                 limpiarCajaTexto();
                 obtenerUltimoID();
@@ -318,6 +426,7 @@ public class Descri extends javax.swing.JInternalFrame {
         BEditar.setEnabled(false);
         BCancelar.setEnabled(true);
         txtDescripcion.setEditable(true);
+        txtMedida.setEditable(true);
         
         
     }//GEN-LAST:event_BEditarActionPerformed
@@ -326,34 +435,44 @@ public class Descri extends javax.swing.JInternalFrame {
         
         limpiarCajaTexto();
         obtenerUltimoID();
+        cleartablacomponentes();
         BNuevo.setEnabled(true);
         BGuardar.setEnabled(false);
         BEditar.setEnabled(false);
         txtDescripcion.setEditable(false);
-        
-        
+        txtMedida.setEditable(false);
     }//GEN-LAST:event_BCancelarActionPerformed
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        BGuardar.requestFocus();
+        txtMedida.requestFocus();
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
         
         BEditar.setEnabled(true);
         BGuardar.setEnabled(false);
-        
+       
         try {
-            DescripcionC m = DBDescripcion.buscarDesc(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(), 0))));
+            DescripcionC m = DBDescripcion.buscarDescCompo(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(), 0))));
             txtNo.setText(String.valueOf(m.getId()));
             txtDescripcion.setText(m.getDescripcion());
+            txtMedida.setText(m.getMedida());
         } catch (Exception e) {
             System.out.println("Error de Seleccion--"+e);
         }
+         LlenaPN();
     }//GEN-LAST:event_TablaMouseClicked
 
+    private void txtMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMedidaActionPerformed
+        BGuardar.requestFocus();
+    }//GEN-LAST:event_txtMedidaActionPerformed
+
+    private void BDescripKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BDescripKeyReleased
+        actualizarBusquedafam();
+    }//GEN-LAST:event_BDescripKeyReleased
+
     private void actualizarBusquedafam() {
-        ArrayList<DescripcionC> result = DBDescripcion.ListarDescrip();
+        ArrayList<DescripcionC> result = DBDescripcion.ListarDescripComponentes(BDescrip.getText());
         recargarTablefam(result);
     }
     
@@ -382,6 +501,32 @@ public class Descri extends javax.swing.JInternalFrame {
         TableColumn columna2 = Tabla.getColumn("Descripcion");
         columna2.setPreferredWidth(200);
     }
+    
+    
+     private void LlenaPN() {
+        ArrayList<DescripcionC> result = DBDescripcion.ListarPN(Integer.parseInt(txtNo.getText()));
+        recargarPN(result);
+    }
+    
+    public void recargarPN(ArrayList<DescripcionC> list) {
+        Object[][] datos = new Object[list.size()][1];
+        int i = 0;
+        for (DescripcionC f : list)
+        {
+            datos[i][0] = f.getPN();
+            i++;
+        }
+        pnTabla.setModel(new javax.swing.table.DefaultTableModel(
+                datos,
+                new String[]{
+                    "P/N"
+                }) {
+                     @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -399,35 +544,42 @@ public class Descri extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngreComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngreComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngreComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Descri.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IngreComponentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Descri().setVisible(true);
+                new IngreComponentes().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BCancelar;
+    private javax.swing.JTextField BDescrip;
     private javax.swing.JButton BEditar;
     private javax.swing.JButton BGuardar;
     private javax.swing.JButton BNuevo;
     private javax.swing.JTable Tabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable pnTabla;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtMedida;
     private javax.swing.JTextField txtNo;
     // End of variables declaration//GEN-END:variables
 }
