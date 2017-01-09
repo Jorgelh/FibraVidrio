@@ -36,10 +36,11 @@ public class Componente {
     public static void guardarPNmas (DescripcionC p) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into PN values (pn1.nextval,?,?,?,'')");
+        ps = cn.prepareStatement("insert into PN values (pn1.nextval,?,?,?,?)");
         ps.setString(1, p.getPN());
         ps.setInt(2, p.getIdcompo());
         ps.setInt(3, p.getCantidad());
+        ps.setString(4, p.getNota());
         ps.executeUpdate();
         cn.close();
         ps.close();

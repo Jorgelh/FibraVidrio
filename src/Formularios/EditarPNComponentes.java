@@ -38,7 +38,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         BNuevo.requestFocus();
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
-        
+        txtNota.setEditable(false);
         try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -68,8 +68,6 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             System.out.println(error);
         }
     }*/
-    
-    
     public  void obteneridcompo() {
       
         try {
@@ -83,9 +81,6 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         }
         
     }
-
-   
-    
    public void cleartablacomponentes() {
 
         try {
@@ -100,14 +95,11 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
-    
-    
     public void limpiarCajaTexto(){
       // CombDescripcion.setText("");
        txtNo.setText("");
        txtCantidad.setText("");
+       txtNota.setText("");
     }
     
     public void activartexto(boolean b){
@@ -115,7 +107,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         txtNo.setEditable(!b);
         CombDescripcion.setEnabled(b);
         txtCantidad.setEditable(b);
-    
+        txtNota.setEditable(b);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -140,6 +132,8 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         txtCantidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         CombDescripcion = new javax.swing.JComboBox<>();
+        txtNota = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         PN = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -222,6 +216,16 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         CombDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CombDescripcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
 
+        txtNota.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNotaActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Nota");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -229,17 +233,6 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CombDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 41, Short.MAX_VALUE)
                         .addComponent(BNuevo)
@@ -249,7 +242,20 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                         .addComponent(BEditar)
                         .addGap(45, 45, 45)
                         .addComponent(BCancelar)
-                        .addGap(58, 58, 58))))
+                        .addGap(58, 58, 58))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CombDescripcion, 0, 451, Short.MAX_VALUE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNota))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +272,11 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,9 +346,9 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -365,6 +375,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         accion = "Guardar";
         CombDescripcion.setEnabled(true);
         txtCantidad.setEditable(true);
+        txtNota.setEditable(true);
         CombDescripcion.requestFocus();
         
     }//GEN-LAST:event_BNuevoActionPerformed
@@ -377,11 +388,13 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 try {
                     CombDescripcion.setEnabled(true);
                     txtCantidad.setEditable(true);
+                    txtNota.setEditable(true);
                     obteneridcompo();
                     DescripcionC m = new DescripcionC();
                     m.setCantidad(Integer.parseInt(txtCantidad.getText()));
                     m.setPN(PN.getText());
                     m.setIdcompo(idcomponente);
+                    m.setNota(txtNota.getText());
                     Componente.guardarPNmas(m);
                     JOptionPane.showMessageDialog(null,"Registro Guardado");
                 } catch (Exception e){
@@ -396,6 +409,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 txtNo.setText("");
                 CombDescripcion.setEnabled(false);
                 txtCantidad.setEditable(false);
+                txtNota.setEditable(false);
             }else {
                JOptionPane.showMessageDialog(null, "Llene Todos Los Campos...");
             }
@@ -407,6 +421,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 p = DBDescripcion.buscarEditCompo(Integer.parseInt(txtNo.getText()));
                 p.setIdcompo(idcomponente);
                 p.setCantidad(Integer.parseInt(txtCantidad.getText()));
+                p.setNota(txtNota.getText());
                 DBDescripcion.actualizarPNComponente(p);
                 JOptionPane.showMessageDialog(null, "Datos Actualizados");
                 limpiarCajaTexto();
@@ -415,6 +430,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 BNuevo.setEnabled(true);
                 CombDescripcion.setEnabled(false);
                 txtCantidad.setEditable(false);
+                txtNota.setEditable(false);
                 BNuevo.requestFocus();
                 CombDescripcion.setSelectedItem("Seleccionar...");
                 txtNo.setText("");
@@ -439,6 +455,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         BCancelar.setEnabled(true);
         CombDescripcion.setEnabled(true);
         txtCantidad.setEditable(true);
+        txtNota.setEditable(true);
         
         
     }//GEN-LAST:event_BEditarActionPerformed
@@ -451,6 +468,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         BEditar.setEnabled(false);
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
+        txtNota.setEditable(false);
         CombDescripcion.setSelectedItem("Seleccionar...");
         txtNo.setText("");
         Tabla.requestFocus();
@@ -466,6 +484,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             txtNo.setText(String.valueOf(m.getId()));
             CombDescripcion.setSelectedItem(m.getDescripcion());
             txtCantidad.setText(String.valueOf(m.getCantidad()));
+            txtNota.setText(m.getNota());
         } catch (Exception e) {
             System.out.println("Error de Seleccion--"+e);
         }
@@ -506,6 +525,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         BEditar.setEnabled(false);
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
+        txtNota.setEditable(false);
         CombDescripcion.setSelectedItem("Seleccionar...");
         txtNo.setText("");
         PN.setText("");
@@ -515,6 +535,10 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNotaActionPerformed
     private void BusquedaComponentes(){
         ArrayList<DescripcionC> result = DBDescripcion.ListarComponentes(PN.getText());
         recargarTable(result);
@@ -592,11 +616,13 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtNo;
+    private javax.swing.JTextField txtNota;
     // End of variables declaration//GEN-END:variables
 }

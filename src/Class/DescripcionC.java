@@ -36,6 +36,17 @@ public class DescripcionC {
     public String PN;
     public int cantidad;
     public int idcompo;
+    public String nota;
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+    
+    
     
     
     public int getIdcompo() {

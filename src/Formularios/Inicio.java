@@ -53,6 +53,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         Pendientes = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -141,6 +142,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem16.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem16.setText("Componentes");
+        jMenuItem16.setPreferredSize(new java.awt.Dimension(143, 35));
+        jMenuItem16.setVerifyInputWhenFocusTarget(false);
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem16ActionPerformed(evt);
@@ -151,6 +154,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem13.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/edit2.png"))); // NOI18N
         jMenuItem13.setText("Editar P/N");
+        jMenuItem13.setPreferredSize(new java.awt.Dimension(133, 35));
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -198,6 +202,16 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu3.add(Pendientes);
+
+        jMenuItem17.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
+        jMenuItem17.setText("Trabajos");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem17);
 
         jMenuItem7.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
@@ -357,7 +371,6 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenu7.setForeground(new java.awt.Color(0, 102, 255));
         jMenu7.setText("  BODEGA HERRAMIENTAS");
-        jMenu7.setEnabled(false);
         jMenu7.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
         jMenu7.setMinimumSize(new java.awt.Dimension(29, 25));
         jMenu7.setPreferredSize(new java.awt.Dimension(225, 25));
@@ -616,6 +629,16 @@ public class Inicio extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+      
+        ConsultaTrabajos compo = new ConsultaTrabajos();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -675,6 +698,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;

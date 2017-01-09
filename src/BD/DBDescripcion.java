@@ -69,9 +69,10 @@ public abstract class DBDescripcion {
     public static boolean actualizarPNComponente(DescripcionC f) throws SQLException {
         Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("update PN set idcompo=?, cantidad=? where id_pn =" + f.getId());
+        ps = cnn.prepareStatement("update PN set idcompo=?, cantidad=?, nota=? where id_pn =" + f.getId());
         ps.setInt(1, f.getIdcompo());
         ps.setInt(2, f.getCantidad());
+        ps.setString(3, f.getNota());
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();
@@ -141,7 +142,7 @@ public abstract class DBDescripcion {
     public static DescripcionC buscarEditCompo(int id, DescripcionC p) throws SQLException {
         Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select PN.IDCOMPO,componentes.descripcion||' '||COMPONENTES.MEDIDA as \"compo\",cantidad from PN inner join COMPONENTES on PN.IDCOMPO = COMPONENTES.IDCOMPO where PN.ID_PN=?");
+        ps = cnn.prepareStatement("select PN.NOTA,PN.IDCOMPO,componentes.descripcion||' '||COMPONENTES.MEDIDA as \"compo\",cantidad from PN inner join COMPONENTES on PN.IDCOMPO = COMPONENTES.IDCOMPO where PN.ID_PN=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -153,6 +154,7 @@ public abstract class DBDescripcion {
             p.setDescripcion(rs.getString("compo"));
             p.setCantidad(rs.getInt("cantidad"));
             p.setIdcompo(rs.getInt("idcompo"));
+            p.setNota(rs.getString("NOTA"));
             
         }
         cnn.close();

@@ -570,7 +570,6 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
             no_trabajo2 = c.getNo_trabajo();
             idcompo = c.getIdcompo();
             cantidadpen = c.getCantidad();
-            System.out.println("cantidad = "+cantidadpen);
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,"ERROr"+e);
         }

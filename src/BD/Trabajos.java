@@ -158,6 +158,45 @@ public class Trabajos {
         return list;
     }
     
+    
+    
+    
+    
+     public static ArrayList<CTrabajos> ListarJobTodo() {
+
+        return consultaTrabajo("select no_trabajo,job,PN,cantidad from INGRESO_TRABAJO");
+    }
+
+    private static ArrayList<CTrabajos> consultaTrabajo(String sql) {
+        ArrayList<CTrabajos> list = new ArrayList<CTrabajos>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            CTrabajos t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                t = new CTrabajos();
+                t.setNoTabajo(rs.getString("no_trabajo"));
+                t.setJob(rs.getString("job"));
+                t.setPn(rs.getString("PN"));
+                t.setCantidad1(rs.getInt("cantidad"));
+                list.add(t);
+                }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR " + e);
+        }
+        return list;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static CTrabajos BuscarTrabajo (int id)  throws SQLException{
         return BuscarTrabajo(id,null);
     }
@@ -166,18 +205,20 @@ public class Trabajos {
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select no_trabajo,job,rev,fecha,fechaven,nota from ingreso_trabajo where no_trabajo ="+id);
+        ps = cn.prepareStatement("select pn,no_trabajo,job,rev,fecha,fechaven,nota,cantidad from ingreso_trabajo where no_trabajo ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (t == null){
              t = new CTrabajos(){};
         }
              t.setIdTrabajo(rs.getInt("no_trabajo"));
-             t.setPn(rs.getString("job"));
+             t.setPn(rs.getString("pn"));
+             t.setJob(rs.getString("job"));
              t.setRev(rs.getString("rev"));
              t.setF1(rs.getString("fecha"));
              t.setF2(rs.getString("fechaven"));
              t.setNota(rs.getString("Nota"));
+             t.setCantidad1(rs.getInt("cantidad"));
     }
       cn.close();
       ps.close();
@@ -206,8 +247,8 @@ public class Trabajos {
                 list.add(t);
                 }
             cn.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR TABLA CANTIDADES " + e);
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(null,"ERROR TABLA CANTIDADES" + e);
         }
         return list;
     }

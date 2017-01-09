@@ -73,10 +73,6 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
         }
 
     }
-    
-    
-    
-    
     public void limpiarCajaTexto(){
        txtDescripcion.setText("");
        txtNo.setText("");
@@ -250,7 +246,7 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
                     .addComponent(BGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pnTabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -280,7 +276,7 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,12 +321,12 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
                     .addComponent(BDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,6 +366,7 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
                 try {
                     txtDescripcion.setEditable(true);
                     txtMedida.setEditable(true);
+                    txtDescripcion.setEditable(true);
                     PN m = new PN();
                     m.setDescripcion(txtDescripcion.getText().toUpperCase());
                     m.setMedida(txtMedida.getText().toUpperCase());
@@ -407,14 +404,7 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
             } catch (Exception e) {
                  JOptionPane.showMessageDialog(null, "Error BD: " + e.getMessage());
             }
-        
-        
-        
         }
-        
-        
-        
-        
     }//GEN-LAST:event_BGuardarActionPerformed
 
     private void BEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BEditarActionPerformed
@@ -427,8 +417,6 @@ public class IngreComponentes extends javax.swing.JInternalFrame {
         BCancelar.setEnabled(true);
         txtDescripcion.setEditable(true);
         txtMedida.setEditable(true);
-        
-        
     }//GEN-LAST:event_BEditarActionPerformed
 
     private void BCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BCancelarActionPerformed

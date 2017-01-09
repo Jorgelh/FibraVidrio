@@ -79,7 +79,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        PN = new javax.swing.JTextField();
+        trabajo = new javax.swing.JTextField();
         REV = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         balance = new javax.swing.JTable();
@@ -125,8 +125,8 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Revision");
 
-        PN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        PN.setForeground(new java.awt.Color(0, 102, 255));
+        trabajo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        trabajo.setForeground(new java.awt.Color(0, 102, 255));
 
         REV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         REV.setForeground(new java.awt.Color(0, 102, 255));
@@ -140,7 +140,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(PN)
+                    .addComponent(trabajo)
                     .addComponent(REV, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -150,7 +150,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(trabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,7 +382,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
       
         try {
             CTrabajos c = Trabajos.BuscarTrabajo(Integer.parseInt(String.valueOf(job.getModel().getValueAt(job.getSelectedRow(), 0))));
-            PN.setText(c.getPn());
+            trabajo.setText(c.getJob());
             REV.setText(c.getRev());
             fechaIn.setText(c.getF1());
             fechaVen.setText(c.getF2());
@@ -395,7 +395,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         txtPN.setText("");
-        PN.setText("");
+        trabajo.setText("");
         REV.setText("");
         fechaIn.setText("");
         fechaVen.setText("");
@@ -407,7 +407,6 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
      private void TablaJob() {
-
         ArrayList<CTrabajos> result = Trabajos.ListarJob(txtPN.getText());
         cargarTabla(result);
     }
@@ -436,16 +435,16 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     }
     
     private void TablaPendiente() {
-
-        ArrayList<CTrabajos> result = Trabajos.ListarPendiente(PN.getText());
+        
+        ArrayList<CTrabajos> result = Trabajos.ListarPendiente(trabajo.getText());
         cargarTablaPendiente(result);
     }
     
-    private void cargarTablaPendiente(ArrayList<CTrabajos> list1) {
-
+    private void cargarTablaPendiente(ArrayList<CTrabajos>list1) {
+         System.out.println("llega");
         Object[][] dato = new Object[list1.size()][4];
         int f = 0;
-        for (CTrabajos a : list1) {
+        for (CTrabajos a : list1){
             dato[f][0] = a.getDescripcion();
             dato[f][1] = a.getCantidad1();
             dato[f][2] = a.getCantidad3();
@@ -455,7 +454,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
         balance.setModel(new javax.swing.table.DefaultTableModel(
                 dato,
                 new String[]{
-                "Descripcion.","Cantidad Total","Cantidad Entregada","Cantidad Pendiente"
+                "Descripcion","Cantidad Total","Cantidad Entregada","Cantidad Pendiente"
                 }) {
             @Override
             public boolean isCellEditable(int row, int colum) {
@@ -501,7 +500,6 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Nota;
-    private javax.swing.JTextField PN;
     private javax.swing.JTextField REV;
     private javax.swing.JTable balance;
     private javax.swing.JTextField fechaIn;
@@ -523,6 +521,7 @@ public class TrabajosPendientes extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable job;
+    private javax.swing.JTextField trabajo;
     private javax.swing.JTextField txtPN;
     // End of variables declaration//GEN-END:variables
 }

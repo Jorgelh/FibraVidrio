@@ -529,15 +529,15 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
             idcompo3 = (int)dato[2][0];cantidad3=(int)dato[2][2];
-            idcompo4 = (int)dato[3][0];cantidad4=(int)dato[2][2];
-            idcompo5 = (int)dato[4][0];cantidad5=(int)dato[2][2];
+            idcompo4 = (int)dato[3][0];cantidad4=(int)dato[3][2];
+            idcompo5 = (int)dato[4][0];cantidad5=(int)dato[4][2];
         } else if (list1.size() == 6) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
-            idcompo3 = (int)dato[2][0];cantidad1=(int)dato[2][2];
-            idcompo3 = (int)dato[3][0];cantidad1=(int)dato[2][2];
-            idcompo3 = (int)dato[4][0];cantidad1=(int)dato[2][2];
-            idcompo3 = (int)dato[5][0];cantidad1=(int)dato[2][2];
+            idcompo3 = (int)dato[2][0];cantidad3=(int)dato[2][2];
+            idcompo4 = (int)dato[3][0];cantidad4=(int)dato[3][2];
+            idcompo5 = (int)dato[4][0];cantidad5=(int)dato[4][2];
+            idcompo6 = (int)dato[5][0];cantidad6=(int)dato[5][2];
         } else if (list1.size() == 7) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];

@@ -56,7 +56,7 @@ public class Entregas {
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select componentes.descripcion,trabajo_partes.cantidad,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join\n" +
+        ps = cn.prepareStatement("select componentes.descripcion||' '||componentes.medida as \"Descripcion\",trabajo_partes.cantidad,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join\n" +
         "componentes on TRABAJO_PARTES.IDCOMPO = componentes.IDCOMPO where TRABAJO_PARTES.IDTRABAJOPARTES ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
