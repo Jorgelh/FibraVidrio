@@ -227,7 +227,6 @@ public class Trabajos {
     }
     
     public static ArrayList<CTrabajos> ListarPendiente(String c) {
-
         return ListarPendientes("select componentes.descripcion||' '||componentes.medida as \"descripcion\",trabajo_partes.cantidad as \"cantidadin\",BITACORAPARTES.CANTIDAD,BITACORAPARTES.CANTIDAD-trabajo_partes.cantidad as \"cantientre\" from ingreso_trabajo inner join TRABAJO_PARTES on ingreso_trabajo.NO_TRABAJO = TRABAJO_PARTES.NO_TRABAJO join componentes on componentes.IDCOMPO = TRABAJO_PARTES.IDCOMPO join BITACORAPARTES on TRABAJO_PARTES.IDTRABAJOPARTES = BITACORAPARTES.IDTRABAJOPARTES where ingreso_trabajo.JOB ='"+c+"'");
     }
 
