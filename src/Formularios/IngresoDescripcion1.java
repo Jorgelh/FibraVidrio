@@ -323,7 +323,7 @@ public class IngresoDescripcion1 extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p=EditComponentesHerramienta.buscarDesc(Integer.parseInt(txtId.getText()));
-                p.setDescripcion(txtFDescripcion.getText());
+                p.setDescripcion(txtFDescripcion.getText().toUpperCase());
                 EditComponentesHerramienta.actualizarDescripcion(p);
                 JOptionPane.showMessageDialog(null,"[Datos Actualizados]");
                 limpiarCajaTextofam();

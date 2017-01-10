@@ -323,7 +323,7 @@ public class MarcaNew extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p=EditComponentesHerramienta.buscarMarca(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
+                p.setDescripcion(txtDescripcion.getText().toUpperCase());
                 EditComponentesHerramienta.actualizarMarca(p);
                 JOptionPane.showMessageDialog(null, "[Datos Actualizados]");
                 limpiarCajaTextofam();

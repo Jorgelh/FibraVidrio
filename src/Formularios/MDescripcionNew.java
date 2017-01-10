@@ -323,7 +323,7 @@ public class MDescripcionNew extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p=EditComponentesHerramienta.buscarDesc(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
+                p.setDescripcion(txtDescripcion.getText().toUpperCase());
                 EditComponentesHerramienta.actualizarDescripcion(p);
                 JOptionPane.showMessageDialog(null, "[Datos Actualizados]");
                 limpiarCajaTextofam();

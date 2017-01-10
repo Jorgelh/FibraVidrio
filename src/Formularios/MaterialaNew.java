@@ -320,7 +320,7 @@ public class MaterialaNew extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p=EditComponentesHerramienta.buscarMaterial(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
+                p.setDescripcion(txtDescripcion.getText().toUpperCase());
                 EditComponentesHerramienta.actualizarMaterial(p);
                 JOptionPane.showMessageDialog(null, "[Datos Actualizados]");
                 limpiarCajaTextofam();

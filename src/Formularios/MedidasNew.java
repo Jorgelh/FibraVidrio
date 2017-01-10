@@ -323,7 +323,7 @@ public class MedidasNew extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p=EditComponentesHerramienta.buscarMedida(Integer.parseInt(txtNo.getText()));
-                p.setDescripcion(txtDescripcion.getText());
+                p.setDescripcion(txtDescripcion.getText().toUpperCase());
                 EditComponentesHerramienta.actualizarMedida(p);
                 JOptionPane.showMessageDialog(null, "[Datos Actualizados]");
                 limpiarCajaTextofam();
