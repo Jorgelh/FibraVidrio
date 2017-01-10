@@ -395,8 +395,6 @@ public class IngresoDescripcion1 extends javax.swing.JInternalFrame {
         TableColumn columna2 = jtFMedida.getColumn("Descripcion");
         columna2.setPreferredWidth(200);
     }
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -424,37 +422,7 @@ public class IngresoDescripcion1 extends javax.swing.JInternalFrame {
             java.util.logging.Logger.getLogger(IngresoDescripcion1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
        // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
-       // </editor-fold>
+      
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

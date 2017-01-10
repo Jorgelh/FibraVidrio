@@ -44,12 +44,12 @@ int d;
         
         medida.requestFocus();
         llenarCombo4();
-        llenarCombo3();
-        obtenerIDcombo();
+        //obtenerIDcombo();
     }
     
+    
      public static void llenarCombo4(){
-        
+        marca.removeAllItems();
         try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -62,7 +62,7 @@ int d;
        marca.setSelectedItem("Sin Marca...");
     }
     
-     public static void llenarCombo3(){
+    /* public static void llenarCombo3(){
         
         try {
             Connection con = BDFIBRA.getConnection();
@@ -73,10 +73,10 @@ int d;
             }
         } catch (Exception e) {
         }
-    }
+    }*/
      
      
-    public void obtenerID(){
+   public void obtenerID(){
         
         try {
             Connection con = BDFIBRA.getConnection();
@@ -92,7 +92,7 @@ int d;
     }
      
     
-   public void obtenerIDcombo(){
+  /* public void obtenerIDcombo(){
         
         try {
             Connection con = BDFIBRA.getConnection();
@@ -106,7 +106,7 @@ int d;
         } 
    
         System.out.println("Formularios.CargaHerramientas.obtenerIDcombo()"+d);
-    } 
+    } */
     
     public void obtenerultimoid(){
     
@@ -182,8 +182,6 @@ int d;
         Cancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         medida = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        combodescri = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -375,7 +373,7 @@ int d;
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BTdescripcion1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -420,7 +418,7 @@ int d;
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Medida");
+        jLabel2.setText("Descripcion ");
 
         medida.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         medida.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -429,95 +427,59 @@ int d;
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Descripcion");
-
-        combodescri.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        combodescri.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                combodescriItemStateChanged(evt);
-            }
-        });
-        combodescri.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                combodescriFocusLost(evt);
-            }
-        });
-        combodescri.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                combodescriMouseClicked(evt);
-            }
-        });
-        combodescri.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combodescriActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(medida)
-                            .addComponent(combodescri, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Cancelar)
-                            .addComponent(Guardar))))
-                .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(291, 291, 291))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Cancelar)
+                                    .addComponent(Guardar)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(medida, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(combodescri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(medida))
-                .addGap(20, 20, 20)
+                    .addComponent(medida, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel2))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addComponent(Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45))))
+                    .addComponent(jScrollPane2))
                 .addGap(16, 16, 16))
         );
 
@@ -608,7 +570,7 @@ int d;
     }//GEN-LAST:event_marcaFocusLost
 
     private void marcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_marcaMouseClicked
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_marcaMouseClicked
 
     private void marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaActionPerformed
@@ -617,7 +579,7 @@ int d;
 
     private void BTdescripcion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdescripcion1ActionPerformed
 
-        IngresoMarca1 compo = new IngresoMarca1();
+        MarcaNew compo = new MarcaNew();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -626,29 +588,13 @@ int d;
 
     }//GEN-LAST:event_BTdescripcion1ActionPerformed
 
-    private void combodescriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combodescriItemStateChanged
-       buscarHerramients();
-    }//GEN-LAST:event_combodescriItemStateChanged
-
-    private void combodescriFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_combodescriFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combodescriFocusLost
-
-    private void combodescriMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_combodescriMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combodescriMouseClicked
-
-    private void combodescriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combodescriActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combodescriActionPerformed
-
     private void medidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medidaKeyReleased
        buscarHerramients();
     }//GEN-LAST:event_medidaKeyReleased
     
     private void buscarHerramients(){
-         obtenerIDcombo();
-         ArrayList<BuscarHerramientas> result = EditComponentesHerramienta.BuscarHerramienta(medida.getText(),d);
+         //obtenerIDcombo();
+         ArrayList<BuscarHerramientas> result = EditComponentesHerramienta.BuscarHerramienta(medida.getText());
          llenartabla(result);
     }
     
@@ -731,7 +677,6 @@ int d;
     private javax.swing.JTextField cantidad;
     private javax.swing.JTextField cantidadBodga;
     private javax.swing.JTextField catalogo;
-    public static javax.swing.JComboBox<String> combodescri;
     private javax.swing.JTextField descripcion;
     private com.toedter.calendar.JDateChooser fechain;
     private javax.swing.JLabel jLabel1;
@@ -741,7 +686,6 @@ int d;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

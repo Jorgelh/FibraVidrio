@@ -206,6 +206,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem17.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
         jMenuItem17.setText("Trabajos");
+        jMenuItem17.setPreferredSize(new java.awt.Dimension(111, 35));
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem17ActionPerformed(evt);
@@ -378,6 +379,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem29.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
         jMenuItem29.setText("Nueva Herramienta");
+        jMenuItem29.setPreferredSize(new java.awt.Dimension(197, 35));
         jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem29ActionPerformed(evt);
@@ -388,6 +390,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem30.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
         jMenuItem30.setText("Ingreso de Herramienta");
+        jMenuItem30.setPreferredSize(new java.awt.Dimension(233, 35));
         jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem30ActionPerformed(evt);
@@ -398,6 +401,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem15.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
         jMenuItem15.setText("Descarga Herramientas");
+        jMenuItem15.setPreferredSize(new java.awt.Dimension(233, 35));
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem15ActionPerformed(evt);
@@ -408,6 +412,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
         jMenu14.setText("Consultas");
         jMenu14.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenu14.setPreferredSize(new java.awt.Dimension(237, 35));
 
         jMenuItem31.setText("Ingresos");
         jMenu14.add(jMenuItem31);

@@ -50,6 +50,8 @@ int n=0;
     }  
     
     public static void llenarCombo1(){
+        material.removeAllItems();   
+        material.addItem("Seleccionar...");
        try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -57,12 +59,14 @@ int n=0;
             while (rs.next()){
                 material.addItem((String) rs.getObject(1));
             }
+        material.setSelectedItem("Seleccionar...");    
         } catch (Exception e) {
         }
     }
     
     public static void llenarCombo2(){
-            
+        medida.removeAllItems();   
+        medida.addItem("Seleccionar...");
         try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -70,11 +74,15 @@ int n=0;
             while (rs.next()){
                 medida.addItem((String) rs.getObject(1));
             }
+        medida.setSelectedItem("Seleccionar...");
         } catch (Exception e) {
+            
         }
     }
     public static void llenarCombo3(){
         
+        descripcion.removeAllItems();
+        descripcion.addItem("Seleccionar...");
         try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
@@ -82,6 +90,7 @@ int n=0;
             while (rs.next()){
                 descripcion.addItem((String) rs.getObject(1));
             }
+            descripcion.setSelectedItem("Seleccionar...");
         } catch (Exception e) {
         }
     }
@@ -582,7 +591,7 @@ int n=0;
 
     private void BTmaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTmaterialActionPerformed
 
-        IngresoTmaterial1 compo = new IngresoTmaterial1();
+        MaterialaNew compo = new MaterialaNew();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -597,7 +606,7 @@ int n=0;
 
     private void BTmedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTmedidaActionPerformed
 
-        IngresoMedida1 compo = new IngresoMedida1();
+        MedidasNew compo = new MedidasNew();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -621,7 +630,7 @@ int n=0;
 
     private void BTdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTdescripcionActionPerformed
         
-        IngresoDescripcion1 compo = new IngresoDescripcion1();
+        MDescripcionNew compo = new MDescripcionNew();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();

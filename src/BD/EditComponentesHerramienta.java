@@ -258,13 +258,13 @@ public static ArrayList<DescripcionC> consultarSQL(String sql) {
     }    
   
   
-public static ArrayList<BuscarHerramientas>BuscarHerramienta(String a, int b){
+public static ArrayList<BuscarHerramientas>BuscarHerramienta(String a){
         
-         return consultarHer("select a.NO, e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO as \"Descripcion\",filos,cantidad \n" +
+         return consultarHer("select a.NO, e.DESCRIPCION||''||d.M_MEDIDA||''||c.M_TIPO,e.DESCRIPCION||' '||d.M_MEDIDA||' '||c.M_TIPO as \"desc\",filos,cantidad \n" +
                                 "FROM M_DESCRIPCION a INNER JOIN "+
                                 "M_MATERIAL c on a.NO_TIPO = c.NO_TIPO\n"+
                                 "join M_MEDIDAS d on a.NO_MEDIDA = d.NO_MEDIDA \n"+
-                                "join M_DESCRIHERRAMIENTA e ON  a.NO_DESCRIPCION = e.NO_DESCRIPCION where e.NO_DESCRIPCION = "+b+" and d.M_MEDIDA like '%"+a+"%' order by e.DESCRIPCION,d.M_MEDIDA,c.M_TIPO");   
+                                "join M_DESCRIHERRAMIENTA e ON  a.NO_DESCRIPCION = e.NO_DESCRIPCION where upper(e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO) like upper('"+a+"%')");   
     }
     
 private static ArrayList<BuscarHerramientas>consultarHer(String sql) {
@@ -277,7 +277,7 @@ private static ArrayList<BuscarHerramientas>consultarHer(String sql) {
             while (rs.next()) {
                 f = new BuscarHerramientas();
                 f.setNo(rs.getInt("NO"));
-                f.setDescripcion(rs.getString("Descripcion"));
+                f.setDescripcion(rs.getString("desc"));
                 f.setFilos(rs.getString("filos"));
                 f.setCantidad(rs.getInt("cantidad"));
                 list.add(f);
