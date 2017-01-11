@@ -330,9 +330,7 @@ public class IngresoDescripcion1 extends javax.swing.JInternalFrame {
                 obtenerUltimoIdfam();
                 BFguardar.setEnabled(false);
                 BFNuevo.setEnabled(true);
-                
                 actualizarBusqueda();
-
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null, "Error BD:" + e.getMessage());
             }
