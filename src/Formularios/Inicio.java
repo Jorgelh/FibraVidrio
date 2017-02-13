@@ -414,7 +414,14 @@ public class Inicio extends javax.swing.JFrame {
         jMenu14.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
         jMenu14.setPreferredSize(new java.awt.Dimension(237, 35));
 
-        jMenuItem31.setText("Ingresos");
+        jMenuItem31.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
+        jMenuItem31.setText("Cantidades");
+        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem31ActionPerformed(evt);
+            }
+        });
         jMenu14.add(jMenuItem31);
 
         jMenuItem32.setText("Descargas");
@@ -643,6 +650,17 @@ public class Inicio extends javax.swing.JFrame {
         compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
         compo.show();
     }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
+        
+         ConsultaHerramientas compo = new ConsultaHerramientas();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+        
+    }//GEN-LAST:event_jMenuItem31ActionPerformed
 
     /**
      * @param args the command line arguments

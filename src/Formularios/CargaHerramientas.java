@@ -44,6 +44,7 @@ int d;
         
         medida.requestFocus();
         llenarCombo4();
+         nota.setLineWrap(true);
         //obtenerIDcombo();
     }
     

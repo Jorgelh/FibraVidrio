@@ -260,11 +260,11 @@ public static ArrayList<DescripcionC> consultarSQL(String sql) {
   
 public static ArrayList<BuscarHerramientas>BuscarHerramienta(String a){
         
-         return consultarHer("select a.NO, e.DESCRIPCION||''||d.M_MEDIDA||''||c.M_TIPO,e.DESCRIPCION||' '||d.M_MEDIDA||' '||c.M_TIPO as \"desc\",filos,cantidad \n" +
+         return consultarHer("select a.NO, e.DESCRIPCION||''||d.M_MEDIDA||''||c.M_TIPO,e.DESCRIPCION||' '||d.M_MEDIDA||' '||c.M_TIPO as \"desc\",filos,cantidad,comentario \n" +
                                 "FROM M_DESCRIPCION a INNER JOIN "+
                                 "M_MATERIAL c on a.NO_TIPO = c.NO_TIPO\n"+
                                 "join M_MEDIDAS d on a.NO_MEDIDA = d.NO_MEDIDA \n"+
-                                "join M_DESCRIHERRAMIENTA e ON  a.NO_DESCRIPCION = e.NO_DESCRIPCION where upper(e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO) like upper('"+a+"%')");   
+                                "join M_DESCRIHERRAMIENTA e ON  a.NO_DESCRIPCION = e.NO_DESCRIPCION where upper(e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO) like upper('"+a+"%') order by no");   
     }
     
 private static ArrayList<BuscarHerramientas>consultarHer(String sql) {
@@ -280,6 +280,7 @@ private static ArrayList<BuscarHerramientas>consultarHer(String sql) {
                 f.setDescripcion(rs.getString("desc"));
                 f.setFilos(rs.getString("filos"));
                 f.setCantidad(rs.getInt("cantidad"));
+                f.setComentario(rs.getString("comentario"));
                 list.add(f);
             }
             cn.close();
@@ -340,11 +341,13 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
    public static void DescargaHerra (BuscarHerramientas t) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into M_DESCARGAS values (?,?,?,?,3)");
+        ps = cn.prepareStatement("insert into M_DESCARGAS values (?,?,?,?,?,?)");
         ps.setInt(1, t.getIdIngresoH());
         ps.setInt(2, t.getNo());
         ps.setDate(3, new java.sql.Date(t.getFechain().getTime()));
         ps.setInt(4, t.getCantidad());
+        ps.setInt(5, t.getCodigo());
+        ps.setString(6, t.getComentario());
         ps.executeUpdate();
         cn.close();
         ps.close();

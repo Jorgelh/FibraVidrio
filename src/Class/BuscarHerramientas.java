@@ -25,7 +25,16 @@ public class BuscarHerramientas {
     private Date fechain;
     private String invoice;
     private int nomarca;
+    private int codigo;
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
     public int getNomarca() {
         return nomarca;
     }
