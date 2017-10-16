@@ -288,8 +288,8 @@ public class Inicio extends javax.swing.JFrame {
         jMenu11.setPreferredSize(new java.awt.Dimension(190, 25));
 
         jMenuItem8.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Next.png"))); // NOI18N
-        jMenuItem8.setText("Tipo de Material");
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/New.png"))); // NOI18N
+        jMenuItem8.setText("Nuevo Material");
         jMenuItem8.setPreferredSize(new java.awt.Dimension(173, 35));
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -553,7 +553,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-      Descri ingre  = new Descri();
+      NuevoProducto_Materiales ingre  = new NuevoProducto_Materiales();
        Panel1.add(ingre);
        Dimension desktopSize = Panel1.getSize();
        Dimension FrameSize = ingre.getSize();
@@ -562,7 +562,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        IngreMateriales ingre  = new IngreMateriales();
+        IngresoProdutoMateriales ingre  = new IngresoProdutoMateriales();
        Panel1.add(ingre);
        Dimension desktopSize = Panel1.getSize();
        Dimension FrameSize = ingre.getSize();

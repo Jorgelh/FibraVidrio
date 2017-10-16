@@ -40,7 +40,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFeditar.setEnabled(false);
         BFguardar.setEnabled(false);
         BFNuevo.requestFocus();
-        txtFDescripcion.setEditable(false);
+        //txtFDescripcion.setEditable(false);
         actualizarBusquedafam();
        // this.setLocationRelativeTo(null);
        
@@ -65,12 +65,12 @@ public class Descripcion extends javax.swing.JInternalFrame {
     
     public void limpiarCajaTextofam() {
         txtId.setText("");
-        txtFDescripcion.setText("");
+        //txtFDescripcion.setText("");
     }
 
     public void activarCajaTextofam(boolean b) {
         txtId.setEditable(!b);
-        txtFDescripcion.setEditable(b);
+        //txtFDescripcion.setEditable(b);
     }
     
     
@@ -305,7 +305,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         try {
             DescripcionC m = DBDescripcion.buscarDesc(Integer.parseInt(String.valueOf(jtFMedida.getModel().getValueAt(jtFMedida.getSelectedRow(),0))));
             txtId.setText(String.valueOf(m.getId()));
-            txtFDescripcion.setText(m.getDescripcion());
+            //txtFDescripcion.setText(m.getDescripcion());
 
         } catch (Exception e) {
             System.out.println("Erro de Seleccion:"+e);
@@ -322,8 +322,8 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFeditar.setEnabled(false);
         obtenerUltimoIdfam();
         accion = "Guardar";
-        txtFDescripcion.setEditable(true);
-        txtFDescripcion.requestFocus();
+        //txtFDescripcion.setEditable(true);
+       // txtFDescripcion.requestFocus();
         
     }//GEN-LAST:event_BFNuevoActionPerformed
 
@@ -331,11 +331,11 @@ public class Descripcion extends javax.swing.JInternalFrame {
         
         if(accion.equalsIgnoreCase("Guardar")){
 
-            if (txtId.getText().compareTo("")!=0 && txtFDescripcion.getText().compareTo("")!=0){
+            if (txtId.getText().compareTo("")!=0){
                 try {
-                    txtFDescripcion.setEditable(true);
+                    
                     DescripcionC m = new DescripcionC();
-                    m.setDescripcion(txtFDescripcion.getText().toUpperCase());
+                    //m.setDescripcion(txtFDescripcion.getText().toUpperCase());
                     m.setId(Integer.parseInt(txtId.getText()));
                     DBDescripcion.insertarDesc(m);
                     JOptionPane.showMessageDialog(null,"Registro Guardado");
@@ -348,7 +348,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
                 BFguardar.setEnabled(false);
                 BFNuevo.requestFocus();
                 BFNuevo.setEnabled(true);
-                txtFDescripcion.setEditable(false);
+                //txtFDescripcion.setEditable(false);
               
 
             }else {
@@ -359,7 +359,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
             DescripcionC p;
             try {
                 p= DBDescripcion.buscarDesc(Integer.parseInt(txtId.getText()));
-                p.setDescripcion(txtFDescripcion.getText());
+                //p.setDescripcion(txtFDescripcion.getText());
                 DBDescripcion.actualizarFamilia(p);
                 JOptionPane.showMessageDialog(null, " [ Datos Actualizados ]");
                 limpiarCajaTextofam();
@@ -382,7 +382,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFguardar.setEnabled(true);
         BFeditar.setEnabled(false);
         BFcancelar.setEnabled(true);
-        txtFDescripcion.setEditable(true);
+       //txtFDescripcion.setEditable(true);
     }//GEN-LAST:event_BFeditarActionPerformed
 
     private void BFcancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFcancelarActionPerformed
@@ -391,7 +391,7 @@ public class Descripcion extends javax.swing.JInternalFrame {
         BFNuevo.setEnabled(true);
         BFguardar.setEnabled(false);
         BFeditar.setEnabled(false);
-        txtFDescripcion.setEditable(false);
+        //txtFDescripcion.setEditable(false);
        
     }//GEN-LAST:event_BFcancelarActionPerformed
 
