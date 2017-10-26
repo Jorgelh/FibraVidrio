@@ -13,31 +13,26 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Jorge Lopez
+ * @author jluis
  */
-public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
+public class NewProductMat extends javax.swing.JInternalFrame {
+
         int idingre;
         int tipo;
         int n=0;
-    /**
-     * Creates new form producto
-     */
-    public NuevoProducto_Materiales() {
-         
+        
+    public NewProductMat() {
         initComponents();
         obtenerID(); 
         Lista();
     }
+
     
     
-    
-     
     public void limpiar(){
     
         comboTipo.setSelectedItem("Seleccionar...");
@@ -65,6 +60,7 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
          
      }
     
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +86,7 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         guardarMat = new javax.swing.JButton();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -210,98 +207,96 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(230, 230, 230))
+                .addGap(247, 247, 247))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2KeyPressed
 
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codigoActionPerformed
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-       diametro.requestFocus();
+        diametro.requestFocus();
     }//GEN-LAST:event_comboTipoActionPerformed
 
-    private void guardarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMatActionPerformed
-       
-        //Seleccionar..., TUBO CUADRADO, TUBO REDONDO, TUBO RECTANGULAR, PLANCHA, 
-        
-        
-            
-            if(codigo.getText().compareTo("")!=0 && diametro.getText().compareTo("")!=0 && grosor.getText().compareTo("")!=0 && !comboTipo.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
-                
-               if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
-                    tipo = 1;
-                } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
-                    tipo = 2;
-                } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
-                {tipo = 3;}
-               else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
-                {tipo = 4;}
-                
-        try {
-            nuevo m = new nuevo();
-            m.setCodigo(Integer.parseInt(codigo.getText()));
-            m.setDiametro(diametro.getText());
-            m.setGrosor(grosor.getText());
-            m.setTipomaterial(tipo);
-            NuevoProducto.IngresoProducto(m);
-            JOptionPane.showMessageDialog(null, "Producto Creado...");
-            limpiar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR"+e);
-        }
-            }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
-
-    }//GEN-LAST:event_guardarMatActionPerformed
-
     private void diametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diametroActionPerformed
-       grosor.requestFocus();
+        grosor.requestFocus();
     }//GEN-LAST:event_diametroActionPerformed
 
     private void grosorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grosorActionPerformed
-       guardarMat.requestFocus();
+        guardarMat.requestFocus();
     }//GEN-LAST:event_grosorActionPerformed
 
-    private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2KeyPressed
+    private void guardarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMatActionPerformed
 
-    
-    
-    
+        //Seleccionar..., TUBO CUADRADO, TUBO REDONDO, TUBO RECTANGULAR, PLANCHA,
+
+        if(codigo.getText().compareTo("")!=0 && diametro.getText().compareTo("")!=0 && grosor.getText().compareTo("")!=0 && !comboTipo.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
+
+            if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
+                tipo = 1;
+            } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
+                tipo = 2;
+            } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
+            {tipo = 3;}
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
+            {tipo = 4;}
+
+            try {
+                nuevo m = new nuevo();
+                m.setCodigo(Integer.parseInt(codigo.getText()));
+                m.setDiametro(diametro.getText());
+                m.setGrosor(grosor.getText());
+                m.setTipomaterial(tipo);
+                NuevoProducto.IngresoProducto(m);
+                JOptionPane.showMessageDialog(null, "Producto Creado...");
+                limpiar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR"+e);
+            }
+        }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
+    }//GEN-LAST:event_guardarMatActionPerformed
+
     private void Lista() {
         ArrayList<nuevo> result = NuevoProducto.ListarProductos();
         recargarTablaPro(result);
@@ -336,12 +331,6 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
     
     
     
-    
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -359,21 +348,20 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewProductMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewProductMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewProductMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewProductMat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoProducto_Materiales().setVisible(true);
+                new NewProductMat().setVisible(true);
             }
         });
     }

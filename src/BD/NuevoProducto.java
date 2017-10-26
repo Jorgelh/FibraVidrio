@@ -67,6 +67,36 @@ private static ArrayList<nuevo> ListarProductos(String sql) {
         return list;
     }
     
+
+ public static ArrayList<IngresoMat> ListarIngresos(int a){
+        
+         return ListarIngre("select id_ingreso,pn,job,po,cantidad from ingresosmat where codigo = "+a+" order by id_ingreso");   
+    }
+   
+private static ArrayList<IngresoMat> ListarIngre(String sql) {
+        ArrayList<IngresoMat> list = new ArrayList<IngresoMat>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            IngresoMat f;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                f = new IngresoMat();
+                f.setIDIngreso(rs.getInt("id_ingreso"));
+                f.setPn(rs.getString("pn"));
+                f.setJob(rs.getString("job"));
+                f.setCantidad(rs.getInt("cantidad"));
+                list.add(f);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
+
 public static nuevo Buscarpro (int id)  throws SQLException{
         return BuscarProducto(id,null);
     }
@@ -97,7 +127,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
     public static void IngresoMat (IngresoMat l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into ingresosmat values (?,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into ingresosmat values (?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getIDIngreso());
         ps.setInt(2, l.getCodigo());
         ps.setString(3, l.getPn());
@@ -106,6 +136,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
         ps.setDate(6, new java.sql.Date(l.getFecha().getTime()));
         ps.setString(7, l.getNota());
         ps.setInt(8, l.getCantidad());
+        ps.setInt(9, l.getCantidad());
         ps.executeUpdate();
         cn.close();
         ps.close();

@@ -13,31 +13,27 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Jorge Lopez
+ * @author jluis
  */
-public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
+public class Test extends javax.swing.JInternalFrame {
+
         int idingre;
         int tipo;
         int n=0;
-    /**
-     * Creates new form producto
-     */
-    public NuevoProducto_Materiales() {
-         
+    
+    
+    public Test() {
         initComponents();
-        obtenerID(); 
         Lista();
+        obtenerID();
     }
     
     
     
-     
     public void limpiar(){
     
         comboTipo.setSelectedItem("Seleccionar...");
@@ -65,6 +61,8 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
          
      }
     
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,26 +73,24 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        codigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         diametro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         grosor = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         guardarMat = new javax.swing.JButton();
+        codigo = new javax.swing.JTextField();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
-
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
-        jLabel1.setText("NUEVO PRODUCTOS");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,20 +102,8 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel2.setText("CODIGO");
-        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLabel2KeyPressed(evt);
-            }
-        });
-
-        codigo.setEnabled(false);
-        codigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
+        jLabel1.setText("NUEVO PRODUCTO");
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("TIPO DE MATERIAL");
@@ -132,7 +116,7 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel3.setText("DIAMETRO");
+        jLabel3.setText("DIAMETRO INTERNO");
 
         diametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,11 +133,26 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
             }
         });
 
-        guardarMat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save2.png"))); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel2.setText("CODIGO");
+        jLabel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel2KeyPressed(evt);
+            }
+        });
+
+        guardarMat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/save2.png"))); // NOI18N
         guardarMat.setText("GUARDAR");
         guardarMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarMatActionPerformed(evt);
+            }
+        });
+
+        codigo.setEnabled(false);
+        codigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoActionPerformed(evt);
             }
         });
 
@@ -165,28 +164,28 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(grosor)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(diametro)
                     .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(codigo))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addComponent(guardarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(guardarMat)
+                .addGap(65, 65, 65))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(7, 7, 7)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
@@ -200,9 +199,9 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(grosor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(guardarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(40, 40, 40)
+                .addComponent(guardarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -211,25 +210,25 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(230, 230, 230))
+                .addGap(182, 182, 182))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,69 +239,65 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codigoActionPerformed
-
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
-       diametro.requestFocus();
+        diametro.requestFocus();
     }//GEN-LAST:event_comboTipoActionPerformed
 
-    private void guardarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMatActionPerformed
-       
-        //Seleccionar..., TUBO CUADRADO, TUBO REDONDO, TUBO RECTANGULAR, PLANCHA, 
-        
-        
-            
-            if(codigo.getText().compareTo("")!=0 && diametro.getText().compareTo("")!=0 && grosor.getText().compareTo("")!=0 && !comboTipo.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
-                
-               if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
-                    tipo = 1;
-                } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
-                    tipo = 2;
-                } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
-                {tipo = 3;}
-               else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
-                {tipo = 4;}
-                
-        try {
-            nuevo m = new nuevo();
-            m.setCodigo(Integer.parseInt(codigo.getText()));
-            m.setDiametro(diametro.getText());
-            m.setGrosor(grosor.getText());
-            m.setTipomaterial(tipo);
-            NuevoProducto.IngresoProducto(m);
-            JOptionPane.showMessageDialog(null, "Producto Creado...");
-            limpiar();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR"+e);
-        }
-            }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
-
-    }//GEN-LAST:event_guardarMatActionPerformed
-
     private void diametroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diametroActionPerformed
-       grosor.requestFocus();
+        grosor.requestFocus();
     }//GEN-LAST:event_diametroActionPerformed
 
     private void grosorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_grosorActionPerformed
-       guardarMat.requestFocus();
+        guardarMat.requestFocus();
     }//GEN-LAST:event_grosorActionPerformed
 
     private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2KeyPressed
 
-    
-    
-    
-    private void Lista() {
+    private void guardarMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMatActionPerformed
+       
+        if(codigo.getText().compareTo("")!=0 && diametro.getText().compareTo("")!=0 && grosor.getText().compareTo("")!=0 && !comboTipo.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
+
+            if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
+                tipo = 1;
+            } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
+                tipo = 2;
+            } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
+            {tipo = 3;}
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
+            {tipo = 4;}
+
+            try {
+                nuevo m = new nuevo();
+                m.setCodigo(Integer.parseInt(codigo.getText()));
+                m.setDiametro(diametro.getText());
+                m.setGrosor(grosor.getText());
+                m.setTipomaterial(tipo);
+                NuevoProducto.IngresoProducto(m);
+                JOptionPane.showMessageDialog(null, "Producto Creado...");
+                limpiar();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "ERROR"+e);
+            }
+        }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
+                                 
+        
+        
+    }//GEN-LAST:event_guardarMatActionPerformed
+
+    private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codigoActionPerformed
+
+   
+     private void Lista() {
         ArrayList<nuevo> result = NuevoProducto.ListarProductos();
         recargarTablaPro(result);
     }
@@ -336,15 +331,6 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
     
     
     
-    
-    
-    
-    
-    
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -359,21 +345,20 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NuevoProducto_Materiales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NuevoProducto_Materiales().setVisible(true);
+                new Test().setVisible(true);
             }
         });
     }

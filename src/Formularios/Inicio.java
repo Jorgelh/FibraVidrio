@@ -553,7 +553,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-      NuevoProducto_Materiales ingre  = new NuevoProducto_Materiales();
+      Test ingre  = new Test();
        Panel1.add(ingre);
        Dimension desktopSize = Panel1.getSize();
        Dimension FrameSize = ingre.getSize();
@@ -580,7 +580,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        Descargas1 ingre  = new Descargas1();
+        DescargaMAT ingre  = new DescargaMAT();
         Panel1.add(ingre);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = ingre.getSize();
