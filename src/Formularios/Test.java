@@ -23,7 +23,7 @@ public class Test extends javax.swing.JInternalFrame {
 
         int idingre;
         int tipo;
-        int estilo = 0;
+        int estilo;
         int n=0;
         
     
@@ -115,7 +115,7 @@ public class Test extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("TIPO DE MATERIAL");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", " " }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", "TUBO PARA BOBBINA REDONDO", "TUBO PARA BOBBINA CUADRADO", "TUBO PARA BOBBINA RECTANGULAR", " " }));
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -302,6 +302,23 @@ public class Test extends javax.swing.JInternalFrame {
                  comboESTILO.setEnabled(true);
                  comboESTILO.setSelectedItem("Seleccionar...");
             }
+        else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA REDONDO"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }
+        else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA CUADRADO"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA RECTANGULAR"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }
         
         
         diametro.requestFocus();
@@ -326,20 +343,25 @@ public class Test extends javax.swing.JInternalFrame {
 
             if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
                 tipo = 1;
+                estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
                 tipo = 2;
+                estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
             {tipo = 3;
+            estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             }
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO INSOLACION"))
             {tipo = 4;
+            estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             }
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("POT ROD"))
             {tipo = 5;
+            estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             }
             
@@ -354,6 +376,12 @@ public class Test extends javax.swing.JInternalFrame {
                     else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
                     else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
             }
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA REDONDO"))
+            {tipo = 7;estilo=0;}
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA CUADRADO"))
+            {tipo = 8;estilo=0;}
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA RECTANGULAR"))
+            {tipo = 9;estilo=0;}
 
             try {
                 nuevo m = new nuevo();
@@ -379,7 +407,7 @@ public class Test extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_codigoActionPerformed
 
     private void comboESTILOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboESTILOActionPerformed
-        // TODO add your handling code here:
+       diametro.requestFocus();
     }//GEN-LAST:event_comboESTILOActionPerformed
 
    

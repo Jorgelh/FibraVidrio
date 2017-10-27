@@ -192,7 +192,7 @@
             <Component class="javax.swing.JComboBox" name="comboTipo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="8">
+                  <StringArray count="11">
                     <StringItem index="0" value="Seleccionar..."/>
                     <StringItem index="1" value="TUBO CUADRADO"/>
                     <StringItem index="2" value="TUBO REDONDO"/>
@@ -200,7 +200,10 @@
                     <StringItem index="4" value="TUBO INSOLACION"/>
                     <StringItem index="5" value="POT ROD"/>
                     <StringItem index="6" value="PLANCHA"/>
-                    <StringItem index="7" value=" "/>
+                    <StringItem index="7" value="TUBO PARA BOBBINA REDONDO"/>
+                    <StringItem index="8" value="TUBO PARA BOBBINA CUADRADO"/>
+                    <StringItem index="9" value="TUBO PARA BOBBINA RECTANGULAR"/>
+                    <StringItem index="10" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
