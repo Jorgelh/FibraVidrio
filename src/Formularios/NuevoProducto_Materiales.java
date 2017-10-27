@@ -33,6 +33,7 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         initComponents();
         obtenerID(); 
         Lista();
+        comboESTILO.setEnabled(false);
     }
     
     
@@ -83,11 +84,13 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         codigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         comboTipo = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
+        medida = new javax.swing.JLabel();
         diametro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         grosor = new javax.swing.JTextField();
         guardarMat = new javax.swing.JButton();
+        comboESTILO = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -131,8 +134,8 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel3.setText("DIAMETRO");
+        medida.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        medida.setText("--");
 
         diametro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,29 +160,41 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
             }
         });
 
+        comboESTILO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "SANDBLAST BOTH SIDES NEGRO", "SANDBLAST BOTH SIDES CLARO", "NATURAL NEGRO", "NATURAL CLARO", "SANDBLAST ONE SIDE NEGRO", "SANDBLAST ONE SIDE CLARO" }));
+        comboESTILO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboESTILOActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel6.setText("ESTILO ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(grosor)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(diametro)
-                    .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(codigo))
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(guardarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(grosor)
+                    .addComponent(diametro)
+                    .addComponent(comboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(codigo)
+                    .addComponent(comboESTILO, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5)
+                            .addComponent(medida)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,14 +208,18 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboESTILO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(medida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(diametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(grosor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(guardarMat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -223,13 +242,13 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,12 +283,20 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
                 
                if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO")) {
                     tipo = 1;
+                    medida.setText("DIAMETRO EXTERNO");
                 } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO")) {
                     tipo = 2;
+                    medida.setText("DIAMETRO EXTERNO");
                 } else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR"))
-                {tipo = 3;}
+                {tipo = 3;
+                 medida.setText("DIAMETRO EXTERNO");
+
+                }
                else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
-                {tipo = 4;}
+                {
+                    medida.setText("MEDIDA");
+                    tipo = 4;}
+                    comboESTILO.setEnabled(true);
                 
         try {
             nuevo m = new nuevo();
@@ -298,6 +325,10 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
     private void jLabel2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2KeyPressed
+
+    private void comboESTILOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboESTILOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboESTILOActionPerformed
 
     
     
@@ -380,18 +411,20 @@ public class NuevoProducto_Materiales extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codigo;
+    private javax.swing.JComboBox comboESTILO;
     private javax.swing.JComboBox comboTipo;
     private javax.swing.JTextField diametro;
     private javax.swing.JTextField grosor;
     private javax.swing.JButton guardarMat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel medida;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

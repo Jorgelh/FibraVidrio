@@ -25,11 +25,12 @@ public class NuevoProducto {
     public static void IngresoProducto (nuevo l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into productosmat values (?,?,?,?,0)");
+        ps = cn.prepareStatement("insert into productosmat values (?,?,?,?,0,?)");
         ps.setInt(1, l.getCodigo());
         ps.setString(2, l.getDiametro());
         ps.setString(3, l.getGrosor());
         ps.setInt(4, l.getTipomaterial());
+        ps.setInt(5, l.getEstilo());
         ps.executeUpdate();
         cn.close();
         ps.close();
@@ -37,12 +38,16 @@ public class NuevoProducto {
     
      public static ArrayList<nuevo> ListarProductosDesc(String a){
         
-         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'PLANCHA')||' '||diametro||' '||grosor as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'PLANCHA')||' '||diametro||' '||grosor) like upper('"+a+"%')");   
+         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA')||' '||diametro||' '||grosor||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO') as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA')||' '||diametro||' '||grosor) like upper('"+a+"%')");   
     }
     
+
+     
+     
+     
     public static ArrayList<nuevo> ListarProductos(){
         
-         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'PLANCHA')||' '||diametro||' '||grosor as \"Descripcion\" from productosmat order by codigo");   
+         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA')||' '||diametro||' '||grosor as \"Descripcion\" from productosmat order by codigo");   
     }
    
     
@@ -105,7 +110,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'PLANCHA')||' '||diametro||' '||grosor \"descri\",codigo,cantidad from productosmat where codigo ="+id);
+        ps = cn.prepareStatement("select decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA')||' '||diametro||' '||grosor \"descri\",productosmat.codigo,cantidad from productosmat where codigo ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (t == null){
@@ -142,6 +147,21 @@ public static nuevo Buscarpro (int id)  throws SQLException{
         ps.close();
     }
 
+    public static void IngresoDesc (IngresoMat l) throws SQLException{
+        Connection cn = BDFIBRA.getConnection();
+        PreparedStatement ps = null;
+        ps = cn.prepareStatement("insert into DESCARGASMAT values (?,?,?,?,?,?,?)");
+        ps.setInt(1, l.getIdDesc());
+        ps.setInt(2, l.getIDIngreso());
+        ps.setDate(3, new java.sql.Date(l.getFecha().getTime()));
+        ps.setInt(4, l.getCantidad());
+        ps.setString(5, l.getJob());
+        ps.setString(6, l.getPn());
+        ps.setString(7, l.getNota());
+        ps.executeUpdate();
+        cn.close();
+        ps.close();
+    }
     
     
     

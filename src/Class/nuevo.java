@@ -17,7 +17,16 @@ public class nuevo {
   String grosor;
   String descripcion;
   int cantidad;
+  int estilo;
 
+    public int getEstilo() {
+        return estilo;
+    }
+
+    public void setEstilo(int estilo) {
+        this.estilo = estilo;
+    }
+    
     public int getCantidad() {
         return cantidad;
     }

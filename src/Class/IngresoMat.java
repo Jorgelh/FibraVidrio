@@ -21,6 +21,17 @@ public class IngresoMat {
     Date fecha;
     String nota;
     int cantidad;
+    int idDesc;
+
+    public int getIdDesc() {
+        return idDesc;
+    }
+
+    public void setIdDesc(int idDesc) {
+        this.idDesc = idDesc;
+    }
+    
+    
 
     public int getIDIngreso() {
         return IDIngreso;

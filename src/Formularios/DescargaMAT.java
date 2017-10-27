@@ -5,10 +5,16 @@
  */
 package Formularios;
 
+import BD.BDFIBRA;
 import BD.NuevoProducto;
 import Class.IngresoMat;
 import Class.nuevo;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumn;
 
@@ -21,6 +27,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
      int id;
      int no;
      int cantidad;
+     int n;
     /**
      * Creates new form DescargaMAT
      */
@@ -28,7 +35,42 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         initComponents();
         Lista();
     }
-
+    
+    public void limpiar(){
+       
+        obtenerID();
+        pn.setText("");
+        job.setText("");
+        FechasJdate();
+        cant.setText("");
+        nota.setText("");
+      
+    
+    }
+    
+    
+     public void FechasJdate() {
+      
+        Calendar c2 = new GregorianCalendar();
+        fecha.setCalendar(c2);
+}
+    
+    public void obtenerID(){
+    
+     try {
+             Connection cn = BDFIBRA.getConnection();
+             Statement ps = cn.createStatement();
+             ResultSet rs = ps.executeQuery("select max(id_desc) from DESCARGASMAT");
+             rs.next();
+             n = (rs.getInt("max(id_desc)"));
+             nodesc.setText(String.valueOf(n+1));
+             ps.close();
+             rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR "+e);
+        }
+     }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +90,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        no_ingre = new javax.swing.JTextField();
+        nodesc = new javax.swing.JTextField();
         pn = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         job = new javax.swing.JTextField();
@@ -57,7 +99,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         nota = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        descargar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cant = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -112,8 +154,22 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("P/N");
 
+        nodesc.setEnabled(false);
+
+        pn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnActionPerformed(evt);
+            }
+        });
+
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setText("JOB");
+
+        job.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("FECHA");
@@ -125,10 +181,12 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         nota.setRows(5);
         jScrollPane3.setViewportView(nota);
 
-        jButton1.setText("DESCARGAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        descargar.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
+        descargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Download.png"))); // NOI18N
+        descargar.setText("DESCARGAR");
+        descargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                descargarActionPerformed(evt);
             }
         });
 
@@ -136,7 +194,12 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
         jLabel7.setText("CANTIDAD");
 
         cant.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        cant.setCaretColor(new java.awt.Color(255, 0, 51));
+        cant.setForeground(new java.awt.Color(204, 0, 0));
+        cant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cantActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -151,7 +214,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(no_ingre, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(nodesc, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(pn, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(job, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
@@ -164,7 +227,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(descargar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -177,7 +240,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(no_ingre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nodesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -185,10 +248,10 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(job, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(job, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,8 +259,8 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(50, 50, 50)
+                        .addComponent(descargar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -282,76 +345,58 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
 
     private void TablaIngreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaIngreMouseClicked
 
-
+        obtenerID();
+        FechasJdate();
         no = (Integer.parseInt(String.valueOf(TablaIngre.getModel().getValueAt(TablaIngre.getSelectedRow(),0))));
         cantidad = (Integer.parseInt(String.valueOf(TablaIngre.getModel().getValueAt(TablaIngre.getSelectedRow(),3))));
-
-
-
+        pn.requestFocus();
 
     }//GEN-LAST:event_TablaIngreMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-/*
-       // if(fecha.getDate() != null &&  && codigo.getText().compareTo("")!=0){
-         //  else if(cant.getText() > cant) {
-                
-            
+    private void descargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descargarActionPerformed
+
+        
+       if(nodesc.getText().compareTo("")!=0 && cant.getText().compareTo("")!=0 && fecha.getDate() != null){
+        int A = cantidad;
+        int B = Integer.parseInt(cant.getText());
+            if (A >= B) {    
+        
         try {
             IngresoMat m = new IngresoMat();
-            m.setIDIngreso(no);           
+            m.setIDIngreso(no);
+            m.setIdDesc(Integer.parseInt(nodesc.getText()));
             m.setPn(pn.getText());
             m.setJob(job.getText());
             m.setFecha(fecha.getDate());
             m.setNota(nota.getText());
             m.setCantidad(Integer.parseInt(cant.getText()));
-            NuevoProducto.IngresoMat(m);
-            JOptionPane.showMessageDialog(null, "Ingreso Realizado...");
-            //limpiar();
+            NuevoProducto.IngresoDesc(m);
+            JOptionPane.showMessageDialog(null, "DESCARGA REALIZADA...");
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR"+e);
         }
-          //  }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
+            } else{ JOptionPane.showMessageDialog(null, "NO POSER LA CANTIDAD NECESARIA PARA REALIZAR LA DESCARGA");}
+       }else{JOptionPane.showMessageDialog(null, "INGRES TODOS LOS CAMPOS NECESARIOS");}
+    }//GEN-LAST:event_descargarActionPerformed
 
-        /*
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void pnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnActionPerformed
+      
+        job.requestFocus();
+    }//GEN-LAST:event_pnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-  //  public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DescargaMAT().setVisible(true);
-            }
-        });
-    }
+        cant.requestFocus();
+    }//GEN-LAST:event_jobActionPerformed
+
+    private void cantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cantActionPerformed
+            
+        descargar.requestFocus();
+
+    }//GEN-LAST:event_cantActionPerformed
+
+    
     
     
      private void Lista() {
@@ -412,12 +457,41 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
+            });
+    }
+    /**
+     * @param args the command line arguments
+     */
+        public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DescargaMAT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DescargaMAT().setVisible(true);
+            }
         });
-        
-       /* TableColumn columna1 = TablaDesc.getColumn("CODIGO");
-        columna1.setPreferredWidth(50);
-        TableColumn columna2 = TablaDesc.getColumn("DESCRIPCION");
-        columna2.setPreferredWidth(400);*/
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -425,8 +499,8 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
     private javax.swing.JTable TablaDesc;
     private javax.swing.JTable TablaIngre;
     private javax.swing.JTextField cant;
+    private javax.swing.JButton descargar;
     private com.toedter.calendar.JDateChooser fecha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -441,7 +515,7 @@ public class DescargaMAT extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField job;
-    private javax.swing.JTextField no_ingre;
+    private javax.swing.JTextField nodesc;
     private javax.swing.JTextArea nota;
     private javax.swing.JTextField pn;
     // End of variables declaration//GEN-END:variables
