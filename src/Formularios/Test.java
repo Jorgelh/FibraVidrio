@@ -115,7 +115,7 @@ public class Test extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("TIPO DE MATERIAL");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", "TUBO PARA BOBBINA REDONDO", "TUBO PARA BOBBINA CUADRADO", "TUBO PARA BOBBINA RECTANGULAR", " " }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", "TUBO PARA BOBBINA REDONDO", "TUBO PARA BOBBINA CUADRADO", "TUBO PARA BOBBINA RECTANGULAR", "PLANCHA DE ALUMINIO", "TUBO REDONDO DE ALUMINIO", "TUBO CUADRADO DE ALUMINIO", "TUBO RECTANGULAR DE ALUMINIO", " " }));
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -232,15 +232,15 @@ public class Test extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(182, 182, 182))
+                .addGap(233, 233, 233))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +251,7 @@ public class Test extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -318,6 +318,26 @@ public class Test extends javax.swing.JInternalFrame {
                  medida.setText("DIAMETRO EXTERNO");
                  comboESTILO.setEnabled(false);
                  comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA DE ALUMINIO"))
+            {
+                 medida.setText("MEDIDAS");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO DE ALUMINIO"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO DE ALUMINIO"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR DE ALUMINIO"))
+            {
+                 medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(false);
+                 comboESTILO.setSelectedItem("Seleccionar...");
             }
         
         
@@ -364,7 +384,6 @@ public class Test extends javax.swing.JInternalFrame {
             estilo=0;
                  medida.setText("DIAMETRO EXTERNO");
             }
-            
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
             {tipo = 6;
                  medida.setText("MEDIDAS"); 
@@ -382,7 +401,15 @@ public class Test extends javax.swing.JInternalFrame {
             {tipo = 8;estilo=0;}
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA RECTANGULAR"))
             {tipo = 9;estilo=0;}
-
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA DE ALUMINIO"))
+            {tipo = 10;estilo=0;               
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO DE ALUMINIO"))
+            {tipo = 11;estilo=0;                
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO DE ALUMINIO"))
+            {tipo = 12;estilo=0;              
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR DE ALUMINIO"))
+            {tipo = 13;estilo=0;               
+            }
             try {
                 nuevo m = new nuevo();
                 m.setCodigo(Integer.parseInt(codigo.getText()));
@@ -397,9 +424,6 @@ public class Test extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "ERROR"+e);
             }
         }else{JOptionPane.showMessageDialog(null, "LLene Los Campos necesario");}
-                                 
-        
-        
     }//GEN-LAST:event_guardarMatActionPerformed
 
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
@@ -441,9 +465,6 @@ public class Test extends javax.swing.JInternalFrame {
         TableColumn columna2 = tabla.getColumn("DESCRIPCION");
         columna2.setPreferredWidth(350);
     }
-    
-    
-    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

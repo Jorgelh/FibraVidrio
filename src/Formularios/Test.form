@@ -44,16 +44,16 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="455" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -67,7 +67,7 @@
                       <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                       <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="64" max="32767" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -192,7 +192,7 @@
             <Component class="javax.swing.JComboBox" name="comboTipo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="11">
+                  <StringArray count="15">
                     <StringItem index="0" value="Seleccionar..."/>
                     <StringItem index="1" value="TUBO CUADRADO"/>
                     <StringItem index="2" value="TUBO REDONDO"/>
@@ -203,7 +203,11 @@
                     <StringItem index="7" value="TUBO PARA BOBBINA REDONDO"/>
                     <StringItem index="8" value="TUBO PARA BOBBINA CUADRADO"/>
                     <StringItem index="9" value="TUBO PARA BOBBINA RECTANGULAR"/>
-                    <StringItem index="10" value=" "/>
+                    <StringItem index="10" value="PLANCHA DE ALUMINIO"/>
+                    <StringItem index="11" value="TUBO REDONDO DE ALUMINIO"/>
+                    <StringItem index="12" value="TUBO CUADRADO DE ALUMINIO"/>
+                    <StringItem index="13" value="TUBO RECTANGULAR DE ALUMINIO"/>
+                    <StringItem index="14" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
