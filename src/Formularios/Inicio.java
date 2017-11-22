@@ -336,7 +336,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu13.add(jMenuItem10);
 
+        jMenuItem28.setFont(new java.awt.Font("Eras Bold ITC", 1, 14)); // NOI18N
+        jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
         jMenuItem28.setText("Descargas");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
         jMenu13.add(jMenuItem28);
 
         jMenuItem14.setText("Ingresos");
@@ -424,7 +431,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem31);
 
+        jMenuItem32.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
         jMenuItem32.setText("Descargas");
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
         jMenu14.add(jMenuItem32);
 
         jMenu7.add(jMenu14);
@@ -661,6 +675,28 @@ public class Inicio extends javax.swing.JFrame {
         compo.show();
         
     }//GEN-LAST:event_jMenuItem31ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        
+        ConsultaDescargasMat compo = new ConsultaDescargasMat();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+        
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
+    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+        ConsultaDescargasHerramienta compo = new ConsultaDescargasHerramienta();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+        
+        
+    }//GEN-LAST:event_jMenuItem32ActionPerformed
 
     /**
      * @param args the command line arguments

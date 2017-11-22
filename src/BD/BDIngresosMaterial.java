@@ -43,7 +43,30 @@ public static void guardarIngresoMaterial (IngresoMaterial l) throws SQLExceptio
 
 public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
 
-        return consultaSQL("select nombre,cantidad from descripcion where upper(nombre) like upper('"+c+"%')");
+        return consultaSQL("select \n" +
+"decode(tipo_material,1,'TUBO CUADRADO',\n" +
+"                     2,'TUBO REDONDO',\n" +
+"                     3,'TUBO RECTANGULAR',\n" +
+"                     4,'TUBO INSOLACION',\n" +
+"                     5,'POT ROD',\n" +
+"                     6,'PLANCHA',\n" +
+"                     7,'TUBO PARA BOBBINA REDONDO',\n" +
+"                     8,'TUBO PARA BOBBINA CUADRADO',\n" +
+"                     9,'TUBO PARA BOBBINA RECTANGULAR',\n" +
+"                     10,'PLANCHA DE ALUMINIO',\n" +
+"                     11,'TUBO REDONDO DE ALUMINIO',\n" +
+"                     12,'TUBO CUADRADO DE ALUMINIO',\n" +
+"                     13,'TUBO RECTANGULAR DE ALUMINIO',\n" +
+"                     14,'ACERO',\n" +
+"                     15,'BRONCE')||' '||grosor||' '||diametro||' '||\n" +
+"                     decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',\n" +
+"                     2,'SANDBLAST BOTH SIDES CLARO',\n" +
+"                     3,'NATURAL NEGRO',\n" +
+"                     4,'NATURAL CLARO',\n" +
+"                     5,'SANDBLAST ONE SIDE NEGRO',\n" +
+"                     6,'SANDBLAST ONE SIDE CLARO',\n" +
+"                     7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\",cantidad\n" +
+"                     from productosmat where upper(decode(productosmat.TIPO_MATERIAL,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+c+"%')");
     }
 
     private static ArrayList<IngresoMaterial> consultaSQL(String sql) {
@@ -56,7 +79,7 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 t = new IngresoMaterial();
-                t.setDescripcion(rs.getString("nombre"));
+                t.setDescripcion(rs.getString("Descripcion"));
                 t.setCantidad(rs.getInt("Cantidad"));
                 list.add(t);
             }

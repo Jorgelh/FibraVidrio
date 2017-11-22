@@ -115,7 +115,7 @@ public class Test extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("TIPO DE MATERIAL");
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", "TUBO PARA BOBBINA REDONDO", "TUBO PARA BOBBINA CUADRADO", "TUBO PARA BOBBINA RECTANGULAR", "PLANCHA DE ALUMINIO", "TUBO REDONDO DE ALUMINIO", "TUBO CUADRADO DE ALUMINIO", "TUBO RECTANGULAR DE ALUMINIO", " " }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "TUBO CUADRADO", "TUBO REDONDO", "TUBO RECTANGULAR", "TUBO INSOLACION", "POT ROD", "PLANCHA", "TUBO PARA BOBBINA REDONDO", "TUBO PARA BOBBINA CUADRADO", "TUBO PARA BOBBINA RECTANGULAR", "PLANCHA DE ALUMINIO", "TUBO REDONDO DE ALUMINIO", "TUBO CUADRADO DE ALUMINIO", "TUBO RECTANGULAR DE ALUMINIO", "ACERO", "BRONCE" }));
         comboTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoActionPerformed(evt);
@@ -166,7 +166,7 @@ public class Test extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("ESTILO");
 
-        comboESTILO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "SANDBLAST BOTH SIDES NEGRO", "SANDBLAST BOTH SIDES CLARO", "NATURAL NEGRO", "NATURAL CLARO", "SANDBLAST ONE SIDE NEGRO", "SANDBLAST ONE SIDE CLARO" }));
+        comboESTILO.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccionar...", "SANDBLAST BOTH SIDES NEGRO", "SANDBLAST BOTH SIDES CLARO", "NATURAL NEGRO", "NATURAL CLARO", "SANDBLAST ONE SIDE NEGRO", "SANDBLAST ONE SIDE CLARO", "60-61", "O-1", "A-2" }));
         comboESTILO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboESTILOActionPerformed(evt);
@@ -321,24 +321,35 @@ public class Test extends javax.swing.JInternalFrame {
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA DE ALUMINIO"))
             {
                  medida.setText("MEDIDAS");
-                 comboESTILO.setEnabled(false);
+                 comboESTILO.setEnabled(true);
                  comboESTILO.setSelectedItem("Seleccionar...");
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO DE ALUMINIO"))
             {
                  medida.setText("DIAMETRO EXTERNO");
-                 comboESTILO.setEnabled(false);
+                 comboESTILO.setEnabled(true);
                  comboESTILO.setSelectedItem("Seleccionar...");
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO DE ALUMINIO"))
             {
                  medida.setText("DIAMETRO EXTERNO");
-                 comboESTILO.setEnabled(false);
+                 comboESTILO.setEnabled(true);
                  comboESTILO.setSelectedItem("Seleccionar...");
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR DE ALUMINIO"))
             {
                  medida.setText("DIAMETRO EXTERNO");
+                 comboESTILO.setEnabled(true);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("ACERO"))
+            {
+                 medida.setText("MEDIDAS");
+                 comboESTILO.setEnabled(true);
+                 comboESTILO.setSelectedItem("Seleccionar...");
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("BRONCE"))
+            {
+                 medida.setText("MEDIDAS");
                  comboESTILO.setEnabled(false);
                  comboESTILO.setSelectedItem("Seleccionar...");
             }
+         
         
         
         diametro.requestFocus();
@@ -387,7 +398,7 @@ public class Test extends javax.swing.JInternalFrame {
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA"))
             {tipo = 6;
                  medida.setText("MEDIDAS"); 
-                 comboESTILO.setEnabled(true);
+                    comboESTILO.setEnabled(true);
                     if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
                     else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
                     else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
@@ -402,14 +413,73 @@ public class Test extends javax.swing.JInternalFrame {
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO PARA BOBBINA RECTANGULAR"))
             {tipo = 9;estilo=0;}
             else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("PLANCHA DE ALUMINIO"))
-            {tipo = 10;estilo=0;               
+            {tipo = 10;
+               comboESTILO.setEnabled(true);
+                    if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL CLARO")){estilo = 4;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("60-61")){estilo = 7;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("O-1")){estilo = 8;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("A-2")){estilo = 9;}
+                          
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO REDONDO DE ALUMINIO"))
-            {tipo = 11;estilo=0;                
+            {tipo = 11;
+                comboESTILO.setEnabled(true);
+                    if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL CLARO")){estilo = 4;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("60-61")){estilo = 7;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("O-1")){estilo = 8;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("A-2")){estilo = 9;}
+                
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO CUADRADO DE ALUMINIO"))
-            {tipo = 12;estilo=0;              
+            {tipo = 12;
+            
+                comboESTILO.setEnabled(true);
+                    if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL CLARO")){estilo = 4;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("60-61")){estilo = 7;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("O-1")){estilo = 8;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("A-2")){estilo = 9;}
+                    
             }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("TUBO RECTANGULAR DE ALUMINIO"))
-            {tipo = 13;estilo=0;               
+            {tipo = 13;
+                    comboESTILO.setEnabled(true);
+                    if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL CLARO")){estilo = 4;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("60-61")){estilo = 7;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("O-1")){estilo = 8;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("A-2")){estilo = 9;}
+            }else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("ACERO"))
+            {tipo = 14;
+                    comboESTILO.setEnabled(true);
+                    if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES NEGRO")){estilo = 1;} 
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST BOTH SIDES CLARO")){estilo = 2;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL NEGRO")){estilo = 3;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("NATURAL CLARO")){estilo = 4;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE NEGRO")){estilo = 5;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("SANDBLAST ONE SIDE CLARO")){estilo = 6;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("60-61")){estilo = 7;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("O-1")){estilo = 8;}
+                    else if (comboESTILO.getSelectedItem().toString().equalsIgnoreCase("A-2")){estilo = 9;}
             }
+            else if (comboTipo.getSelectedItem().toString().equalsIgnoreCase("BRONCE"))
+            {tipo = 15;estilo=0;}
+            
             try {
                 nuevo m = new nuevo();
                 m.setCodigo(Integer.parseInt(codigo.getText()));

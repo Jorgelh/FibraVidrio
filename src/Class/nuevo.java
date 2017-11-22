@@ -5,6 +5,7 @@
  */
 package Class;
 
+
 /**
  *
  * @author Jorge Lopez
@@ -18,6 +19,46 @@ public class nuevo {
   String descripcion;
   int cantidad;
   int estilo;
+  String PN;
+  String Fecha;
+  String trabajo;
+  String nota;
+
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+  
+  
+    
+    public String getPN() {
+        return PN;
+    }
+
+    public void setPN(String PN) {
+        this.PN = PN;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public String getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(String trabajo) {
+        this.trabajo = trabajo;
+    }
+  
+  
 
     public int getEstilo() {
         return estilo;

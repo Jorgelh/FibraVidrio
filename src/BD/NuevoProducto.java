@@ -38,7 +38,7 @@ public class NuevoProducto {
     
      public static ArrayList<nuevo> ListarProductosDesc(String a){
         
-         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO') as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
+         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
     }
     
 
@@ -72,6 +72,70 @@ private static ArrayList<nuevo> ListarProductos(String sql) {
         return list;
     }
     
+
+public static ArrayList<nuevo> ProductosDescargados(String a){
+        
+         return ListarProductosDescargados("select productosmat.codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" ,DESCARGASMAT.fecha,DESCARGASMAT.PN,DESCARGASMAT.TRABAJO,DESCARGASMAT.CANTIDAD from productosmat inner join INGRESOSMAT on INGRESOSMAT.CODIGO = productosmat.CODIGO join DESCARGASMAT on INGRESOSMAT.ID_INGRESO = DESCARGASMAT.ID_INGRESO where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
+    }
+
+private static ArrayList<nuevo> ListarProductosDescargados(String sql) {
+        ArrayList<nuevo> list = new ArrayList<nuevo>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            nuevo f;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                f = new nuevo();
+                f.setCodigo(rs.getInt("codigo"));
+                f.setDescripcion(rs.getString("descripcion"));
+                f.setCantidad(rs.getInt("cantidad"));
+                f.setFecha(rs.getString("fecha"));
+                f.setPN(rs.getString("pn"));
+                f.setTrabajo(rs.getString("trabajo"));
+                list.add(f);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
+
+public static ArrayList<nuevo> HerramientaDescargada(String a){
+        
+         return ListarHerramientaDescargada("select dh.DESCRIPCION||' '||m.M_MEDIDA||' '||ma.M_TIPO as \"descripcion\",de.FECHADESC ,de.CANTIDAD,de.NOTA from  M_DESCRIPCION d join   M_DESCRIHERRAMIENTA dh on  d.NO_DESCRIPCION = dh.NO_DESCRIPCION\n" +
+"                     join M_Medidas m on d.NO_MEDIDA = m.NO_MEDIDA join M_MATERIAL ma on d.NO_TIPO = ma.NO_TIPO join m_descargas de on de.NO = d.NO \n" +
+"                     where upper(dh.DESCRIPCION||' '||m.M_MEDIDA||' '||ma.M_TIPO) like upper('"+a+"%')");   
+    }
+
+private static ArrayList<nuevo> ListarHerramientaDescargada(String sql) {
+        ArrayList<nuevo> list = new ArrayList<nuevo>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            nuevo f;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                f = new nuevo();
+                f.setDescripcion(rs.getString("descripcion"));
+                f.setCantidad(rs.getInt("cantidad"));
+                f.setFecha(rs.getString("fechadesc"));
+                f.setNota(rs.getString("nota"));
+                list.add(f);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
+
+
 
  public static ArrayList<IngresoMat> ListarIngresos(int a){
         

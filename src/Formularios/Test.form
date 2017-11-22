@@ -192,7 +192,7 @@
             <Component class="javax.swing.JComboBox" name="comboTipo">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="15">
+                  <StringArray count="16">
                     <StringItem index="0" value="Seleccionar..."/>
                     <StringItem index="1" value="TUBO CUADRADO"/>
                     <StringItem index="2" value="TUBO REDONDO"/>
@@ -207,7 +207,8 @@
                     <StringItem index="11" value="TUBO REDONDO DE ALUMINIO"/>
                     <StringItem index="12" value="TUBO CUADRADO DE ALUMINIO"/>
                     <StringItem index="13" value="TUBO RECTANGULAR DE ALUMINIO"/>
-                    <StringItem index="14" value=" "/>
+                    <StringItem index="14" value="ACERO"/>
+                    <StringItem index="15" value="BRONCE"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -282,7 +283,7 @@
             <Component class="javax.swing.JComboBox" name="comboESTILO">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="7">
+                  <StringArray count="10">
                     <StringItem index="0" value="Seleccionar..."/>
                     <StringItem index="1" value="SANDBLAST BOTH SIDES NEGRO"/>
                     <StringItem index="2" value="SANDBLAST BOTH SIDES CLARO"/>
@@ -290,6 +291,9 @@
                     <StringItem index="4" value="NATURAL CLARO"/>
                     <StringItem index="5" value="SANDBLAST ONE SIDE NEGRO"/>
                     <StringItem index="6" value="SANDBLAST ONE SIDE CLARO"/>
+                    <StringItem index="7" value="60-61"/>
+                    <StringItem index="8" value="O-1"/>
+                    <StringItem index="9" value="A-2"/>
                   </StringArray>
                 </Property>
               </Properties>
