@@ -123,6 +123,7 @@ public class Fotos extends javax.swing.JInternalFrame {
         adelante = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtPN = new javax.swing.JTextField();
+        Fotosboton1 = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Consulta P/N");
@@ -192,6 +193,14 @@ public class Fotos extends javax.swing.JInternalFrame {
             }
         });
 
+        Fotosboton1.setFont(new java.awt.Font("Eras Bold ITC", 0, 9)); // NOI18N
+        Fotosboton1.setText("FOTOS P/N TALLER");
+        Fotosboton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Fotosboton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,7 +223,8 @@ public class Fotos extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Fotosboton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(Fotosboton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Fotosboton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel2)
@@ -240,12 +250,14 @@ public class Fotos extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Fotosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Fotosboton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Fotosboton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(adelante)
                     .addComponent(atras))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,6 +337,22 @@ public class Fotos extends javax.swing.JInternalFrame {
         cargarAlbum();
     }//GEN-LAST:event_txtPNActionPerformed
 
+    private void Fotosboton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fotosboton1ActionPerformed
+        String letra = "\\\\192.168.0.2\\Compartida Produccion\\ALEJANDRO\\FOTOS TODAS AREA DEL TALLER\\Fotos Fibra de Vidrio\\" + txtPN.getText();
+        File Dir = new File(letra);
+        File[] lista_Archivos = Dir.listFiles();
+        System.out.println("carpeta" + lista_Archivos);
+        try {
+            if (lista_Archivos != null) {
+                Desktop.getDesktop().open(new File("\\\\192.168.0.2\\Compartida Produccion\\ALEJANDRO\\FOTOS TODAS AREA DEL TALLER\\Fotos Fibra de Vidrio\\" + txtPN.getText()));
+            } else {
+                Desktop.getDesktop().open(new File("\\\\192.168.0.2\\Compartida Produccion\\ALEJANDRO\\FOTOS TODAS AREA DEL TALLER\\Fotos Fibra de Vidrio\\"));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Fotos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Fotosboton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -378,6 +406,7 @@ public class Fotos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Fotosboton;
+    private javax.swing.JButton Fotosboton1;
     private javax.swing.JButton adelante;
     private javax.swing.JButton atras;
     private javax.swing.JButton jButton1;

@@ -7,7 +7,7 @@ package BD;
 
 import Class.CTrabajos;
 import Class.IngresoMaterial;
-import Formularios.IngreMateriales;
+import NOUSO.IngreMateriales;
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,9 +50,9 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
 "                     4,'TUBO INSOLACION',\n" +
 "                     5,'POT ROD',\n" +
 "                     6,'PLANCHA',\n" +
-"                     7,'TUBO PARA BOBBINA REDONDO',\n" +
-"                     8,'TUBO PARA BOBBINA CUADRADO',\n" +
-"                     9,'TUBO PARA BOBBINA RECTANGULAR',\n" +
+"                     7,'TUBO PARA BOBINA REDONDO',\n" +
+"                     8,'TUBO PARA BOBINA CUADRADO',\n" +
+"                     9,'TUBO PARA BOBINA RECTANGULAR',\n" +
 "                     10,'PLANCHA DE ALUMINIO',\n" +
 "                     11,'TUBO REDONDO DE ALUMINIO',\n" +
 "                     12,'TUBO CUADRADO DE ALUMINIO',\n" +
@@ -66,7 +66,7 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
 "                     5,'SANDBLAST ONE SIDE NEGRO',\n" +
 "                     6,'SANDBLAST ONE SIDE CLARO',\n" +
 "                     7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\",cantidad\n" +
-"                     from productosmat where upper(decode(productosmat.TIPO_MATERIAL,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+c+"%')");
+"                     from productosmat where upper(decode(productosmat.TIPO_MATERIAL,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+c+"%')");
     }
 
     private static ArrayList<IngresoMaterial> consultaSQL(String sql) {

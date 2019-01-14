@@ -23,7 +23,25 @@ public class Entregas {
     
     public static ArrayList<CEntregas> ListarPartesEntrega(int l){
 
-        return ListarPartes("select trabajo_partes.idtrabajopartes,trabajo_partes.cantidad,componentes.medida,componentes.descripcion from trabajo_partes inner join componentes on trabajo_partes.IDCOMPO = componentes.IDCOMPO where no_trabajo="+l);
+        return ListarPartes("select tp.idtrabajopartes,tp.cantidad,decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion from trabajo_partes tp inner join componentes c1 on tp.IDCOMPO = c1.IDCOMPO join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where no_trabajo ="+l);
     }
 
     private static ArrayList<CEntregas> ListarPartes(String sql) {
@@ -36,8 +54,7 @@ public class Entregas {
             while (rs.next()){
                 t = new CEntregas();
                 t.setIdtrabajopartes(rs.getInt("idtrabajopartes"));
-                t.setDescripcion(rs.getString("descripcion"));
-                t.setMedida(rs.getString("medida"));
+                t.setDescripcion(rs.getString("Descripcion"));
                 t.setCantidad(rs.getInt("Cantidad"));
                 list.add(t);
                 }
@@ -56,8 +73,25 @@ public class Entregas {
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select componentes.descripcion||' '||componentes.medida as \"Descripcion\",trabajo_partes.cantidad,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join\n" +
-        "componentes on TRABAJO_PARTES.IDCOMPO = componentes.IDCOMPO where TRABAJO_PARTES.IDTRABAJOPARTES ="+id);
+        ps = cn.prepareStatement("select decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion ,trabajo_partes.cantidad,trabajo_partes.idtrabajopartes,trabajo_partes.no_trabajo,trabajo_partes.idcompo from TRABAJO_PARTES inner join componentes c1 on TRABAJO_PARTES.IDCOMPO = c1.IDCOMPO join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where TRABAJO_PARTES.IDTRABAJOPARTES = "+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (t == null){
@@ -99,9 +133,29 @@ public class Entregas {
     
     public static ArrayList<CEntregas> ListarHistorialEntregas(String l, String i){
 
-        return ListarHistorial("select Ingreso_trabajo.pn,entregas.fecha,entregas.cantidad,entregas.po,componentes.descripcion,ingreso_trabajo.job,empleado.nombre from entregas inner join componentes on\n" +
-"entregas.IDCOMPO = componentes.idcompo join ingreso_trabajo on entregas.NO_TRABAJO = ingreso_trabajo.NO_TRABAJO\n" +
-"join empleado on entregas.codigo = empleado.codigo where upper(ingreso_trabajo.PN) like upper('"+l+"%') and upper(ingreso_trabajo.job) like upper('"+i+"%')");
+        return ListarHistorial("select i.pn,decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,e.fecha,e.cantidad,e.po,i.job,\n" +
+"                          e.codigo from entregas e inner join componentes c1 on\n" +
+"                          e.IDCOMPO = c1.idcompo join ingreso_trabajo i on e.NO_TRABAJO = i.NO_TRABAJO\n" +
+"                          join componentes2 c2 on c1.idcompo2 = c2.idcompo2\n" +
+"                          where upper(i.PN) like upper('"+l+"%') and upper(i.job) like upper('"+i+"%')");
     }
 
     private static ArrayList<CEntregas> ListarHistorial(String sql) {
@@ -113,13 +167,13 @@ public class Entregas {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 t = new CEntregas();
-                t.setPN(rs.getString("PN"));
-                t.setDescripcion(rs.getString("descripcion"));
+                t.setPN(rs.getString("pn"));
+                t.setDescripcion(rs.getString("Descripcion"));
                 t.setFecha(rs.getString("fecha"));
-                t.setCantidad(rs.getInt("Cantidad"));
-                t.setPO(rs.getString("PO"));
+                t.setCantidad(rs.getInt("cantidad"));
+                t.setPO(rs.getString("po"));
                 t.setJOB(rs.getString("job"));
-                t.setEmpleado(rs.getString("nombre"));
+                t.setEmpleado(rs.getString("codigo"));
                 list.add(t);
                 }
             cn.close();

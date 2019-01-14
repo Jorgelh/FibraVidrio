@@ -24,7 +24,25 @@ public class Trabajos {
 
     public static ArrayList<CTrabajos> ListarTrabajos(String c) {
 
-        return consultaSQL("select pn.idcompo,componentes.descripcion||' '||componentes.medida as \"descripcion\",pn.cantidad from pn inner join componentes on componentes.IDCOMPO=pn.IDCOMPO where pn = '" + c + "'");
+        return consultaSQL("select pn.idcompo,decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,pn.cantidad from pn inner join componentes c1 on c1.IDCOMPO = pn.IDCOMPO join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where pn = '" + c + "'");
     }
 
     private static ArrayList<CTrabajos> consultaSQL(String sql) {
@@ -227,7 +245,31 @@ public class Trabajos {
     }
     
     public static ArrayList<CTrabajos> ListarPendiente(String c) {
-        return ListarPendientes("select componentes.descripcion||' '||componentes.medida as \"descripcion\",trabajo_partes.cantidad as \"cantidadin\",BITACORAPARTES.CANTIDAD,BITACORAPARTES.CANTIDAD-trabajo_partes.cantidad as \"cantientre\" from ingreso_trabajo inner join TRABAJO_PARTES on ingreso_trabajo.NO_TRABAJO = TRABAJO_PARTES.NO_TRABAJO join componentes on componentes.IDCOMPO = TRABAJO_PARTES.IDCOMPO join BITACORAPARTES on TRABAJO_PARTES.IDTRABAJOPARTES = BITACORAPARTES.IDTRABAJOPARTES where ingreso_trabajo.JOB ='"+c+"'");
+        return ListarPendientes("select  decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,tp.cantidad as cantidadin,\n" +
+"        b.CANTIDAD,\n" +
+"        b.CANTIDAD-tp.cantidad as cantientre \n" +
+"        from ingreso_trabajo inner join TRABAJO_PARTES tp on ingreso_trabajo.NO_TRABAJO = tp.no_trabajo \n" +
+"        join componentes c1 on c1.IDCOMPO = tp.idcompo \n" +
+"        join BITACORAPARTES b on tp.idtrabajopartes = b.IDTRABAJOPARTES \n" +
+"        join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where ingreso_trabajo.JOB ='"+c+"'");
     }
 
     private static ArrayList<CTrabajos> ListarPendientes(String sql) {
@@ -239,7 +281,7 @@ public class Trabajos {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 t = new CTrabajos();
-                t.setDescripcion(rs.getString("descripcion"));
+                t.setDescripcion(rs.getString("Descripcion"));
                 t.setCantidad1(rs.getInt("cantidad"));
                 t.setCantidad2(rs.getInt("cantidadin"));
                 t.setCantidad3(rs.getInt("cantientre"));

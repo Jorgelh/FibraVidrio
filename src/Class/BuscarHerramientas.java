@@ -26,7 +26,16 @@ public class BuscarHerramientas {
     private String invoice;
     private int nomarca;
     private int codigo;
+    private String nota;
 
+    public String getNota() {
+        return nota;
+    }
+
+    public void setNota(String nota) {
+        this.nota = nota;
+    }
+    
     public int getCodigo() {
         return codigo;
     }

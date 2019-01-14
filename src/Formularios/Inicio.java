@@ -5,6 +5,27 @@
  */
 package Formularios;
 
+import CREARPN.Componente;
+import InventarioHerramientas.HerramientaporAgotar;
+import InventarioHerramientas.ConsultaDescargasHerramienta;
+import InventarioHerramientas.ConsultaHerramientas;
+import InventarioHerramientas.DescargaHerramientas;
+import InventarioHerramientas.CargaHerramientas;
+import InventarioMateriales.Existencias;
+import InventarioMateriales.ConsultaDescargasMat;
+import InventarioMateriales.DescargaMAT;
+import TRABAJOS.HistorialEntregas;
+import TRABAJOS.ConsultaTrabajos;
+import TRABAJOS.TrabajosPendientes;
+import TRABAJOS.EntregasTrabajo;
+import TRABAJOS.IngresoTrabajos;
+import CREARPN.IngresosPN;
+import CREARPN.IngreComponentes;
+import CREARPN.EditarPNComponentes;
+import InventarioMateriales.IngresoProdutoMateriales;
+import InventarioMateriales.Test;
+import InventarioHerramientas.ingresoHerramientas;
+import TRABAJOS.ConsultaPN;
 import java.awt.Dimension;
 import java.util.Locale;
 import javax.swing.UIManager;
@@ -28,6 +49,13 @@ public class Inicio extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
+        
+        HerramientaporAgotar compo = new HerramientaporAgotar();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
     }
     
     
@@ -55,6 +83,7 @@ public class Inicio extends javax.swing.JFrame {
         Pendientes = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -81,6 +110,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu14 = new javax.swing.JMenu();
         jMenuItem31 = new javax.swing.JMenuItem();
         jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -100,7 +130,7 @@ public class Inicio extends javax.swing.JFrame {
         Panel1Layout.setHorizontalGroup(
             Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel1Layout.createSequentialGroup()
-                .addContainerGap(446, Short.MAX_VALUE)
+                .addContainerGap(597, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -224,6 +254,16 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem7);
+
+        jMenuItem19.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Search.png"))); // NOI18N
+        jMenuItem19.setText("Consulta P/N");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem19);
 
         jMenuBar1.add(jMenu3);
 
@@ -441,6 +481,16 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenu14.add(jMenuItem32);
 
+        jMenuItem18.setFont(new java.awt.Font("Eras Bold ITC", 0, 14)); // NOI18N
+        jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
+        jMenuItem18.setText("Herramienta por Agotar");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem18);
+
         jMenu7.add(jMenu14);
 
         jMenuBar1.add(jMenu7);
@@ -635,7 +685,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        IngreComponentes compo = new IngreComponentes();
+        Componente compo = new Componente();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
@@ -698,6 +748,24 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem32ActionPerformed
 
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        HerramientaporAgotar compo = new HerramientaporAgotar();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        ConsultaPN compo = new ConsultaPN();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -758,6 +826,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;

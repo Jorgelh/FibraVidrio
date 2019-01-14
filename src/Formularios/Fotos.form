@@ -70,6 +70,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jButton1" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
                                       <Component id="Fotosboton" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Component id="Fotosboton1" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -106,6 +107,8 @@
                           <Component id="jButton2" min="-2" pref="36" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Fotosboton" min="-2" pref="36" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="Fotosboton1" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -113,7 +116,7 @@
                       <Component id="adelante" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="atras" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -198,6 +201,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPNActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="Fotosboton1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Eras Bold ITC" size="9" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="FOTOS P/N TALLER"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Fotosboton1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -38,7 +38,7 @@ public class NuevoProducto {
     
      public static ArrayList<nuevo> ListarProductosDesc(String a){
         
-         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
+         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" from productosmat where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
     }
     
 
@@ -47,7 +47,7 @@ public class NuevoProducto {
      
     public static ArrayList<nuevo> ListarProductos(){
         
-         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO')||' '||grosor||' '||diametro as \"Descripcion\" from productosmat order by codigo");   
+         return ListarProductos("select codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro as \"Descripcion\" from productosmat order by codigo");   
     }
    
     
@@ -75,7 +75,7 @@ private static ArrayList<nuevo> ListarProductos(String sql) {
 
 public static ArrayList<nuevo> ProductosDescargados(String a){
         
-         return ListarProductosDescargados("select productosmat.codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" ,DESCARGASMAT.fecha,DESCARGASMAT.PN,DESCARGASMAT.TRABAJO,DESCARGASMAT.CANTIDAD from productosmat inner join INGRESOSMAT on INGRESOSMAT.CODIGO = productosmat.CODIGO join DESCARGASMAT on INGRESOSMAT.ID_INGRESO = DESCARGASMAT.ID_INGRESO where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
+         return ListarProductosDescargados("select productosmat.codigo,decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro||' '||decode(estilo,1,'SANDBLAST BOTH SIDES NEGRO',2,'SANDBLAST BOTH SIDES CLARO',3,'NATURAL NEGRO',4,'NATURAL CLARO',5,'SANDBLAST ONE SIDE NEGRO',6,'SANDBLAST ONE SIDE CLARO',7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\" ,DESCARGASMAT.fecha,DESCARGASMAT.PN,DESCARGASMAT.TRABAJO,DESCARGASMAT.CANTIDAD from productosmat inner join INGRESOSMAT on INGRESOSMAT.CODIGO = productosmat.CODIGO join DESCARGASMAT on INGRESOSMAT.ID_INGRESO = DESCARGASMAT.ID_INGRESO where upper(decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro) like upper('"+a+"%')");   
     }
 
 private static ArrayList<nuevo> ListarProductosDescargados(String sql) {
@@ -132,7 +132,9 @@ private static ArrayList<nuevo> ListarHerramientaDescargada(String sql) {
             return null;
         }
         return list;
-    }
+
+                                        }
+    
 
 
 
@@ -155,6 +157,7 @@ private static ArrayList<IngresoMat> ListarIngre(String sql) {
                 f.setPn(rs.getString("pn"));
                 f.setJob(rs.getString("job"));
                 f.setCantidad(rs.getInt("cantidad"));
+                f.setPo(rs.getString("po"));
                 list.add(f);
             }
             cn.close();
@@ -174,7 +177,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
         
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps =null;
-        ps = cn.prepareStatement("select decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBBINA REDONDO',8,'TUBO PARA BOBBINA CUADRADO',9,'TUBO PARA BOBBINA RECTANGULAR')||' '||grosor||' '||diametro \"descri\",productosmat.codigo,cantidad from productosmat where codigo ="+id);
+        ps = cn.prepareStatement("select decode(tipo_material,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'BARRA DE ALUMINIO',13,'ANGULARES DE ALUMINIO',14,'BARRA DE ACERO',15,'BARRA DE BRONCE',16,'PLANCHA DE ACERO',17,'BARRA DE TITANIUM RODS',18,'BARRA DE ACERO INOXIDABLE',19,'BARRA ROSCADA')||' '||grosor||' '||diametro \"descri\",productosmat.codigo,cantidad from productosmat where codigo ="+id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
              if (t == null){
@@ -191,6 +194,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
       return t;
               
     }
+    
     
     
     public static void IngresoMat (IngresoMat l) throws SQLException{

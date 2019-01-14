@@ -326,12 +326,13 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
   public static void IngresoHerra (BuscarHerramientas l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into M_INGRESOHERRAMIENTA values (?,?,?,?,1,?)");
+        ps = cn.prepareStatement("insert into M_INGRESOHERRAMIENTA values (?,?,?,?,1,?,?)");
         ps.setInt(1, l.getIdIngresoH());
         ps.setInt(2, l.getNo());
         ps.setInt(3, l.getNomarca());
         ps.setDate(4, new java.sql.Date(l.getFechain().getTime()));
         ps.setInt(5, l.getCantidad());
+        ps.setString(6, l.getNota());
         ps.executeUpdate();
         cn.close();
         ps.close();
