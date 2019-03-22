@@ -21,9 +21,12 @@ public class BDFIBRA {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
             //String url = "jdbc:oracle:thin:@localhost:1521:xe";
-            String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
+            /*String url = "jdbc:oracle:thin:@192.168.0.2:1521:orcl";
             String user = "fibra";
-            String password = "campana1234";
+            String password = "campana1234";*/
+            String url = "jdbc:oracle:thin:@192.168.0.16:1521:orcl";
+          String user = "fibra";
+            String password = "campana";
             cn= DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             cn=null;

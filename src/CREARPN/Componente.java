@@ -312,7 +312,7 @@ public class Componente extends javax.swing.JInternalFrame {
         jLabel4.setText("PINES");
 
         PINES.setEditable(true);
-        PINES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "TC", "NIKEL" }));
+        PINES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "TC", "NIKEL", "HAPTZ" }));
         PINES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PINESActionPerformed(evt);
@@ -323,7 +323,7 @@ public class Componente extends javax.swing.JInternalFrame {
         jLabel9.setText("No.");
 
         NO.setEditable(true);
-        NO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "16", "18", "20", "22", "24" }));
+        NO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "15", "16", "17", "18", "20", "22", "24" }));
         NO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NOActionPerformed(evt);
@@ -559,7 +559,7 @@ public class Componente extends javax.swing.JInternalFrame {
                      
              if(ID.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");} 
                  
-         }else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR")){
+         }else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO PLASTICO")){
 
              if(ID.getText().compareTo("")!=0 && ID2.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");} 
         
@@ -597,6 +597,7 @@ public class Componente extends javax.swing.JInternalFrame {
         if (PINES.getSelectedItem().toString().equalsIgnoreCase("TC")) {
              pin = 1;
         }else if(PINES.getSelectedItem().toString().equalsIgnoreCase("NIKEL")){pin = 2;}
+        else if(PINES.getSelectedItem().toString().equalsIgnoreCase("HAPTZ")){pin = 3;}
         else if(PINES.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){pin = 0;}
            ((JComponent) evt.getSource()).transferFocus();
     }//GEN-LAST:event_PINESActionPerformed

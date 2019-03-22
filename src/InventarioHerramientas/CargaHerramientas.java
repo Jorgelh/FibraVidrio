@@ -6,14 +6,14 @@
 package InventarioHerramientas;
 
 import BD.BDFIBRA;
-import BD.BDIngresosMaterial;
+//import BD.BDIngresosMaterial;
 import BD.EditComponentesHerramienta;
 import Class.BuscarHerramientas;
-import Class.DescripcionC;
-import Class.IngresoMaterial;
+//import Class.DescripcionC;
+//import Class.IngresoMaterial;
 import NOUSO.MarcaNew;
 import static Formularios.Inicio.Panel1;
-import static InventarioHerramientas.ingresoHerramientas.descripcion;
+//import static InventarioHerramientas.ingresoHerramientas.descripcion;
 //import static Formularios.ingresoHerramientas.marca;
 import java.awt.Dimension;
 import java.sql.Connection;

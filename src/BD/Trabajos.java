@@ -176,10 +176,6 @@ public class Trabajos {
         return list;
     }
     
-    
-    
-    
-    
      public static ArrayList<CTrabajos> ListarJobTodo() {
 
         return consultaTrabajo("select no_trabajo,job,PN,cantidad from INGRESO_TRABAJO");
@@ -206,13 +202,6 @@ public class Trabajos {
         }
         return list;
     }
-    
-    
-    
-    
-    
-    
-    
     
     
     public static CTrabajos BuscarTrabajo (int id)  throws SQLException{
