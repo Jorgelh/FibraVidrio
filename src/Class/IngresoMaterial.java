@@ -22,7 +22,54 @@ public class IngresoMaterial {
     public String PN;
     public String notas;
     public String Descripcion;
+    public int Codigo;
+    public String Job;
+    public int cantidadBodega;
+    public String Ubicacion;
+    public String FechaString;
 
+    public String getFechaString() {
+        return FechaString;
+    }
+
+    public void setFechaString(String FechaString) {
+        this.FechaString = FechaString;
+    }
+
+    
+    
+    public String getUbicacion() {
+        return Ubicacion;
+    }
+
+    public void setUbicacion(String Ubicacion) {
+        this.Ubicacion = Ubicacion;
+    }
+
+    public int getCantidadBodega() {
+        return cantidadBodega;
+    }
+
+    public void setCantidadBodega(int cantidadBodega) {
+        this.cantidadBodega = cantidadBodega;
+    }
+    
+    public String getJob() {
+        return Job;
+    }
+
+    public void setJob(String Job) {
+        this.Job = Job;
+    }
+    public int getCodigo() {
+        return Codigo;
+    }
+
+    public void setCodigo(int Codigo) {
+        this.Codigo = Codigo;
+    }
+    
+    
     public int getId_Material() {
         return Id_Material;
     }
@@ -94,10 +141,5 @@ public class IngresoMaterial {
     public void setDescripcion(String Descripcion) {
         this.Descripcion = Descripcion;
     }
-    
-    
-    
-    
-    
     
 }

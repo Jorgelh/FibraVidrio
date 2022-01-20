@@ -43,7 +43,7 @@ public static void guardarIngresoMaterial (IngresoMaterial l) throws SQLExceptio
 
 public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
 
-        return consultaSQL("select \n" +
+        return consultaSQL("select codigo, \n" +
 "decode(tipo_material,1,'TUBO CUADRADO',\n" +
 "                     2,'TUBO REDONDO',\n" +
 "                     3,'TUBO RECTANGULAR',\n" +
@@ -65,14 +65,13 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
 "                     4,'NATURAL CLARO',\n" +
 "                     5,'SANDBLAST ONE SIDE NEGRO',\n" +
 "                     6,'SANDBLAST ONE SIDE CLARO',\n" +
-"                     7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\",cantidad\n" +
+"                     7,'60-61',8,'O-1',9,'A-2') as \"Descripcion\",codigo,cantidad,ubicacion\n" +
 "                     from productosmat where upper(decode(productosmat.TIPO_MATERIAL,1,'TUBO CUADRADO',2,'TUBO REDONDO',3,'TUBO RECTANGULAR',4,'TUBO INSOLACION',5,'POT ROD',6,'PLANCHA',7,'TUBO PARA BOBINA REDONDO',8,'TUBO PARA BOBINA CUADRADO',9,'TUBO PARA BOBINA RECTANGULAR',10,'PLANCHA DE ALUMINIO',11,'TUBO REDONDO DE ALUMINIO',12,'TUBO CUADRADO DE ALUMINIO',13,'TUBO RECTANGULAR DE ALUMINIO',14,'ACERO',15,'BRONCE')||' '||grosor||' '||diametro) like upper('"+c+"%')");
     }
 
     private static ArrayList<IngresoMaterial> consultaSQL(String sql) {
         ArrayList<IngresoMaterial> list = new ArrayList<IngresoMaterial>();
         Connection cn = BDFIBRA.getConnection();
-
         try {
             IngresoMaterial t;
             Statement stmt = cn.createStatement();
@@ -80,17 +79,47 @@ public static ArrayList<IngresoMaterial> ListarMateriales(String c) {
             while (rs.next()) {
                 t = new IngresoMaterial();
                 t.setDescripcion(rs.getString("Descripcion"));
-                t.setCantidad(rs.getInt("Cantidad"));
+                t.setCodigo(rs.getInt("codigo"));
+                t.setCantidad(rs.getInt("cantidad"));
+                t.setUbicacion(rs.getString("ubicacion"));
                 list.add(t);
             }
             cn.close();
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR " + e);
         }
         return list;
     }
+    
+    
+public static ArrayList<IngresoMaterial> ListarMaterialesIngresados(int c) {
 
+        return consultaSQLMat("select pn,job,po,invoice,fecha,cantidad2,cantidad,nota from ingresosmat where codigo ="+c);
+    }
+
+    private static ArrayList<IngresoMaterial> consultaSQLMat(String sql) {
+        ArrayList<IngresoMaterial> list = new ArrayList<IngresoMaterial>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            IngresoMaterial t;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()){
+                t = new IngresoMaterial();
+                t.setPN(rs.getString("pn"));
+                t.setJob(rs.getString("job"));
+                t.setInvoice(rs.getString("INVOICE"));
+                t.setPO(rs.getString("Po"));
+                t.setFechaString(rs.getString("fecha"));
+                t.setCantidad(rs.getInt("cantidad2"));
+                t.setCantidadBodega(rs.getInt("cantidad"));
+                t.setNotas(rs.getString("nota"));
+                list.add(t);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"ERROR" + e);
+        }
+        return list;
+    }    
 }
-
-

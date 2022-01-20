@@ -98,12 +98,14 @@ public class Componente extends javax.swing.JInternalFrame {
     ID2.setEnabled(false);
     THK.setEnabled(false);
     OD.setEnabled(false);
+    OD2.setEnabled(false);
     LARGO.setEnabled(false);
     APLASTADO.setEnabled(false);
     PINES.setEnabled(false);
     NO.setEnabled(false);
     RADIO.setEnabled(false);
     INSERT.setEnabled(false);
+    HT.setEnabled(false);
     }
     
     public void limpiar(){
@@ -112,11 +114,13 @@ public class Componente extends javax.swing.JInternalFrame {
     ID2.setText("");
     THK.setText("");
     OD.setText("");
+    OD2.setText("");
     LARGO.setText("");
     APLASTADO.setText("");
     PINES.setSelectedItem("SELECCIONAR...");
     NO.setSelectedItem("SELECCIONAR...");
     RADIO.setText("");
+    INSERT.setSelectedItem("SELECCIONAR...");
     INSERT.setSelectedItem("SELECCIONAR...");
     
      }
@@ -147,12 +151,14 @@ public class Componente extends javax.swing.JInternalFrame {
                     m.setId2(ID2.getText());
                     m.setThk(THK.getText());
                     m.setOd(OD.getText());
+                    m.setOd2(OD2.getText());
                     m.setLargo(LARGO.getText());
                     m.setAplastado(APLASTADO.getText());
                     m.setPines(pin);
                     m.setNumero(num);
                     m.setRadio(RADIO.getText());
                     m.setInsert(inserto);
+                    m.setHT(HT.getText());
                     IngresoPartes.IngresoPart(m);
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
                     limpiar();
@@ -184,6 +190,10 @@ public class Componente extends javax.swing.JInternalFrame {
         THK = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         OD = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        OD2 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        HT = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         PINES = new javax.swing.JComboBox<>();
@@ -256,6 +266,24 @@ public class Componente extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("OD");
+
+        OD2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OD2ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setText("HT");
+
+        HT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HTActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -264,25 +292,36 @@ public class Componente extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(THK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(OD))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(101, 101, 101)
-                                .addComponent(jLabel7))
+                                .addComponent(THK, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(OD))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(101, 101, 101)
+                                        .addComponent(jLabel7))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 6, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(OD2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13)
+                            .addComponent(HT, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,7 +342,17 @@ public class Componente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(THK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(OD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(OD2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(HT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
@@ -410,7 +459,7 @@ public class Componente extends javax.swing.JInternalFrame {
         jLabel6.setText("INSERT");
 
         INSERT.setEditable(true);
-        INSERT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "CB 256-6", "CB 440-4" }));
+        INSERT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR...", "CB 256-6", "CB 440-4", "CBL 440-6", "CB 440-12", "CBL 632-8", "CBL 832-8" }));
         INSERT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 INSERTActionPerformed(evt);
@@ -531,6 +580,7 @@ public class Componente extends javax.swing.JInternalFrame {
         if (CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE REDONDO")){bloqueartodo(); ID.setEnabled(true);THK.setEnabled(true);} 
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO") ||
                 CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO PLASTICO") ||
+                CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR PLASTICO") ||
                 CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR")){bloqueartodo(); ID.setEnabled(true);ID2.setEnabled(true);THK.setEnabled(true);}
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("TAPADERA") || 
                 CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("HEADER") || 
@@ -545,7 +595,10 @@ public class Componente extends javax.swing.JInternalFrame {
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOBINA CUADRADA") ||
                 CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOBINA RECTANGULAR")){bloqueartodo(); ID.setEnabled(true);ID2.setEnabled(true);THK.setEnabled(true);}
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("INSERT")){bloqueartodo(); INSERT.setEnabled(true);} 
-        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER") || CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("DISCO")){bloqueartodo(); OD.setEnabled(true);ID.setEnabled(true);THK.setEnabled(true);} 
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER NOMEX") || CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("DISCO") || CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER KAPTON")){bloqueartodo(); OD.setEnabled(true);ID.setEnabled(true);THK.setEnabled(true);} 
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BASE PLATE") || CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE DE ALUMINIO")){bloqueartodo(); OD.setEnabled(true);OD2.setEnabled(true);THK.setEnabled(true);} 
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOTTOM PLATE")){bloqueartodo(); OD.setEnabled(true);THK.setEnabled(true);} 
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("TOP PLATE")){bloqueartodo(); OD.setEnabled(true);THK.setEnabled(true);HT.setEnabled(true);} 
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){bloqueartodo();} 
            ((JComponent) evt.getSource()).transferFocus();
         
@@ -559,7 +612,7 @@ public class Componente extends javax.swing.JInternalFrame {
                      
              if(ID.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");} 
                  
-         }else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO PLASTICO")){
+         }else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE CUADRADO PLASTICO")||CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE RECTANGULAR PLASTICO")){
 
              if(ID.getText().compareTo("")!=0 && ID2.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");} 
         
@@ -583,13 +636,15 @@ public class Componente extends javax.swing.JInternalFrame {
         }
         else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOBINA CUADRADA")||
                 CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOBINA RECTANGULAR")){ if(ID.getText().compareTo("")!=0 && ID2.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");} }
-        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("INSERT")){if(!INSERT.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}} 
-        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER") || 
-                CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("DISCO")){if(OD.getText().compareTo("")!=0 && ID.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}
-                
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("INSERT")){if(!INSERT.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}} 
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER NOMEX") || 
+                CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("DISCO")||
+                CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("WASHER KAPTON")){if(OD.getText().compareTo("")!=0 && ID.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}}
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("CASE DE ALUMINIO") || 
+                CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BASE PLATE")){if(OD.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}}
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("TOP PLATE")){if(OD.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0 && HT.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}}
+        else if(CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("BOTTOM PLATE")){if(OD.getText().compareTo("")!=0 && THK.getText().compareTo("")!=0){guardar();}else{JOptionPane.showMessageDialog(null, "LLENAR DATOS NECESARIOS...");}        
         }
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void PINESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PINESActionPerformed
@@ -618,6 +673,10 @@ public class Componente extends javax.swing.JInternalFrame {
              inserto = 0;
         }else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CB 256-6")){inserto = 1;}
         else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CB 440-4")){inserto = 2;}
+        else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CBL 440-6")){inserto = 3;}
+        else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CB 440-12")){inserto = 4;}
+        else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CBL 632-8")){inserto = 5;}
+        else if(INSERT.getSelectedItem().toString().equalsIgnoreCase("CBL 832-8")){inserto = 6;}
            ((JComponent) evt.getSource()).transferFocus();
     }//GEN-LAST:event_INSERTActionPerformed
 
@@ -646,8 +705,16 @@ public class Componente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_RADIOActionPerformed
 
     private void APLASTADOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_APLASTADOActionPerformed
-        // TODO add your handling code here:
+      ((JComponent) evt.getSource()).transferFocus();
     }//GEN-LAST:event_APLASTADOActionPerformed
+
+    private void OD2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OD2ActionPerformed
+       ((JComponent) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_OD2ActionPerformed
+
+    private void HTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HTActionPerformed
+       ((JComponent) evt.getSource()).transferFocus();
+    }//GEN-LAST:event_HTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -687,12 +754,14 @@ public class Componente extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField APLASTADO;
     private javax.swing.JComboBox<String> CombDescripcion;
+    private javax.swing.JTextField HT;
     private javax.swing.JTextField ID;
     private javax.swing.JTextField ID2;
     private javax.swing.JComboBox<String> INSERT;
     private javax.swing.JTextField LARGO;
     private javax.swing.JComboBox<String> NO;
     private javax.swing.JTextField OD;
+    private javax.swing.JTextField OD2;
     private javax.swing.JComboBox<String> PINES;
     private javax.swing.JTextField RADIO;
     private javax.swing.JTextField THK;
@@ -700,6 +769,8 @@ public class Componente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

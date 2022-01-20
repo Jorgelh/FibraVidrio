@@ -8,6 +8,9 @@ package TRABAJOS;
 import BD.BDFIBRA;
 import BD.Trabajos;
 import Class.CTrabajos;
+import static Formularios.Inicio.Panel1;
+import NOUSO.MarcaNew;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,7 +20,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-
 /**
  *
  * @author jluis
@@ -45,8 +47,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     int idcompo10;
     int cantidad10;
     int n=0;
+    int cliente;
+    int prec;
     DefaultTableModel temp;
-
     /**
      * Creates new form IngresoTrabajos
      */
@@ -54,8 +57,14 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         initComponents();
         txtpn.requestFocus();
         txtTrabajo.setEditable(false);
+        fechaingre.setEnabled(false);
+        ComboCliente.setEnabled(false);
+        txtcantidad.setEnabled(false);
+        txtrevision.setEnabled(false);
+        fechaexp.setEnabled(false);
+        txtnota.setEnabled(false);
+        addCliente.setEnabled(false);
     }
-
     public void existePN() {
 
         try {
@@ -70,6 +79,13 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 txtpn.setEditable(false);
                 txtTrabajo.setEditable(true);
                 txtTrabajo.requestFocus();
+        fechaingre.setEnabled(true);
+        ComboCliente.setEnabled(true);
+        txtcantidad.setEnabled(true);
+        txtrevision.setEnabled(true);
+        fechaexp.setEnabled(true);
+        txtnota.setEnabled(true);
+        addCliente.setEnabled(true);
                 
             } else {
                 JOptionPane.showMessageDialog(null, "El P/N no existe");
@@ -82,6 +98,36 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
 
     }
     
+    
+    public static void llenardescri(){
+            ComboCliente.removeAllItems();
+            ComboCliente.addItem("SELECCIONAR...");
+            ComboCliente.setSelectedItem("SELECCIONAR...");
+        try {
+            Connection con = BDFIBRA.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select descripcion from CLIENTES order by descripcion");
+            while (rs.next()){
+            ComboCliente.addItem((String) rs.getObject(1));
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "ERROR "+e);
+        }
+        }
+    
+    public void obteneridCliente(){
+    try {
+            Connection con = BDFIBRA.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select id_cliente from CLIENTES where descripcion ='"+ComboCliente.getSelectedItem()+"'");
+            while (rs.next()) {
+            cliente = rs.getInt("id_cliente");     
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA" + e);
+        }
+    }
+
     public void existeJob() {
 
         try {
@@ -92,16 +138,20 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             int coun = rs.getInt("JOB");
             if (coun == 0) {
                 if(txtTrabajo.getText().compareTo("")!=0 && txtcantidad.getText().compareTo("")!=0 && txtpn.getText().compareTo("")!=0
-            && txtrevision.getText().compareTo("")!=0 && fechaingre.getDate()!=null && fechaexp.getDate()!=null)
-        {
+            && txtrevision.getText().compareTo("")!=0 && fechaingre.getDate()!=null && fechaexp.getDate()!=null && !ComboCliente.getSelectedItem().equals("SELECCIONAR..."))
+        { 
             try {
             CTrabajos t = new CTrabajos();
+            obteneridCliente();
             SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yy");
             Date fec1 = fechaingre.getDate();
             Date fec2 = fechaexp.getDate();
             String fe1 = formato.format(fec1);
             String fe2 = formato.format(fec2);
              t.setJob(txtTrabajo.getText().toUpperCase());
+             t.setClienteint(cliente);
+             if(precap.getSelectedItem().equals("SI")){prec = 1;}else{prec = 2;}
+             t.setPrecap(prec);
              t.setCantidadportrabajo(Integer.parseInt(txtcantidad.getText()));
              t.setPn(txtpn.getText().toUpperCase());
              t.setRev(txtrevision.getText().toUpperCase());
@@ -119,18 +169,17 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
              t.setCantidad7(cantidad7*(Integer.parseInt(txtcantidad.getText())));t.setIdpn7(idcompo7);
              t.setCantidad8(cantidad8*(Integer.parseInt(txtcantidad.getText())));t.setIdpn8(idcompo8);
              t.setCantidad9(cantidad9*(Integer.parseInt(txtcantidad.getText())));t.setIdpn9(idcompo9);
-             t.setCantidad10(cantidad10*(Integer.parseInt(txtcantidad.getText())));t.setIdpn(idcompo10);
+             t.setCantidad10(cantidad10*(Integer.parseInt(txtcantidad.getText())));t.setIdpn10(idcompo10);
              Trabajos.GuardarTrabajo(t);
              JOptionPane.showMessageDialog(null, "Trabajo Ingresado");
              Limpiar();
              } catch (Exception e) {
-                 System.out.println("ERROR  "+e);
+                 System.out.println("ERROR"+e);
             }        
         }else {JOptionPane.showMessageDialog(null, "Llene Todos Los Campos");}
              
             } else {
                 JOptionPane.showMessageDialog(null, "El No. JOB ya existe");
-                txtTrabajo.setText("");
             }
 
         } catch (Exception e) {
@@ -138,7 +187,6 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         }
 
     }
-    
     public void obtenerID()
     {
         
@@ -153,7 +201,6 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    
     public void Limpiar()
     {
        txtTrabajo.setText("");
@@ -165,7 +212,19 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
        fechaexp.setDate(null);
        txtpn.setEditable(true);
        txtpn.requestFocus();
+       ComboCliente.removeAllItems();
+       ComboCliente.addItem("SELECCIONAR...");
+       ComboCliente.setSelectedItem("SELECCIONAR...");
+       precap.setSelectedItem("NO");
        //Bagregar.setEnabled(false);
+                txtTrabajo.setEditable(false);
+                fechaingre.setEnabled(false);
+                ComboCliente.setEnabled(false);
+                txtcantidad.setEnabled(false);
+                txtrevision.setEnabled(false);
+                fechaexp.setEnabled(false);
+                txtnota.setEnabled(false);
+                addCliente.setEnabled(false);
        
         try {
             temp = (DefaultTableModel) TablaPartes.getModel();
@@ -174,11 +233,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 temp.removeRow(i);
                 i--;
             }
-        } catch (Exception e) {
+        }catch (Exception e) {
 
         }
-               
-    
     }
        
     /**
@@ -190,6 +247,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLocaleChooser1 = new com.toedter.components.JLocaleChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtpn = new javax.swing.JTextField();
@@ -201,6 +259,8 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtnota = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
+        precap = new javax.swing.JComboBox<>();
         Bagregar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -211,7 +271,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txtcantidad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        bTrabajos = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        ComboCliente = new javax.swing.JComboBox<>();
+        addCliente = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -251,6 +313,12 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         txtnota.setRows(5);
         jScrollPane1.setViewportView(txtnota);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel9.setText("PRE-CAP");
+
+        precap.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        precap.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NO", "SI" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -261,7 +329,10 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(fechaexp, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(precap, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -271,7 +342,11 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fechaexp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(precap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,53 +397,68 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Cantidad");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Cliente");
+
+        ComboCliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR..." }));
+
+        addCliente.setText("+");
+        addCliente.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        addCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(txtrevision, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(fechaingre, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(fechaingre, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(ComboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addCliente)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fechaingre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ComboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addCliente))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(txtTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtrevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
-
-        bTrabajos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bTrabajos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Zoom.png"))); // NOI18N
-        bTrabajos.setText("Trabajos");
-        bTrabajos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bTrabajosActionPerformed(evt);
-            }
-        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/cancelar.png"))); // NOI18N
@@ -386,7 +476,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -400,8 +490,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Bagregar)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(bTrabajos, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -420,14 +509,12 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(20, 20, 20))
+                        .addGap(17, 17, 17))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(Bagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(bTrabajos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -441,7 +528,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
@@ -450,6 +537,7 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     private void txtpnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpnActionPerformed
        
         existePN();
+        llenardescri();
         
     }//GEN-LAST:event_txtpnActionPerformed
 
@@ -458,12 +546,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTrabajoActionPerformed
 
     private void BagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BagregarActionPerformed
-    existeJob();
+    
+        existeJob();
     }//GEN-LAST:event_BagregarActionPerformed
-
-    private void bTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTrabajosActionPerformed
-             
-    }//GEN-LAST:event_bTrabajosActionPerformed
 
     private void txtcantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantidadActionPerformed
        txtrevision.requestFocus();
@@ -478,6 +563,16 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
         Limpiar();
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void addClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addClienteActionPerformed
+
+        CLIENTES compo = new CLIENTES();
+        Panel1.add(compo);
+        Dimension desktopSize = Panel1.getSize();
+        Dimension FrameSize = compo.getSize();
+        compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
+        compo.show();
+    }//GEN-LAST:event_addClienteActionPerformed
 
     private void TablaComponentes() {
 
@@ -513,18 +608,28 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
          columna3.setPreferredWidth(15);
         if (list1.size() == 1) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
+            System.out.println("ID "+idcompo1+" / cantidad "+cantidad1);
         } else if (list1.size() == 2) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
+                    System.out.println("ID "+idcompo1+" / cantidad "+cantidad1);
+                    System.out.println("ID "+idcompo2+" / cantidad "+cantidad2);
         } else if (list1.size() == 3) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
             idcompo3 = (int)dato[2][0];cantidad3=(int)dato[2][2];
+            System.out.println("ID "+idcompo1+" / cantidad "+cantidad1);
+                    System.out.println("ID "+idcompo2+" / cantidad "+cantidad2);
+                    System.out.println("ID "+idcompo3+" / cantidad "+cantidad3);
         } else if (list1.size() == 4) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
             idcompo3 = (int)dato[2][0];cantidad3=(int)dato[2][2];
             idcompo4 = (int)dato[3][0];cantidad4=(int)dato[3][2];
+                    System.out.println("ID "+idcompo1+" / cantidad "+cantidad1);
+                    System.out.println("ID "+idcompo2+" / cantidad "+cantidad2);
+                    System.out.println("ID "+idcompo3+" / cantidad "+cantidad3);
+                    System.out.println("ID "+idcompo4+" / cantidad "+cantidad4);
         } else if (list1.size() == 5) {
             idcompo1 = (int)dato[0][0];cantidad1=(int)dato[0][2];
             idcompo2 = (int)dato[1][0];cantidad2=(int)dato[1][2];
@@ -623,8 +728,9 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Bagregar;
+    private static javax.swing.JComboBox<String> ComboCliente;
     private javax.swing.JTable TablaPartes;
-    private javax.swing.JButton bTrabajos;
+    private javax.swing.JButton addCliente;
     private com.toedter.calendar.JDateChooser fechaexp;
     private com.toedter.calendar.JDateChooser fechaingre;
     private javax.swing.JButton jButton3;
@@ -635,11 +741,15 @@ public class IngresoTrabajos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private com.toedter.components.JLocaleChooser jLocaleChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox<String> precap;
     private javax.swing.JTextField txtTrabajo;
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextArea txtnota;

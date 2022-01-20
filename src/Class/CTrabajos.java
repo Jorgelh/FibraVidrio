@@ -14,7 +14,7 @@ import java.util.Date;
 public class CTrabajos {
     
     public String descripcion;
-    public int    cantidadporpieza;
+    public int cantidadporpieza;
     public String NoTabajo;
     public String pn;
     public String job;
@@ -50,7 +50,34 @@ public class CTrabajos {
     public String f1;
     public String f2;
     public String nota;
+    public String cliente;
+    public int Clienteint;
+    public int precap;
 
+    public int getPrecap() {
+        return precap;
+    }
+
+    public void setPrecap(int precap) {
+        this.precap = precap;
+    }
+   
+    public int getClienteint() {
+        return Clienteint;
+    }
+
+    public void setClienteint(int Clienteint) {
+        this.Clienteint = Clienteint;
+    }
+   
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+    
     public String getNota() {
         return nota;
     }
@@ -84,8 +111,6 @@ public class CTrabajos {
         this.fechaexp = fechaexp;
     }
     
-    
-
     public int getIdpn1() {
         return idpn1;
     }
@@ -246,7 +271,6 @@ public class CTrabajos {
         this.cantidad10 = cantidad10;
     }
     
-    
     public String getDescripcion() {
         return descripcion;
     }
@@ -350,13 +374,5 @@ public class CTrabajos {
     public void setIdcompo(int idcompo) {
         this.idcompo = idcompo;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

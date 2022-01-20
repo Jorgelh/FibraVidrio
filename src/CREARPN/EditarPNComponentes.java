@@ -27,6 +27,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
     String accion = "";
     DefaultTableModel temp;
     int idcomponente;
+    int ID_PN;
 
     /**
      * Creates new form Descri
@@ -39,16 +40,18 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
         txtNota.setEditable(false);
-        try {
+        
+        
+        /*try {
             Connection con = BDFIBRA.getConnection();
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select descripcion||' '||medida from COMPONENTES order by descripcion");
             while (rs.next()){
             CombDescripcion.addItem((String) rs.getObject(1));
             }
-     
+            CombDescripcion.addItem("SELECCIONAR...");
         } catch (Exception e){
-        }
+        }*/
     }
 
   /*  public void obtenerUltimoID(){
@@ -68,18 +71,90 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             System.out.println(error);
         }
     }*/
+    
+    public void llenacomponentes(){
+    
+    try {
+            Connection con = BDFIBRA.getConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,"+ 
+"                          20,c2.descripcion,"+
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,"+
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,"+
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,"+
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK ) as Descripcion,c1.idcompo2 \n" +
+"                          from componentes c1 inner join componentes2 c2 on c1.idcompo2 = c2.idcompo2");            
+                while (rs.next()){
+                CombDescripcion.addItem((String) rs.getObject(1));
+            }
+                CombDescripcion.addItem("SELECCIONAR...");
+                CombDescripcion.setSelectedItem("SELECCIONAR...");
+               
+        } catch (Exception e) {
+        }
+    }
+    
+    
     public  void obteneridcompo() {
-      
+       if(!CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR...")){
         try {
             Connection con = BDFIBRA.getConnection();
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("select idcompo from COMPONENTES where DESCRIPCION||' '||MEDIDA = '" + CombDescripcion.getSelectedItem()+"'");
+            ResultSet rs = stmt.executeQuery("select idcompo from componentes c1 inner join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where \n" +
+"                          decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,"+ 
+"                          20,c2.descripcion,"+
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,"+
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,"+
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,"+
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) = '" + CombDescripcion.getSelectedItem()+"'");
             rs.next();
+
             idcomponente = rs.getInt("idcompo");
+            txtNo.setText(String.valueOf(idcomponente));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR POR QUE HAY ALGO MAL"+e);
         }
-        
+    }
     }
    public void cleartablacomponentes() {
 
@@ -100,6 +175,8 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
        txtNo.setText("");
        txtCantidad.setText("");
        txtNota.setText("");
+       CombDescripcion.setSelectedItem("SELECCIONAR...");
+       Tabla.setEnabled(true);
     }
     
     public void activartexto(boolean b){
@@ -154,6 +231,9 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         Tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                TablaMouseEntered(evt);
             }
         });
         jScrollPane1.setViewportView(Tabla);
@@ -214,7 +294,11 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         jLabel3.setText("Cantidad");
 
         CombDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        CombDescripcion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        CombDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CombDescripcionActionPerformed(evt);
+            }
+        });
 
         txtNota.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNota.addActionListener(new java.awt.event.ActionListener() {
@@ -323,10 +407,10 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 568, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 138, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -377,6 +461,8 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         txtCantidad.setEditable(true);
         txtNota.setEditable(true);
         CombDescripcion.requestFocus();
+         Tabla.clearSelection();
+         Tabla.setEnabled(false);
         
     }//GEN-LAST:event_BNuevoActionPerformed
 
@@ -402,10 +488,10 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 }
                 limpiarCajaTexto();
                 BusquedaComponentes();
-                BGuardar.setEnabled(false);
+                //BGuardar.setEnabled(false);
                 BNuevo.requestFocus();
                 BNuevo.setEnabled(true);
-                CombDescripcion.setSelectedItem("Seleccionar...");
+                CombDescripcion.setSelectedItem("SELECCIONAR...");
                 txtNo.setText("");
                 CombDescripcion.setEnabled(false);
                 txtCantidad.setEditable(false);
@@ -415,13 +501,14 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             }
         }
         if(accion.equalsIgnoreCase("Actualizar")){
-            DescripcionC p;
+            //DescripcionC p;
+            if(txtCantidad.getText().compareTo("")!=0 && !CombDescripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
             try {
-                obteneridcompo();
-                p = DBDescripcion.buscarEditCompo(Integer.parseInt(txtNo.getText()));
+                 DescripcionC p = new DescripcionC();
                 p.setIdcompo(idcomponente);
                 p.setCantidad(Integer.parseInt(txtCantidad.getText()));
                 p.setNota(txtNota.getText());
+                p.setId_pn(ID_PN);
                 DBDescripcion.actualizarPNComponente(p);
                 JOptionPane.showMessageDialog(null, "Datos Actualizados");
                 limpiarCajaTexto();
@@ -432,15 +519,15 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
                 txtCantidad.setEditable(false);
                 txtNota.setEditable(false);
                 BNuevo.requestFocus();
-                CombDescripcion.setSelectedItem("Seleccionar...");
+                CombDescripcion.setSelectedItem("SELECCIONAR...");
                 txtNo.setText("");
 
             } catch (Exception e) {
-                 JOptionPane.showMessageDialog(null, "Error BD: " + e.getMessage());
+                 JOptionPane.showMessageDialog(null, "Error BD:" + e.getMessage());
             }
         }
         
-        
+        }
         
         
     }//GEN-LAST:event_BGuardarActionPerformed
@@ -469,29 +556,37 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
         txtNota.setEditable(false);
-        CombDescripcion.setSelectedItem("Seleccionar...");
+        CombDescripcion.setSelectedItem("SELECCIONAR...");
         txtNo.setText("");
         Tabla.requestFocus();
+        Tabla.setEnabled(true);
+        accion= "";
+        Tabla.clearSelection();
+        
+        
         
     }//GEN-LAST:event_BCancelarActionPerformed
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
-        
         BEditar.setEnabled(true);
-        BGuardar.setEnabled(false);
+        if(accion == "Guardar"){
+        BGuardar.setEnabled(true);
+        BEditar.setEnabled(false);
+        }else{BGuardar.setEnabled(false);}
         try {
-            DescripcionC m = DBDescripcion.buscarEditCompo(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(),0))));
-            txtNo.setText(String.valueOf(m.getId()));
-            CombDescripcion.setSelectedItem(m.getDescripcion());
-            txtCantidad.setText(String.valueOf(m.getCantidad()));
-            txtNota.setText(m.getNota());
+           DescripcionC m = DBDescripcion.buscarEditCompo(Integer.parseInt(String.valueOf(Tabla.getModel().getValueAt(Tabla.getSelectedRow(),0))));
+           txtNo.setText(String.valueOf(m.getIdcompo()));
+           CombDescripcion.setSelectedItem(m.getDescripcion());
+           txtCantidad.setText(String.valueOf(m.getCantidad()));
+           txtNota.setText(m.getNota());
+           ID_PN = m.getId_pn();
         } catch (Exception e) {
-            System.out.println("Error de Seleccion--"+e);
+            System.out.println("Error de Seleccion = "+e);
         }
     }//GEN-LAST:event_TablaMouseClicked
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        BGuardar.requestFocus();
+        txtNota.requestFocus();
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void PNKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PNKeyReleased
@@ -507,13 +602,16 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             if (pn1 > 0) {
                  BusquedaComponentes();
                  PN.setEditable(false);
+                 //CombDescripcion.setEnabled(true);
+                 llenacomponentes();
+                 limpiarCajaTexto();
             } else {
                 JOptionPane.showMessageDialog(null, "EL P/N NO EXISTE...");
                 PN.requestFocus();
                 return;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMINISTRADOR DEL SISTEMA"+e);
+            JOptionPane.showMessageDialog(null, "ERROR CONTACTE AL ADMIN POR ERRORES"+e);
         }
     }//GEN-LAST:event_PNActionPerformed
 
@@ -526,7 +624,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         CombDescripcion.setEnabled(false);
         txtCantidad.setEditable(false);
         txtNota.setEditable(false);
-        CombDescripcion.setSelectedItem("Seleccionar...");
+        CombDescripcion.setSelectedItem("SELECCIONAR...");
         txtNo.setText("");
         PN.setText("");
         cleartablacomponentes();
@@ -537,8 +635,17 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotaActionPerformed
-        // TODO add your handling code here:
+       BGuardar.requestFocus();
     }//GEN-LAST:event_txtNotaActionPerformed
+
+    private void CombDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CombDescripcionActionPerformed
+       obteneridcompo();
+       txtCantidad.requestFocus();
+    }//GEN-LAST:event_CombDescripcionActionPerformed
+
+    private void TablaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablaMouseEntered
     private void BusquedaComponentes(){
         ArrayList<DescripcionC> result = DBDescripcion.ListarComponentes(PN.getText());
         recargarTable(result);
@@ -548,7 +655,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         int i = 0;
         for (DescripcionC f : list)
         {
-            datos[i][0] = f.getId();
+            datos[i][0] = f.getId_pn();
             datos[i][1] = f.getDescripcion();
             datos[i][2] = f.getCantidad();
             i++;
@@ -556,7 +663,7 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
                 datos,
                 new String[]{
-                    "No.","Descripcion","Cantidad"
+                    "ID P/N","DESCRIPCION","CANTIDAD"
                 }) {
                      @Override
             public boolean isCellEditable(int row, int column) {
@@ -564,11 +671,11 @@ public class EditarPNComponentes extends javax.swing.JInternalFrame {
             }
         });
         
-        TableColumn columna1 = Tabla.getColumn("No.");
+        TableColumn columna1 = Tabla.getColumn("ID P/N");
         columna1.setPreferredWidth(0);
-        TableColumn columna2 = Tabla.getColumn("Descripcion");
+        TableColumn columna2 = Tabla.getColumn("DESCRIPCION");
         columna2.setPreferredWidth(200);
-        TableColumn columna3 = Tabla.getColumn("Cantidad");
+        TableColumn columna3 = Tabla.getColumn("CANTIDAD");
         columna3.setPreferredWidth(200);
     }
     /**

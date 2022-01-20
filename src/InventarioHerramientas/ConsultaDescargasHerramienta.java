@@ -145,9 +145,7 @@ public class ConsultaDescargasHerramienta extends javax.swing.JInternalFrame {
         TableColumn columna2 = Tabla.getColumn("FECHA");
         columna2.setPreferredWidth(0);
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -184,12 +182,6 @@ public class ConsultaDescargasHerramienta extends javax.swing.JInternalFrame {
         });
     }
 
-    
-    
-    
-    
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField descripcion;

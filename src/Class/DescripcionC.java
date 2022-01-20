@@ -37,7 +37,16 @@ public class DescripcionC {
     public int cantidad;
     public int idcompo;
     public String nota;
+    public int id_pn;
 
+    public int getId_pn() {
+        return id_pn;
+    }
+
+    public void setId_pn(int id_pn) {
+        this.id_pn = id_pn;
+    }
+    
     public String getNota() {
         return nota;
     }

@@ -22,7 +22,27 @@ public class IngresoMat {
     String nota;
     int cantidad;
     int idDesc;
+    String invoice;
+    String cliente;
 
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+    
+    
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+    
     public int getIdDesc() {
         return idDesc;
     }
@@ -30,9 +50,7 @@ public class IngresoMat {
     public void setIdDesc(int idDesc) {
         this.idDesc = idDesc;
     }
-    
-    
-
+   
     public int getIDIngreso() {
         return IDIngreso;
     }
@@ -96,8 +114,4 @@ public class IngresoMat {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
-    
-    
 }

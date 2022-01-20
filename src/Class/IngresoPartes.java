@@ -20,6 +20,7 @@ public class IngresoPartes {
     private String id;
     private String id2;
     private String od;
+    private String od2;
     private String thk;
     private int pines;
     private int numero;
@@ -27,7 +28,24 @@ public class IngresoPartes {
     private String aplastado;
     private String radio;
     private int insert;
+    private String HT;
 
+    public String getHT() {
+        return HT;
+    }
+
+    public void setHT(String HT) {
+        this.HT = HT;
+    }
+ 
+    public String getOd2() {
+        return od2;
+    }
+
+    public void setOd2(String od2) {
+        this.od2 = od2;
+    }
+    
     public String getId() {
         return id;
     }
@@ -83,10 +101,7 @@ public class IngresoPartes {
     public void setRadio(String radio) {
         this.radio = radio;
     }
-
     
-    
-
     public int getIdcompo() {
         return idcompo;
     }
@@ -130,7 +145,7 @@ public class IngresoPartes {
     public static void IngresoPart (IngresoPartes l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into componentes values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into componentes values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getIdcompo());
         ps.setInt(2, l.getDescripcion());
         ps.setString(3, l.getId());
@@ -143,6 +158,8 @@ public class IngresoPartes {
         ps.setString(10, l.getRadio());
         ps.setInt(11, l.getInsert());
         ps.setString(12, l.getThk());
+        ps.setString(13, l.getOd2());
+        ps.setString(14, l.getHT());
         ps.executeUpdate();
         cn.close();
         ps.close();

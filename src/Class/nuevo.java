@@ -23,6 +23,26 @@ public class nuevo {
   String Fecha;
   String trabajo;
   String nota;
+  String Ubicacion;
+  String PO;
+
+    public String getPO() {
+        return PO;
+    }
+
+    public void setPO(String PO) {
+        this.PO = PO;
+    }
+
+    public String getUbicacion() {
+        return Ubicacion;
+    }
+
+    public void setUbicacion(String Ubicacion) {
+        this.Ubicacion = Ubicacion;
+    }
+  
+  
 
     public String getNota() {
         return nota;

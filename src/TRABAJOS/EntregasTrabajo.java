@@ -162,7 +162,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2"
+                "NO", "JOB"
             }
         ));
         job.setFocusable(false);
@@ -662,7 +662,7 @@ public class EntregasTrabajo extends javax.swing.JInternalFrame {
         int f = 0;
         for (CEntregas a : list1) {
             dato[f][0] = a.getIdtrabajopartes();
-            dato[f][1] = a.getDescripcion()+" "+a.getMedida();
+            dato[f][1] = a.getDescripcion();//+" "+a.getMedida();
             dato[f][2] = a.getCantidad();
             f++;
         }

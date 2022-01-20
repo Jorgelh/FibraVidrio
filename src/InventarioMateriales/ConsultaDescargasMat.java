@@ -78,7 +78,7 @@ public class ConsultaDescargasMat extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(68, 68, 68)
                 .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(680, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
@@ -91,18 +91,16 @@ public class ConsultaDescargasMat extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +132,7 @@ public class ConsultaDescargasMat extends javax.swing.JInternalFrame {
     }
     
     public void recargarTablaPro(ArrayList<nuevo> list) {
-        Object[][] datos = new Object[list.size()][6];
+        Object[][] datos = new Object[list.size()][8];
         int i = 0;
         for (nuevo f : list)
         {
@@ -142,14 +140,16 @@ public class ConsultaDescargasMat extends javax.swing.JInternalFrame {
             datos[i][1] = f.getDescripcion();
             datos[i][2] = f.getPN();
             datos[i][3] = f.getTrabajo();
-            datos[i][4] = f.getCantidad();
-            datos[i][5] = f.getFecha();
+            datos[i][4] = f.getPO();
+            datos[i][5] = f.getCantidad();
+            datos[i][6] = f.getFecha();
+            datos[i][7] = f.getNota();
             i++;
         }
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
                 datos,
                 new String[]{
-                    "CODIGO","DESCRIPCION","P/N","Trabajo","CANTIDAD","FECHA"
+                    "CODIGO","DESCRIPCION","P/N","TRABAJO","P.O","CANTIDAD","FECHA","NOTA"
                 }) {
                      @Override
             public boolean isCellEditable(int row, int column) {
@@ -160,7 +160,17 @@ public class ConsultaDescargasMat extends javax.swing.JInternalFrame {
         TableColumn columna1 = Tabla.getColumn("CODIGO");
         columna1.setPreferredWidth(0);
         TableColumn columna2 = Tabla.getColumn("DESCRIPCION");
-        columna2.setPreferredWidth(400);
+        columna2.setPreferredWidth(200);
+        TableColumn columna3 = Tabla.getColumn("NOTA");
+        columna3.setPreferredWidth(250);
+        TableColumn columna4 = Tabla.getColumn("P/N");
+        columna4.setPreferredWidth(40);
+        TableColumn columna5 = Tabla.getColumn("TRABAJO");
+        columna5.setPreferredWidth(40);
+        TableColumn columna6 = Tabla.getColumn("FECHA");
+        columna6.setPreferredWidth(40);
+        TableColumn columna7 = Tabla.getColumn("CANTIDAD");
+        columna7.setPreferredWidth(0);
     }
     
     

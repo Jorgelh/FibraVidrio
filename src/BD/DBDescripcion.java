@@ -69,10 +69,11 @@ public abstract class DBDescripcion {
     public static boolean actualizarPNComponente(DescripcionC f) throws SQLException {
         Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("update PN set idcompo=?, cantidad=?, nota=? where id_pn =" + f.getId());
+        ps = cnn.prepareStatement("update PN set idcompo=?, cantidad=?, nota=? where id_pn =?");
         ps.setInt(1, f.getIdcompo());
         ps.setInt(2, f.getCantidad());
         ps.setString(3, f.getNota());
+        ps.setInt(4, f.getId_pn());
         int rowsUpdated = ps.executeUpdate();
         cnn.close();
         ps.close();
@@ -136,30 +137,61 @@ public abstract class DBDescripcion {
     
        
     
-    public static DescripcionC buscarEditCompo(int id) throws SQLException {
-      return buscarEditCompo(id, null);
+    public static DescripcionC buscarEditCompo(int id1) throws SQLException {
+      return buscarEditCompo(id1, null);
     }
     public static DescripcionC buscarEditCompo(int id, DescripcionC p) throws SQLException {
         Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select PN.NOTA,PN.IDCOMPO,componentes.descripcion||' '||COMPONENTES.MEDIDA as \"compo\",cantidad from PN inner join COMPONENTES on PN.IDCOMPO = COMPONENTES.IDCOMPO where PN.ID_PN=?");
-        ps.setInt(1, id);
+        try {
+        ps = cnn.prepareStatement("select p.id_pn,p.idcompo, decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,"+ 
+"                          20,c2.descripcion,"+
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,"+
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,"+
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,"+
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,p.cantidad,p.nota\n" +
+"                          from componentes c1 inner join componentes2 c2 on c1.idcompo2 = c2.idcompo2 join pn p on c1.idcompo = p.idcompo where p.id_pn ="+id);
+        //ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             if (p == null) {
                 p = new DescripcionC(){
                 };
             }
-            p.setId(id);
-            p.setDescripcion(rs.getString("compo"));
-            p.setCantidad(rs.getInt("cantidad"));
             p.setIdcompo(rs.getInt("idcompo"));
-            p.setNota(rs.getString("NOTA"));
-            
+            p.setDescripcion(rs.getString("Descripcion"));
+            p.setCantidad(rs.getInt("cantidad"));
+            p.setNota(rs.getString("nota"));
+            p.setId_pn(rs.getInt("id_pn"));
+        }
+        } catch (Exception e) {
+            System.out.println("ERRRO MIERDA "+e);
         }
         cnn.close();
         ps.close();
         return p;
+        
+        
     }
     
     
@@ -225,10 +257,35 @@ private static ArrayList<DescripcionC> consultarComponentes(String sql) {
 
 public static ArrayList<DescripcionC> ListarComponentes(String a){
         
-         return Componentes("select PN.ID_PN,componentes.descripcion||''||COMPONENTES.MEDIDA,cantidad from PN inner join COMPONENTES on PN.IDCOMPO = COMPONENTES.IDCOMPO where PN = '"+a+"'");   
+         return Componentes("select p.id_pn,c1.idcompo, decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,"+ 
+"                          20,c2.descripcion,"+
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,"+
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,"+
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,"+
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,p.cantidad\n" +
+"                          from componentes c1 inner join componentes2 c2 on c1.idcompo2 = c2.idcompo2 join pn p on c1.idcompo = p.idcompo where p.pn = '"+a+"'");   
     }
-   
-    
+
 private static ArrayList<DescripcionC> Componentes(String sql) {
         ArrayList<DescripcionC> list = new ArrayList<DescripcionC>();
         Connection cn = BDFIBRA.getConnection();
@@ -238,9 +295,150 @@ private static ArrayList<DescripcionC> Componentes(String sql) {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 f = new DescripcionC();
-                f.setId(rs.getInt("ID_PN"));
-                f.setDescripcion(rs.getString("componentes.descripcion||''||COMPONENTES.MEDIDA"));
+                f.setId_pn(rs.getInt("id_pn"));
+                f.setIdcompo(rs.getInt("idcompo"));
+                f.setDescripcion(rs.getString("descripcion"));
                 f.setCantidad(rs.getInt("CANTIDAD"));
+                list.add(f);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+   
+
+public static ArrayList<DescripcionC> ListarComponentesNombre(String a){
+        
+         return ComponentesNombre(" select decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          20,c2.descripcion,\n" +
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,\n" +
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,\n" +
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,\n" +
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,\n" +
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,\n" +
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion\n" +
+"                          from componentes c1 inner join componentes2 c2 on c1.idcompo2 = c2.idcompo2\n" +
+"                          where upper(decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          20,c2.descripcion,\n" +
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,\n" +
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,\n" +
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,\n" +
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,\n" +
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,\n" +
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK)) like upper('"+a+"%')");   
+    }
+
+    
+private static ArrayList<DescripcionC> ComponentesNombre(String a) {
+        ArrayList<DescripcionC> list = new ArrayList<DescripcionC>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            DescripcionC s;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(a);
+            while (rs.next()) {
+                s = new DescripcionC();
+                s.setDescripcion(rs.getString("descripcion"));
+                list.add(s);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }
+
+
+
+public static ArrayList<DescripcionC> ListarComponentesExistentes(String c){
+        
+         return ComponentesExistentes("select tp.idcompo,tp.idtrabajopartes,decode(c1.idcompo2,1,c2.descripcion||' ID '||c1.ID||' THK '|| c1.THK,\n" +
+"                          2,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          3,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          4,c2.descripcion||' THK '||c1.THK,\n" +
+"                          5,c2.descripcion||' THK '||c1.THK,\n" +
+"                          6,c2.descripcion||' ID '||c1.ID||' LARGO '||c1.largo||' THK '||c1.THK,\n" +
+"                          7,c2.descripcion||' '||decode(c1.pinesmat,1,'TC',2,'NIKEL')||' #'||c1.nume||' LARGO '||c1.largo||' APLASTADO '||c1.aplastado,\n" +
+"                          8,c2.descripcion||' RADIO '||c1.radio,\n" +
+"                          9,c2.descripcion||' ID '||c1.ID||' THK '||c1.THK,\n" +
+"                          10,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          11,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,\n" +
+"                          12,c2.descripcion||' '||decode(c1.inserto,1,'CB252-6',2,'CB440-4',3,'CBL 440-6',4,'CB 440-12',5,'CBL 632-8',6,'CBL 832-8'),\n" +
+"                          13,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          14,c2.descripcion||' OD '||c1.od||' ID '||c1.id||' THK '||c1.thk,\n" +
+"                          15,c2.descripcion||' THK '||c1.thk,\n" +
+"                          16,c2.descripcion||' THK '||c1.thk,\n" +
+"                          17,c2.descripcion||' THK '||c1.thk,\n" +
+"                          18,c2.descripcion||' THK '||c1.thk,\n" +
+"                          19,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK,"+ 
+"                          20,c2.descripcion,"+
+"                          21,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          22,c2.descripcion||' OD '||c1.OD||' OD '||c1.OD2||' THK '||c1.THK,"+
+"                          23,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK||' HT '||c1.ht,"+
+"                          24,c2.descripcion||' OD '||c1.OD||' THK '||c1.THK,"+
+"                          25,c2.descripcion||' ID '||c1.id||' OD '||c1.od||' THK '||c1.thk,"+
+"                          26,c2.descripcion||' ID '||c1.ID||' ID '||c1.ID2||' THK '||c1.THK) as Descripcion,tp.cantidad as cantidadin,\n" +
+"        b.CANTIDAD\n" +
+"        from ingreso_trabajo inner join TRABAJO_PARTES tp on ingreso_trabajo.NO_TRABAJO = tp.no_trabajo \n" +
+"        join componentes c1 on c1.IDCOMPO = tp.idcompo \n" +
+"        join BITACORAPARTES b on tp.idtrabajopartes = b.IDTRABAJOPARTES \n" +
+"        join componentes2 c2 on c1.idcompo2 = c2.idcompo2 where ingreso_trabajo.JOB ='"+c+"'");   
+    }
+   
+    
+private static ArrayList<DescripcionC> ComponentesExistentes(String sql) {
+        ArrayList<DescripcionC> list = new ArrayList<DescripcionC>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            DescripcionC f;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                f = new DescripcionC();
+                f.setId_pn(rs.getInt("idtrabajopartes"));
+                f.setDescripcion(rs.getString("descripcion"));
+                f.setCantidad(rs.getInt("CANTIDAD"));
+                f.setIdcompo(rs.getInt("idcompo"));
                 list.add(f);
             }
             cn.close();
@@ -277,8 +475,5 @@ private static ArrayList<DescripcionC> consultarPN(String sql) {
         }
         return list;
     }
-
-
-
-    
+ 
 }
