@@ -215,7 +215,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
     public static void IngresoDesc (IngresoMat l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into DESCARGASMAT values (?,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into DESCARGASMAT values (?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getIdDesc());
         ps.setInt(2, l.getIDIngreso());
         ps.setDate(3, new java.sql.Date(l.getFecha().getTime()));
@@ -224,6 +224,7 @@ public static nuevo Buscarpro (int id)  throws SQLException{
         ps.setString(6, l.getPn());
         ps.setString(7, l.getNota());
         ps.setString(8, l.getCliente());
+        ps.setInt(9, l.getEntregadoa());
         ps.executeUpdate();
         cn.close();
         ps.close();

@@ -34,6 +34,27 @@ public class ProductosTaller {
     private int conta;
     private String cliente;
     int departamento;
+    int procedencia;
+    int entregado;
+
+    public int getEntregado() {
+        return entregado;
+    }
+
+    public void setEntregado(int entregado) {
+        this.entregado = entregado;
+    }
+    
+
+    public int getProcedencia() {
+        return procedencia;
+    }
+
+    public void setProcedencia(int procedencia) {
+        this.procedencia = procedencia;
+    }
+    
+    
 
     public int getDepartamento() {
         return departamento;

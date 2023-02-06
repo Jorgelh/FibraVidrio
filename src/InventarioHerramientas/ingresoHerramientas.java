@@ -41,8 +41,6 @@ int n=0;
      */
     public ingresoHerramientas() {
         initComponents();
-        Calendar c2 = new GregorianCalendar();
-        fechaIngreso.setCalendar(c2);
         llenarCombo1();
         llenarCombo2();
         llenarCombo3();
@@ -189,7 +187,7 @@ int n=0;
         medida.setSelectedItem("Seleccionar...");
         descripcion.setSelectedItem("Seleccionar...");
         //marca.setSelectedItem("Sin Marca...");
-        fechaIngreso.setDate(null);
+        catalogo.setText("");
         //marca.setSelectedItem("");
         filos.setSelectedItem("");
       //  cantidad.setText("");
@@ -197,8 +195,7 @@ int n=0;
         no_descrip = 0;
         no_material = 0;
         no_medida = 0;
-        Calendar c2 = new GregorianCalendar();
-        fechaIngreso.setCalendar(c2);
+       
     }
     
     
@@ -225,11 +222,11 @@ int n=0;
         filos = new javax.swing.JComboBox<>();
         descripcion = new javax.swing.JComboBox<>();
         BTdescripcion = new javax.swing.JButton();
-        fechaIngreso = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         nota = new javax.swing.JTextArea();
+        catalogo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Guardar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
@@ -299,6 +296,7 @@ int n=0;
             }
         });
 
+        filos.setEditable(true);
         filos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "2", "3", "4", "6", "8" }));
         filos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -343,7 +341,7 @@ int n=0;
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Fecha Ingreso");
+        jLabel4.setText("No. Catalogo");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Notas");
@@ -351,6 +349,8 @@ int n=0;
         nota.setColumns(20);
         nota.setRows(5);
         jScrollPane1.setViewportView(nota);
+
+        catalogo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -371,7 +371,6 @@ int n=0;
                         .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BTdescripcion))
-                    .addComponent(fechaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -383,7 +382,8 @@ int n=0;
                                 .addComponent(filos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4)
                             .addComponent(jLabel7)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(catalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -415,7 +415,7 @@ int n=0;
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(catalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -510,20 +510,18 @@ int n=0;
         
             obtenerultimoid();
             obtenerID();
-            if(fechaIngreso.getDate() != null && !material.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !medida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !descripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
+            if(!material.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !medida.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...") && !descripcion.getSelectedItem().toString().equalsIgnoreCase("Seleccionar...")){
         try {
             componentes m = new componentes();
             m.setNo(n+1);
             m.setTipoMaterial(no_material);
             m.setMedida(no_medida);
             m.setDescri(no_descrip);
-            m.setFecha(fechaIngreso.getDate());
             m.setMarca(no_marca);
-           // m.setCantidad(Integer.parseInt(cantidad.getText()));
             m.setFilos((String)filos.getSelectedItem());
             m.setComentantario(nota.getText());
-            m.setPo(null);
-            m.setCodigoCatalogo(null);
+            m.setCodigoCatalogo(catalogo.getText());
+            //m.setPo(null);
             BDTaller.guardarIngresoHerramienta(m);
             JOptionPane.showMessageDialog(null, "Ingreso Agregado...");
             limpiar();
@@ -656,8 +654,8 @@ int n=0;
     private javax.swing.JButton BTmedida;
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
+    private javax.swing.JTextField catalogo;
     public static javax.swing.JComboBox<String> descripcion;
-    private com.toedter.calendar.JDateChooser fechaIngreso;
     private javax.swing.JComboBox<String> filos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

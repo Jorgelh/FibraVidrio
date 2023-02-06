@@ -20,18 +20,15 @@ public class BDTaller {
     public static void guardarIngresoHerramienta (componentes l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into M_DESCRIPCION values (?,?,?,?,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into M_DESCRIPCION(no,no_tipo,no_medida,no_descripcion,no_marca,filos,notas,nocatalogo) values (?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getNo());
         ps.setInt(2, l.getTipoMaterial());
         ps.setInt(3, l.getMedida());
         ps.setInt(4, l.getDescri());
         ps.setInt(5, l.getMarca());
         ps.setString(6, l.getFilos());
-        ps.setInt(7, l.getCantidad());
-        ps.setDate(8, new java.sql.Date(l.getFecha().getTime()));
-        ps.setString(9, l.getPo());
-        ps.setString(10, l.getComentantario());
-        ps.setString(11, l.getCodigoCatalogo());
+        ps.setString(7, l.getComentantario());
+        ps.setString(8, l.getCodigoCatalogo());
         ps.executeUpdate();
         cn.close();
         ps.close();

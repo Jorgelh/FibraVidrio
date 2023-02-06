@@ -27,6 +27,36 @@ public class BuscarHerramientas {
     private int nomarca;
     private int codigo;
     private String nota;
+    private int procedencia;
+    private String fechaS;
+    private int idDescaergaH;
+
+    public int getIdDescaergaH() {
+        return idDescaergaH;
+    }
+
+    public void setIdDescaergaH(int idDescaergaH) {
+        this.idDescaergaH = idDescaergaH;
+    }
+
+    public String getFechaS() {
+        return fechaS;
+    }
+
+    public void setFechaS(String fechaS) {
+        this.fechaS = fechaS;
+    }
+    
+    public int getProcedencia() {
+        return procedencia;
+    }
+    
+
+    public void setProcedencia(int procedencia) {
+        this.procedencia = procedencia;
+    }
+    
+    
 
     public String getNota() {
         return nota;

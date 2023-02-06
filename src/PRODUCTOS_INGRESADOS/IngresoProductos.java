@@ -247,6 +247,7 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         PRECIO = new javax.swing.JTextField();
         contable = new javax.swing.JCheckBox();
+        NACIONAL = new javax.swing.JCheckBox();
         jPanel7 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -395,6 +396,18 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
         });
 
         contable.setText("CONTABLE");
+        contable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contableMouseClicked(evt);
+            }
+        });
+
+        NACIONAL.setText("NACIONAL");
+        NACIONAL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NACIONALMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -403,7 +416,10 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contable)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(contable)
+                        .addGap(18, 18, 18)
+                        .addComponent(NACIONAL))
                     .addComponent(jLabel3)
                     .addComponent(PN, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JOb, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -446,7 +462,9 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PRECIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(contable)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contable)
+                    .addComponent(NACIONAL))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -697,6 +715,7 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
             m.setPrecio(Double.parseDouble(PRECIO.getText()));
             m.setESTANDAR(estandar);
             m.setNOTA(Nota.getText());
+            if(NACIONAL.isSelected()){m.setProcedencia(2);}else{m.setProcedencia(conta = 1);}
             if(contable.isSelected()){m.setConta(conta= 1);}else{m.setConta(conta = 2);}
             IngresoConsultaProductos.IngresoProductos(m);
             if(contable.isSelected()){kardexfibra();}
@@ -725,6 +744,14 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
     private void BCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BCodigoKeyReleased
         ListarPro();
     }//GEN-LAST:event_BCodigoKeyReleased
+
+    private void contableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contableMouseClicked
+        NACIONAL.setSelected(false);
+    }//GEN-LAST:event_contableMouseClicked
+
+    private void NACIONALMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NACIONALMouseClicked
+       contable.setSelected(false);
+    }//GEN-LAST:event_NACIONALMouseClicked
 
     private void ListarPro() {
 
@@ -769,6 +796,7 @@ public class IngresoProductos extends javax.swing.JInternalFrame {
     private javax.swing.JButton Guardar;
     private javax.swing.JTextField INVOICE;
     private javax.swing.JTextField JOb;
+    private javax.swing.JCheckBox NACIONAL;
     private javax.swing.JTextArea Nota;
     private javax.swing.JTextField PN;
     private javax.swing.JTextField PO;

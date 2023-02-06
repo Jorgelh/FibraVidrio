@@ -1,4 +1,4 @@
-package FormularioKardex;
+package Kardex;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -49,13 +49,13 @@ public class FormatoTabla extends DefaultTableCellRenderer{
         }*/
          /*--------*/   
         
-        if(String.valueOf(table.getValueAt(row,column)).equals("DESCARGA1")){
+        if(String.valueOf(table.getValueAt(row,column)).equals("DESCARGA")){
             setBackground(Color.getHSBColor(0, 43, 64)); 
             table.setFont(normal);                
             setHorizontalAlignment(0);//centro
         }   
         
-        if(String.valueOf(table.getValueAt(row,column)).equals("INGRESO1")){
+        if(String.valueOf(table.getValueAt(row,column)).equals("INGRESO")){
             setBackground(Color.GREEN); 
             table.setFont(normal);                
             setHorizontalAlignment(0);//centro

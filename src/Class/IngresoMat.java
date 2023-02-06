@@ -24,6 +24,15 @@ public class IngresoMat {
     int idDesc;
     String invoice;
     String cliente;
+    int entregadoa;
+
+    public int getEntregadoa() {
+        return entregadoa;
+    }
+
+    public void setEntregadoa(int entregadoa) {
+        this.entregadoa = entregadoa;
+    }
 
     public String getCliente() {
         return cliente;

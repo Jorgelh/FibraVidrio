@@ -260,7 +260,7 @@ public static ArrayList<DescripcionC> consultarSQL(String sql) {
   
 public static ArrayList<BuscarHerramientas>BuscarHerramienta(String a){
         
-         return consultarHer("select a.NO, e.DESCRIPCION||''||d.M_MEDIDA||''||c.M_TIPO,e.DESCRIPCION||' '||d.M_MEDIDA||' '||c.M_TIPO as \"desc\",filos,cantidad,comentario \n" +
+         return consultarHer("select a.NO, e.DESCRIPCION||''||d.M_MEDIDA||''||c.M_TIPO,e.DESCRIPCION||' '||d.M_MEDIDA||' '||c.M_TIPO as \"desc\",filos,notas \n" +
                                 "FROM M_DESCRIPCION a INNER JOIN "+
                                 "M_MATERIAL c on a.NO_TIPO = c.NO_TIPO\n"+
                                 "join M_MEDIDAS d on a.NO_MEDIDA = d.NO_MEDIDA \n"+
@@ -279,8 +279,8 @@ private static ArrayList<BuscarHerramientas>consultarHer(String sql) {
                 f.setNo(rs.getInt("NO"));
                 f.setDescripcion(rs.getString("desc"));
                 f.setFilos(rs.getString("filos"));
-                f.setCantidad(rs.getInt("cantidad"));
-                f.setComentario(rs.getString("comentario"));
+               // f.setCantidad(rs.getInt("cantidad"));
+                f.setComentario(rs.getString("notas"));
                 list.add(f);
             }
             cn.close();
@@ -299,7 +299,7 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
  public static BuscarHerramientas BuscarH(int id, BuscarHerramientas p) throws SQLException {
         Connection cnn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cnn.prepareStatement("select a.NO, e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO as \"Descripcion\",cantidad,comentario,a.NOCATALOGO \n" +
+        ps = cnn.prepareStatement("select a.NO, e.DESCRIPCION||' '|| d.M_MEDIDA||' '||c.M_TIPO as \"Descripcion\",notas,a.NOCATALOGO \n" +
                                   "FROM M_DESCRIPCION a INNER JOIN \n" +
                                   "M_MATERIAL c on a.NO_TIPO = c.NO_TIPO\n" +
                                   "join M_MEDIDAS d on a.NO_MEDIDA = d.NO_MEDIDA \n" +
@@ -314,8 +314,8 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
             p.setNo(rs.getInt("NO"));
             p.setDescripcion(rs.getString("DESCRIPCION"));
             p.setCatalogo(rs.getString("nocatalogo"));
-            p.setCantidad(rs.getInt("cantidad"));
-            p.setComentario(rs.getString("comentario"));
+            //p.setCantidad(rs.getInt("cantidad"));
+            p.setComentario(rs.getString("notas"));
         }
         cnn.close();
         ps.close();
@@ -326,13 +326,17 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
   public static void IngresoHerra (BuscarHerramientas l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into M_INGRESOHERRAMIENTA values (?,?,?,?,1,?,?)");
+        ps = cn.prepareStatement("insert into M_INGRESOHERRAMIENTA(id_ingresoherra,no,no_marca,fechain,po,cantidad,nota,procedencia,invoice,cantidadin) values (?,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getIdIngresoH());
         ps.setInt(2, l.getNo());
         ps.setInt(3, l.getNomarca());
         ps.setDate(4, new java.sql.Date(l.getFechain().getTime()));
-        ps.setInt(5, l.getCantidad());
-        ps.setString(6, l.getNota());
+        ps.setString(5, l.getPo());
+        ps.setInt(6, l.getCantidad());
+        ps.setString(7, l.getNota());
+        ps.setInt(8, l.getProcedencia());
+        ps.setString(9, l.getInvoice());
+        ps.setInt(10, l.getCantidad());
         ps.executeUpdate();
         cn.close();
         ps.close();
@@ -342,17 +346,51 @@ public static BuscarHerramientas buscarHerramienta(int id) throws SQLException {
    public static void DescargaHerra (BuscarHerramientas t) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into M_DESCARGAS values (?,?,?,?,?,?)");
-        ps.setInt(1, t.getIdIngresoH());
+        ps = cn.prepareStatement("insert into M_DESCARGAS values (?,?,?,?,?,?,?)");
+        ps.setInt(1, t.getIdDescaergaH());
         ps.setInt(2, t.getNo());
         ps.setDate(3, new java.sql.Date(t.getFechain().getTime()));
         ps.setInt(4, t.getCantidad());
         ps.setInt(5, t.getCodigo());
         ps.setString(6, t.getComentario());
+        ps.setInt(7, t.getIdIngresoH());
         ps.executeUpdate();
         cn.close();
         ps.close();
     }
+   
+   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+   public static ArrayList<BuscarHerramientas>BuscarHerramientaIngresada(int a){
+        
+         return consultarHerIngre("select id_ingresoherra,po,fechain,cantidad,m.decri_marca as marca from m_ingresoherramienta i inner join m_marca m on i.no_marca = m.no_marca  where no = "+a);   
+    }
+    
+private static ArrayList<BuscarHerramientas>consultarHerIngre(String sql) {
+        ArrayList<BuscarHerramientas> list = new ArrayList<BuscarHerramientas>();
+        Connection cn = BDFIBRA.getConnection();
+        try {
+            BuscarHerramientas f;
+            Statement stmt = cn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                f = new BuscarHerramientas();
+                f.setIdIngresoH(rs.getInt("id_ingresoherra"));
+                f.setPo(rs.getString("po"));
+                f.setFechaS(rs.getString("fechain"));
+                f.setMarca(rs.getString("marca"));
+                list.add(f);
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+        return list;
+    }  
+   
+   
+   
 
   
   

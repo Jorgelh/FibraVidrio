@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FormularioKardex;
+package Kardex;
+
 
 import BD.BDFIBRA;
 import java.sql.Connection;
@@ -17,14 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author jluis
  */
-public class ConsultaKardex extends javax.swing.JInternalFrame {
+public class Kardex extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ConsultaKardex
      */
-    public ConsultaKardex() {
+    public Kardex() {
         initComponents();
-        //Karde.setDefaultRenderer (Object.class, new FormatoTabla());
+        Karde.setDefaultRenderer (Object.class, new FormatoTabla());
     }
 
     
@@ -60,7 +61,6 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
         Karde = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         codigo = new javax.swing.JTextField();
-        buscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         descripcion = new javax.swing.JTextField();
         codigostrin = new javax.swing.JTextField();
@@ -84,18 +84,12 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(Karde);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("CODIGO");
 
         codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoActionPerformed(evt);
-            }
-        });
-
-        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Search.png"))); // NOI18N
-        buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
             }
         });
 
@@ -165,9 +159,7 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscar))
+                                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -178,13 +170,12 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscar))
+                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,18 +192,11 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-
-          actualizarTablaconsulta();
-          //actualizarTablaconsulta2();
-          obtenerdescripcion();
-
-    }//GEN-LAST:event_buscarActionPerformed
-
     private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
-         actualizarTablaconsulta();
-          obtenerdescripcion();
-        buscar.requestFocus();
+        
+        if(codigo.getText().compareTo("")!=0){
+        actualizarTablaconsulta();
+          obtenerdescripcion();}else {JOptionPane.showMessageDialog(null, "Ingrese un Codigo");}
         
     }//GEN-LAST:event_codigoActionPerformed
 
@@ -251,18 +235,9 @@ public class ConsultaKardex extends javax.swing.JInternalFrame {
             }
         });
     }
-    
-    
-    
-    
-    
-    
-    
-    
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Karde;
-    private javax.swing.JButton buscar;
     private javax.swing.JTextField codigo;
     private javax.swing.JTextField codigostrin;
     private javax.swing.JTextField descripcion;

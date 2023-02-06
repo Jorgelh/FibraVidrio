@@ -215,7 +215,7 @@ public static ArrayList<ProductosTaller> ListarTodosProductosIngresadosConsulta(
     public static void IngresoProductos (ProductosTaller t) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into PRODUCTOS_TALLER_INGRESOS values (INGRESOPRODUCTOS.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?)");
+        ps = cn.prepareStatement("insert into PRODUCTOS_TALLER_INGRESOS values (INGRESOPRODUCTOS.NEXTVAL,?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)");
         ps.setInt(1, t.getCodigo_ingre());
         ps.setString(2, t.getPN());
         ps.setString(3, t.getJOB());
@@ -229,6 +229,7 @@ public static ArrayList<ProductosTaller> ListarTodosProductosIngresadosConsulta(
         ps.setDouble(11, t.getPrecio());
         ps.setInt(12, t.getConta());
         ps.setDate(13, new java.sql.Date(t.getFechaPoliza().getTime())); 
+        ps.setInt(14, t.getProcedencia());
         ps.executeUpdate();
         cn.close();
         ps.close();
@@ -237,7 +238,7 @@ public static ArrayList<ProductosTaller> ListarTodosProductosIngresadosConsulta(
     public static void IngresoDescarga (ProductosTaller l) throws SQLException{
         Connection cn = BDFIBRA.getConnection();
         PreparedStatement ps = null;
-        ps = cn.prepareStatement("insert into PROCUTOS_TALLER_DESCARGA values (ingresodesc.nextval,?,?,?,?,?,?,?,?)");
+        ps = cn.prepareStatement("insert into PROCUTOS_TALLER_DESCARGA values (ingresodesc.nextval,?,?,?,?,?,?,?,?,?)");
         ps.setInt(1, l.getId_ingreso());
         ps.setDate(2, new java.sql.Date(l.getFechaI().getTime()));
         ps.setInt(3, l.getCANTIDAD());
@@ -246,6 +247,7 @@ public static ArrayList<ProductosTaller> ListarTodosProductosIngresadosConsulta(
         ps.setString(6, l.getCliente());
         ps.setString(7, l.getNOTA());
         ps.setInt(8, l.getDepartamento());
+        ps.setInt(9, l.getEntregado());
         ps.executeUpdate();
         cn.close();
         ps.close();

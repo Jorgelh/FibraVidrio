@@ -22,11 +22,12 @@ import TRABAJOS.EntregasTrabajo;
 import TRABAJOS.IngresoTrabajos;
 import CREARPN.IngresosPN;
 import CREARPN.EditarPNComponentes;
-import FormularioKardex.ConsultaKardex;
+import Kardex.ConsultaKardex;
 import InventarioMateriales.IngresoProdutoMateriales;
 import InventarioMateriales.NuevoMaterial;
 import InventarioHerramientas.ingresoHerramientas;
 import InventarioMateriales.ConsultaIngresosMateriales;
+import Kardex.Kardex;
 import PRODUCTOS_INGRESADOS.CREARNUEVOPRODUCTO;
 import PRODUCTOS_INGRESADOS.ConsultaDescargas;
 import PRODUCTOS_INGRESADOS.ConsultaIngresos;
@@ -58,12 +59,12 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         
-        HerramientaporAgotar compo = new HerramientaporAgotar();
+       /* HerramientaporAgotar compo = new HerramientaporAgotar();
         Panel1.add(compo);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = compo.getSize();
         compo.setLocation((desktopSize.width - FrameSize.width)/2 , (desktopSize.height - FrameSize.height)/2);
-        compo.show();
+        compo.show();*/
     }
     
     
@@ -953,7 +954,7 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         
-        ConsultaKardex A = new ConsultaKardex();
+        Kardex A = new Kardex();
         Panel1.add(A);
         Dimension desktopSize = Panel1.getSize();
         Dimension FrameSize = A.getSize();
